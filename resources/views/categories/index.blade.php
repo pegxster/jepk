@@ -83,7 +83,7 @@
         </div>
         <div class="sous-grid mix">
             <a href="{{ route('categories.show', 'maison') }}" class="sous-card h-tall">
-                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80" alt="Coussins">
+                <img src="{{ asset('assets/images/jepk39.jpg') }}" alt="Coussins">
                 <div class="sc-overlay">
                     <span class="sc-nom">Coussins</span>
                     <span class="sc-nb">Décoration intérieure</span>
