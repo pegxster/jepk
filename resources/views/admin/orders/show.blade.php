@@ -1,0 +1,138 @@
+@extends('admin.layouts.app')
+@section('title', 'Commande #'.($order->order_number ?? 'N/A'))
+
+@section('topbar-actions')
+    <a href="{{ route('admin.orders.index') }}" class="topbar-btn outline">
+        <i class="fa-solid fa-arrow-left"></i> Retour
+    </a>
+@endsection
+
+@section('content')
+<div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start">
+
+    {{-- Détails --}}
+    <div style="display:flex;flex-direction:column;gap:20px">
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Articles commandés</h2>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Qté</th>
+                            <th>Prix unit.</th>
+                            <th>Sous-total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($order->items ?? [] as $item)
+                        <tr>
+                            <td>
+                                <strong>{{ $item['name'] ?? '—' }}</strong>
+                                @if(!empty($item['variant']))
+                                    <div style="font-size:12px;color:#9A8070">{{ $item['variant'] }}</div>
+                                @endif
+                            </td>
+                            <td>{{ $item['quantity'] ?? 1 }}</td>
+                            <td>{{ number_format($item['price'] ?? 0, 0, ',', ' ') }} FCFA</td>
+                            <td><strong>{{ number_format(($item['price'] ?? 0) * ($item['quantity'] ?? 1), 0, ',', ' ') }} FCFA</strong></td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="4" style="text-align:center;color:#9A8070;padding:20px">Aucun article</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <div style="padding:16px 24px;border-top:1px solid #F0E8E0">
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px">
+                    <span>Sous-total</span><span>{{ number_format($order->subtotal ?? 0, 0, ',', ' ') }} FCFA</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px">
+                    <span>Livraison</span><span>{{ number_format($order->shipping_cost ?? 0, 0, ',', ' ') }} FCFA</span>
+                </div>
+                @if($order->discount)
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:var(--rose)">
+                    <span>Réduction</span><span>-{{ number_format($order->discount, 0, ',', ' ') }} FCFA</span>
+                </div>
+                @endif
+                <div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid #F0E8E0;font-size:18px;font-weight:700">
+                    <span>Total</span><span>{{ number_format($order->total ?? 0, 0, ',', ' ') }} FCFA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">Adresse de livraison</h2></div>
+            <div class="card-body" style="font-size:14px;line-height:1.8">
+                @if($addr = $order->shipping_address)
+                    <div>{{ $addr['name'] ?? '' }}</div>
+                    <div>{{ $addr['address'] ?? '' }}</div>
+                    <div>{{ $addr['city'] ?? '' }} {{ $addr['postal_code'] ?? '' }}</div>
+                    <div>{{ $addr['country'] ?? '' }}</div>
+                    @if(!empty($addr['phone']))<div>Tel: {{ $addr['phone'] }}</div>@endif
+                @else
+                    <span style="color:#9A8070">Aucune adresse enregistrée</span>
+                @endif
+            </div>
+        </div>
+
+        @if($order->notes)
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">Notes</h2></div>
+            <div class="card-body" style="font-size:14px;color:#5A4030">{{ $order->notes }}</div>
+        </div>
+        @endif
+    </div>
+
+    {{-- Colonne latérale --}}
+    <div style="display:flex;flex-direction:column;gap:20px">
+
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">Statut</h2></div>
+            <div class="card-body">
+                @php $c = \App\Models\Order::statusColor($order->status ?? 'pending'); @endphp
+                <div class="status-dot" style="color:{{ $c }};font-size:16px;font-weight:700;margin-bottom:20px">
+                    {{ \App\Models\Order::statusLabel($order->status ?? 'pending') }}
+                </div>
+
+                <form method="POST" action="{{ route('admin.orders.status', $order) }}">
+                    @csrf @method('PUT')
+                    <div class="form-group" style="margin-bottom:12px">
+                        <label class="form-label">Changer le statut</label>
+                        <select name="status" class="form-control">
+                            @foreach(['pending','confirmed','processing','shipped','delivered','cancelled'] as $s)
+                            <option value="{{ $s }}" {{ $order->status == $s ? 'selected' : '' }}>
+                                {{ \App\Models\Order::statusLabel($s) }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="topbar-btn" style="width:100%;justify-content:center">
+                        <i class="fa-solid fa-check"></i> Mettre à jour
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">Client</h2></div>
+            <div class="card-body" style="font-size:14px;display:flex;flex-direction:column;gap:10px">
+                <div>
+                    <div style="font-weight:600;font-size:16px">{{ $order->customer_name ?? '—' }}</div>
+                    <div style="color:#9A8070">{{ $order->customer_email ?? '' }}</div>
+                    @if($order->customer_phone)<div style="color:#9A8070">{{ $order->customer_phone }}</div>@endif
+                </div>
+                <div style="padding-top:10px;border-top:1px solid #F0E8E0;font-size:12px;color:#9A8070">
+                    <div>Méthode : <strong>{{ $order->payment_method ?? '—' }}</strong></div>
+                    <div>Paiement : <strong>{{ $order->payment_status ?? '—' }}</strong></div>
+                    <div>Date : <strong>{{ $order->created_at?->format('d/m/Y H:i') ?? '—' }}</strong></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@endsection

@@ -109,7 +109,7 @@
 <div class="page-hero">
     <span class="s-label">Bienvenue dans notre univers</span>
     <h1 class="s-titre">L'<em>Atelier</em> JEKP</h1>
-    <p style="font-size:14px;color:var(--texte2);margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8">Découvrez les coulisses de nos créations artisanales — les mains qui tricotent, les fils qui parlent, l'amour dans chaque maille.</p>
+    <p style="font-size:14px;color:var(--texte2);margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8">Découvrez les coulisses de nos créations artisanales — les mains qui crochètent, les fils qui parlent, l'amour dans chaque maille.</p>
     <div class="breadcrumb">
         <a href="{{ route('home') }}">Accueil</a>
         <i class="fas fa-chevron-right" style="font-size:9px"></i>
@@ -131,7 +131,7 @@
         <h2 class="s-titre">Chaque maille<br>raconte une <em>histoire</em></h2>
         <div class="at-sep"></div>
         <p>L'Atelier JEKP est né d'une passion simple et profonde : celle de créer avec ses mains. Ce qui a commencé comme un loisir s'est transformé en une maison de création artisanale dédiée à toutes les femmes qui aiment le beau, le doux et l'authentique.</p>
-        <p>Chaque pièce est pensée, tricotée et finalisée à la main. Pas de production en masse, pas de compromis sur la qualité. Seulement des fils soigneusement sélectionnés, des points maîtrisés et un amour sincère du travail bien fait.</p>
+        <p>Chaque pièce est pensée, crochetée et finalisée à la main. Pas de production en masse, pas de compromis sur la qualité. Seulement des fils soigneusement sélectionnés, des points maîtrisés et un amour sincère du travail bien fait.</p>
         <p>Que ce soit pour votre maison, pour vous, pour vos enfants ou pour offrir — chaque création JEKP est unique et porte en elle un peu de notre âme.</p>
         <a href="{{ route('shop.index') }}" class="btn btn-rose" style="margin-top:10px">
             <i class="fas fa-shopping-bag"></i> Découvrir la boutique
@@ -150,7 +150,7 @@
             <div class="at-val-card rev">
                 <div class="at-val-icon"><i class="fas fa-hands"></i></div>
                 <h3>100% Artisanal</h3>
-                <p>Chaque pièce est entièrement tricotée à la main, avec patience et précision. Aucune machine ne remplacera jamais la chaleur du fait-main.</p>
+                <p>Chaque pièce est entièrement crochetée à la main, avec patience et précision. Aucune machine ne remplacera jamais la chaleur du fait-main.</p>
             </div>
             <div class="at-val-card rev">
                 <div class="at-val-icon"><i class="fas fa-leaf"></i></div>
@@ -197,10 +197,10 @@
         <div class="at-step rev">
             <div class="at-step-num">03</div>
             <div>
-                <h3>Le tricotage</h3>
+                <h3>Le crochet</h3>
                 <p>Maille après maille, la pièce prend vie entre nos mains. C'est la partie la plus méditative et la plus précieuse — là où l'amour du métier s'exprime pleinement.</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=700&q=80" alt="Tricotage" class="at-step-img">
+            <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=700&q=80" alt="Crochet" class="at-step-img">
         </div>
         <div class="at-step rev">
             <div class="at-step-num">04</div>

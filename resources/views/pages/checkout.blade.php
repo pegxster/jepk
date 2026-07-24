@@ -69,17 +69,25 @@
             <div class="checkout-bloc">
                 <h3 class="bloc-titre"><i class="fas fa-map-marker-alt"></i> Adresse de livraison</h3>
                 <div class="f-row">
-                    <div class="f-g"><label>Prénom</label><input type="text" name="prenom" value="{{ auth()->user()->prenom ?? '' }}" placeholder="Marie" required></div>
-                    <div class="f-g"><label>Nom</label><input type="text" name="nom" value="{{ auth()->user()->nom ?? '' }}" placeholder="Dupont" required></div>
+                    <div class="f-g"><label>Prénom</label><input type="text" name="prenom" value="{{ auth()->user()->prenom ?? '' }}" placeholder="Ex: Aminata" required></div>
+                    <div class="f-g"><label>Nom</label><input type="text" name="nom" value="{{ auth()->user()->nom ?? '' }}" placeholder="Ex: Kouassi" required></div>
                 </div>
-                <div class="f-g"><label>Adresse</label><input type="text" name="adresse" placeholder="12 rue des Fleurs" required></div>
+                <div class="f-g"><label>Adresse de livraison</label><input type="text" name="adresse" placeholder="Ex: Cocody Angré 8ème Tranche, Rue L12" required></div>
                 <div class="f-row">
-                    <div class="f-g"><label>Code postal</label><input type="text" name="code_postal" placeholder="75001" required></div>
-                    <div class="f-g"><label>Ville</label><input type="text" name="ville" placeholder="Paris" required></div>
+                    <div class="f-g"><label>Ville / Commune</label><input type="text" name="ville" placeholder="Ex: Abidjan (Cocody)" required></div>
+                    <div class="f-g">
+                        <label>Pays</label>
+                        <select name="pays">
+                            <option selected>Côte d'Ivoire (+225)</option>
+                            <option>Sénégal (+221)</option>
+                            <option>Mali (+223)</option>
+                            <option>Burkina Faso (+226)</option>
+                            <option>Autre (Zone UEMOA)</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="f-g"><label>Pays</label><select name="pays"><option>France</option><option>Belgique</option><option>Suisse</option><option>Canada</option><option>Autres</option></select></div>
-                <div class="f-g"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+33 6 00 00 00 00"></div>
-                <div class="f-g"><label>Note pour la commande (optionnel)</label><input type="text" name="note" placeholder="Instructions spéciales, sonnette…"></div>
+                <div class="f-g"><label>Téléphone (+225)</label><input type="tel" name="telephone" placeholder="+225 07 00 00 00 00" required></div>
+                <div class="f-g"><label>Note pour le livreur (optionnel)</label><input type="text" name="note" placeholder="Précisions de repère, quartier, heure de passage…"></div>
             </div>
 
             {{-- Méthode de livraison --}}
@@ -88,33 +96,72 @@
                 <div class="livraison-opts">
                     <label class="livr-opt on">
                         <input type="radio" name="livraison" value="standard" checked>
-                        <div><div class="livr-nom">Livraison Standard</div><div class="livr-desc">3 à 5 jours ouvrés</div></div>
+                        <div><div class="livr-nom">Livraison Standard</div><div class="livr-desc">24h à 48h ouvrés</div></div>
                         <span class="livr-prix">Gratuite</span>
                     </label>
                     <label class="livr-opt">
-                        <input type="radio" name="livraison" value="express">
-                        <div><div class="livr-nom">Livraison Express</div><div class="livr-desc">24 à 48h</div></div>
-                        <span class="livr-prix">7,90 €</span>
-                    </label>
-                    <label class="livr-opt">
-                        <input type="radio" name="livraison" value="colissimo">
-                        <div><div class="livr-nom">Colissimo</div><div class="livr-desc">2 à 3 jours ouvrés + suivi</div></div>
-                        <span class="livr-prix">4,90 €</span>
+                        <input type="radio" name="livraison" value="coursier">
+                        <div><div class="livr-nom">Livraison Express par coursier</div><div class="livr-desc">Même jour (Abidjan & environs)</div></div>
+                        <span class="livr-prix">3 000 F CFA</span>
                     </label>
                 </div>
             </div>
 
             {{-- Paiement --}}
             <div class="checkout-bloc">
-                <h3 class="bloc-titre"><i class="fas fa-lock"></i> Paiement</h3>
-                <div class="paiement-opts">
-                    <div class="pay-opt on"><i class="far fa-credit-card"></i><span>Carte bancaire</span></div>
-                    <div class="pay-opt"><i class="fab fa-paypal"></i><span>PayPal</span></div>
+                <h3 class="bloc-titre"><i class="fas fa-lock"></i> Moyen de paiement</h3>
+                <input type="hidden" name="payment_method" id="checkout_payment_method" value="wave">
+
+                <div style="display:flex;flex-direction:column;gap:12px">
+                    {{-- Option 1 : Wave --}}
+                    <div class="pay-opt-card on" id="opt-wave" onclick="selectCheckoutPayment('wave')" style="display:flex;align-items:center;gap:14px;padding:16px;border:2px solid var(--rose-v);border-radius:12px;background:var(--creme2);cursor:pointer;transition:all .3s">
+                        <div style="width:42px;height:42px;background:#1dc8f0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                            <svg viewBox="0 0 100 100" width="34" height="34" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="50" fill="#1dc8f0"/>
+                                <ellipse cx="50" cy="60" rx="22" ry="26" fill="#0b1b28"/>
+                                <ellipse cx="50" cy="64" rx="14" ry="18" fill="#ffffff"/>
+                                <circle cx="43" cy="46" r="4.5" fill="#ffffff"/>
+                                <circle cx="57" cy="46" r="4.5" fill="#ffffff"/>
+                                <circle cx="44" cy="46" r="2.2" fill="#0b1b28"/>
+                                <circle cx="58" cy="46" r="2.2" fill="#0b1b28"/>
+                                <polygon points="45,53 50,60 55,53" fill="#f39c12"/>
+                            </svg>
+                        </div>
+                        <div style="flex:1">
+                            <div style="font-size:14px;font-weight:600;color:var(--texte)">Paiement Wave (+225)</div>
+                            <div style="font-size:11px;color:var(--texte2);margin-top:2px">Mobile Money rapide & sans frais</div>
+                        </div>
+                        <i class="fas fa-check-circle" id="check-wave" style="color:var(--rose-v);font-size:18px"></i>
+                    </div>
+
+                    {{-- Option 2 : À la livraison --}}
+                    <div class="pay-opt-card" id="opt-livraison" onclick="selectCheckoutPayment('livraison')" style="display:flex;align-items:center;gap:14px;padding:16px;border:1.5px solid var(--peche);border-radius:12px;background:var(--blanc);cursor:pointer;transition:all .3s">
+                        <div style="width:42px;height:42px;background:var(--brun-d);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                            <i class="fas fa-money-bill-wave" style="color:#fff;font-size:18px"></i>
+                        </div>
+                        <div style="flex:1">
+                            <div style="font-size:14px;font-weight:600;color:var(--texte)">Paiement à la livraison</div>
+                            <div style="font-size:11px;color:var(--texte2);margin-top:2px">Payez en espèces directement au livreur</div>
+                        </div>
+                        <i class="far fa-circle" id="check-livraison" style="color:var(--texte2);font-size:18px"></i>
+                    </div>
                 </div>
-                <div class="f-g"><label>Numéro de carte</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19"></div>
-                <div class="f-row">
-                    <div class="f-g"><label>Date d'expiration</label><input type="text" placeholder="MM/AA"></div>
-                    <div class="f-g"><label>CVV</label><input type="text" placeholder="123" maxlength="3"></div>
+
+                {{-- Indication Wave --}}
+                <div id="wave-input-box" style="margin-top:16px;background:var(--creme2);padding:14px 18px;border-radius:10px;border:1px solid var(--peche2)">
+                    <label style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--texte2);display:block;margin-bottom:6px;font-weight:500">
+                        <i class="fas fa-phone" style="color:var(--rose-v);margin-right:4px"></i> Numéro pour le paiement Wave (+225)
+                    </label>
+                    <input type="tel" name="num_wave" placeholder="+225 07 00 00 00 00" style="width:100%;padding:10px 14px;border:1.5px solid var(--peche);border-radius:8px;font-family:var(--f-corps);font-size:13.5px;outline:none;background:var(--blanc)">
+                    <small style="display:block;font-size:11px;color:var(--texte2);margin-top:6px">
+                        Un lien de paiement ou une demande Wave vous sera envoyée sur ce numéro.
+                    </small>
+                </div>
+
+                {{-- Indication Livraison --}}
+                <div id="livraison-info-box" style="display:none;margin-top:16px;background:#f0faf5;padding:14px 18px;border-radius:10px;border:1px solid #a8d5be;color:#2d6a4f;font-size:12.5px;line-height:1.6">
+                    <i class="fas fa-info-circle" style="margin-right:6px"></i>
+                    Vous réglerez le montant exact en espèces auprès de notre livreur à la réception de votre colis.
                 </div>
             </div>
         </form>
@@ -126,19 +173,27 @@
         @php $items=session('cart',[]);$total=0; @endphp
         @if(count($items))
             @foreach($items as $id=>$item)
-            @php $sous=$item['prix']*$item['qte'];$total+=$sous; @endphp
+            @php
+                $iNom  = $item['name'] ?? $item['nom'] ?? 'Création JEKP';
+                $iPrix = $item['price'] ?? $item['prix'] ?? 0;
+                $iQte  = $item['quantity'] ?? $item['qte'] ?? 1;
+                $iImg  = $item['image'] ?? $item['img'] ?? null;
+                $iImg  = product_image_url($iImg, 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200');
+                $sous  = $iPrix * $iQte;
+                $total += $sous;
+            @endphp
             <div class="recap-item">
-                <img src="{{ $item['img'] ?? 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200' }}" alt="">
-                <div><div class="ri-nom">{{ $item['nom'] }} x{{ $item['qte'] }}</div><div class="ri-prix">{{ number_format($sous,2,',',' ') }} €</div></div>
+                <img src="{{ $iImg }}" alt="{{ $iNom }}">
+                <div><div class="ri-nom">{{ $iNom }} x{{ $iQte }}</div><div class="ri-prix">{{ number_format($sous,0,',',' ') }} F CFA</div></div>
             </div>
             @endforeach
         @else
-            <div class="recap-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200" alt=""><div><div class="ri-nom">Kit Pull Couture N°1 x1</div><div class="ri-prix">68,00 €</div></div></div>
-            @php $total=68; @endphp
+            <div class="recap-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200" alt=""><div><div class="ri-nom">Kit Pull Couture N°1 x1</div><div class="ri-prix">45 000 F CFA</div></div></div>
+            @php $total=45000; @endphp
         @endif
-        <div class="recap-ligne"><span>Sous-total</span><span>{{ number_format($total,2,',',' ') }} €</span></div>
+        <div class="recap-ligne"><span>Sous-total</span><span>{{ number_format($total,0,',',' ') }} F CFA</span></div>
         <div class="recap-ligne"><span>Livraison</span><span>Gratuite</span></div>
-        <div class="recap-total"><span>Total</span><span>{{ number_format($total,2,',',' ') }} €</span></div>
+        <div class="recap-total"><span>Total</span><span>{{ number_format($total,0,',',' ') }} F CFA</span></div>
         <button type="submit" form="checkout-form" class="btn btn-rose" style="width:100%;justify-content:center;margin-top:20px;border-radius:50px">
             <i class="fas fa-lock"></i> Confirmer la commande
         </button>
@@ -148,8 +203,49 @@
 
 @push('scripts')
 <script>
-document.querySelectorAll('.livr-opt').forEach(o=>o.addEventListener('click',()=>{document.querySelectorAll('.livr-opt').forEach(x=>x.classList.remove('on'));o.classList.add('on')}));
-document.querySelectorAll('.pay-opt').forEach(o=>o.addEventListener('click',()=>{document.querySelectorAll('.pay-opt').forEach(x=>x.classList.remove('on'));o.classList.add('on')}));
+document.querySelectorAll('.livr-opt').forEach(o => o.addEventListener('click', () => {
+    document.querySelectorAll('.livr-opt').forEach(x => x.classList.remove('on'));
+    o.classList.add('on');
+}));
+
+function selectCheckoutPayment(method) {
+    document.getElementById('checkout_payment_method').value = method;
+
+    const optWave = document.getElementById('opt-wave');
+    const optLivr = document.getElementById('opt-livraison');
+    const checkWave = document.getElementById('check-wave');
+    const checkLivr = document.getElementById('check-livraison');
+    const boxWave = document.getElementById('wave-input-box');
+    const boxLivr = document.getElementById('livraison-info-box');
+
+    if (method === 'wave') {
+        optWave.style.border = '2px solid var(--rose-v)';
+        optWave.style.background = 'var(--creme2)';
+        checkWave.className = 'fas fa-check-circle';
+        checkWave.style.color = 'var(--rose-v)';
+
+        optLivr.style.border = '1.5px solid var(--peche)';
+        optLivr.style.background = 'var(--blanc)';
+        checkLivr.className = 'far fa-circle';
+        checkLivr.style.color = 'var(--texte2)';
+
+        boxWave.style.display = 'block';
+        boxLivr.style.display = 'none';
+    } else {
+        optLivr.style.border = '2px solid var(--rose-v)';
+        optLivr.style.background = 'var(--creme2)';
+        checkLivr.className = 'fas fa-check-circle';
+        checkLivr.style.color = 'var(--rose-v)';
+
+        optWave.style.border = '1.5px solid var(--peche)';
+        optWave.style.background = 'var(--blanc)';
+        checkWave.className = 'far fa-circle';
+        checkWave.style.color = 'var(--texte2)';
+
+        boxWave.style.display = 'none';
+        boxLivr.style.display = 'block';
+    }
+}
 </script>
 @endpush
 @endsection

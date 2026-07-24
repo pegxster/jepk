@@ -2,23 +2,80 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
-        return view('pages.checkout');
+        $cart  = session('cart', []);
+        $total = array_sum(array_map(fn($i) => ($i['price'] ?? 0) * ($i['quantity'] ?? 1), $cart));
+
+        return view('pages.checkout', compact('cart', 'total'));
     }
 
     public function process(Request $request)
     {
-        return back()->with('success', 'Commande passée !');
+        $request->validate([
+            'nom'       => 'nullable|string|max:100',
+            'adresse'   => 'nullable|string|max:255',
+            'telephone' => 'nullable|string|max:30',
+        ]);
+
+        $cart = session('cart', []);
+
+        if (empty($cart)) {
+            // Commande de démonstration si le panier était vide
+            $cart = [
+                'p1' => [
+                    'product_id' => 'p1',
+                    'name'       => 'Kit Pull Couture N°1',
+                    'price'      => 45000,
+                    'quantity'   => 1,
+                ]
+            ];
+        }
+
+        $subtotal = array_sum(array_map(fn($i) => ($i['price'] ?? 0) * ($i['quantity'] ?? 1), $cart));
+        $shipping = $subtotal >= 70000 ? 0 : 2000;
+        $total    = $subtotal + $shipping;
+
+        $user = auth()->user();
+
+        $order = Order::create([
+            'order_number'    => 'JKP-' . strtoupper(Str::random(6)),
+            'user_id'         => $user?->_id ?? null,
+            'customer_name'   => $request->input('nom', $user?->name ?? 'Cliente JEKP'),
+            'customer_email'  => $user?->email ?? 'client@jekpstore.com',
+            'customer_phone'  => $request->input('telephone', '0700000000'),
+            'items'           => array_values($cart),
+            'subtotal'        => $subtotal,
+            'shipping_cost'   => $shipping,
+            'discount'        => 0,
+            'total'           => $total,
+            'status'          => Order::STATUS_PENDING,
+            'payment_method'  => $request->input('payment_method', 'Wave / Mobile Money'),
+            'payment_status'  => 'pending',
+            'shipping_address'=> [
+                'adresse' => $request->input('adresse', 'Abidjan'),
+                'ville'   => $request->input('ville', 'Abidjan'),
+            ],
+        ]);
+
+        // Vider le panier
+        session()->forget('cart');
+
+        return redirect()->route('checkout.success', $order->_id ?? 'demo')
+            ->with('success', 'Votre commande #' . $order->order_number . ' a bien été enregistrée ! ✨');
     }
 
-    public function success($order)
+    public function success($orderId)
     {
-        return view('pages.checkout');
+        $order = Order::find($orderId);
+
+        return view('pages.checkout_success', compact('order', 'orderId'));
     }
 
     public function webhook(Request $request)

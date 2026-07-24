@@ -4,7 +4,14 @@
 @push('styles')
 <style>
 /* ── Hero ── */
-.page-hero{background:linear-gradient(135deg,var(--creme2),var(--peche),var(--lavande));padding:70px 50px;text-align:center;border-bottom:1px solid var(--peche)}
+.page-hero{
+    background:linear-gradient(135deg,var(--creme2) 0%,var(--blanc) 50%,var(--peche) 100%);
+    padding:80px 50px 60px;text-align:center;border-bottom:1px solid var(--peche);
+    position:relative;overflow:hidden;
+}
+.page-hero::before{content:'';position:absolute;right:-100px;top:-100px;
+    width:360px;height:360px;border-radius:50%;
+    background:linear-gradient(135deg,var(--lavande),var(--lavande2));opacity:.15;pointer-events:none}
 .breadcrumb{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--texte2);justify-content:center;margin-top:14px}
 .breadcrumb a{color:var(--texte2);text-decoration:none}.breadcrumb a:hover{color:var(--rose-v)}
 .breadcrumb span{color:var(--rose-p)}
@@ -30,7 +37,9 @@
 .sous-grid.col2{grid-template-columns:2fr 1fr}
 .sous-grid.mix{grid-template-columns:1.6fr 1fr 1fr}
 
-.sous-card{border-radius:var(--rayon);overflow:hidden;position:relative;text-decoration:none;display:block;background:var(--creme2)}
+.sous-card{border-radius:14px;overflow:hidden;position:relative;text-decoration:none;display:block;background:var(--creme2);
+    box-shadow:var(--ombre-sm);transition:var(--trans)}
+.sous-card:hover{box-shadow:var(--ombre)}
 .sous-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
 .sous-card:hover img{transform:scale(1.06)}
 .sous-card .sc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(61,32,48,.65) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
@@ -45,9 +54,15 @@
 .h-sm  {height:180px}
 
 /* ── Bandeau séparateur ── */
-.coll-band{background:linear-gradient(135deg,var(--brun-d),var(--brun-2));padding:50px;text-align:center;border-radius:var(--rayon);margin-bottom:80px}
-.coll-band p{font-family:var(--f-script);font-size:32px;color:var(--rose-p);margin-bottom:16px}
-.coll-band span{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase}
+.coll-band{
+    background:linear-gradient(135deg,var(--brun-d),var(--brun-2),var(--rose-v));
+    padding:60px 50px;text-align:center;border-radius:18px;margin-bottom:80px;
+    position:relative;overflow:hidden;
+}
+.coll-band::before{content:'✦';position:absolute;font-size:300px;color:rgba(255,255,255,.04);
+    top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;font-family:serif}
+.coll-band p{font-family:var(--f-script);font-size:36px;color:var(--peche);margin-bottom:12px}
+.coll-band span{font-size:12px;color:rgba(255,255,255,.45);letter-spacing:3px;text-transform:uppercase}
 
 /* Responsive */
 @media(max-width:1000px){.sous-grid.col4{grid-template-columns:repeat(2,1fr)}.sous-grid.mix{grid-template-columns:1fr 1fr}.coll-layout{padding:40px 24px}}
@@ -59,20 +74,27 @@
 
 {{-- Hero --}}
 <div class="page-hero">
-    <span class="s-label">Univers JEKP</span>
+    <span class="s-label">Explorez</span>
     <h1 class="s-titre">Nos <em>Collections</em></h1>
-    <p style="font-size:14px;color:var(--texte2);margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8">Des créations artisanales pour chaque moment de vie — la maison, la mode, l'enfance et tous vos accessoires préférés.</p>
+    <p style="font-size:14px;color:var(--texte2);margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8">Créations artisanales pour la maison, la mode adulte, l'univers enfant et tous vos accessoires du quotidien.</p>
     <div class="breadcrumb">
         <a href="{{ route('home') }}">Accueil</a>
         <i class="fas fa-chevron-right" style="font-size:9px"></i>
         <span>Collections</span>
+    </div>
+    {{-- Nav rapide entre sections --}}
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px">
+        <a href="#maison"      style="font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:50px;border:1.5px solid var(--peche2);color:var(--texte2);text-decoration:none;transition:all .3s" onmouseover="this.style.background='var(--rose-v)';this.style.color='#fff';this.style.borderColor='var(--rose-v)'" onmouseout="this.style.background='';this.style.color='var(--texte2)';this.style.borderColor='var(--peche2)'">Maison</a>
+        <a href="#adulte"      style="font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:50px;border:1.5px solid var(--peche2);color:var(--texte2);text-decoration:none;transition:all .3s" onmouseover="this.style.background='var(--rose-v)';this.style.color='#fff';this.style.borderColor='var(--rose-v)'" onmouseout="this.style.background='';this.style.color='var(--texte2)';this.style.borderColor='var(--peche2)'">Adulte</a>
+        <a href="#enfant"      style="font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:50px;border:1.5px solid var(--peche2);color:var(--texte2);text-decoration:none;transition:all .3s" onmouseover="this.style.background='var(--rose-v)';this.style.color='#fff';this.style.borderColor='var(--rose-v)'" onmouseout="this.style.background='';this.style.color='var(--texte2)';this.style.borderColor='var(--peche2)'">Enfant</a>
+        <a href="#accessoires" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:50px;border:1.5px solid var(--peche2);color:var(--texte2);text-decoration:none;transition:all .3s" onmouseover="this.style.background='var(--rose-v)';this.style.color='#fff';this.style.borderColor='var(--rose-v)'" onmouseout="this.style.background='';this.style.color='var(--texte2)';this.style.borderColor='var(--peche2)'">Accessoires</a>
     </div>
 </div>
 
 <div class="coll-layout">
 
     {{-- ══════ MAISON ══════ --}}
-    <div class="coll-bloc">
+    <div class="coll-bloc" id="maison">
         <div class="coll-bloc-header">
             <div>
                 <span style="font-family:var(--f-script);font-size:20px;color:var(--rose-v)">Collection</span>
@@ -83,7 +105,7 @@
         </div>
         <div class="sous-grid mix">
             <a href="{{ route('categories.show', 'maison') }}" class="sous-card h-tall">
-                <img src="{{ asset('assets/images/jepk39.jpg') }}" alt="Coussins">
+                <img src="{{ asset('assets/images/jepk42.jpg') }}" alt="Coussins">
                 <div class="sc-overlay">
                     <span class="sc-nom">Coussins</span>
                     <span class="sc-nb">Décoration intérieure</span>
@@ -92,7 +114,7 @@
             </a>
             <div style="display:flex;flex-direction:column;gap:18px">
                 <a href="{{ route('categories.show', 'maison') }}" class="sous-card h-med">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80" alt="Nappes">
+                    <img src="{{ asset('assets/images/jepk40.jpg') }}" alt="Nappes">
                     <div class="sc-overlay">
                         <span class="sc-nom">Nappes & Sets de table</span>
                         <span class="sc-nb">Art de la table</span>
@@ -100,7 +122,7 @@
                     <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
                 </a>
                 <a href="{{ route('categories.show', 'maison') }}" class="sous-card" style="height:144px">
-                    <img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=500&q=80" alt="Plaids">
+                    <img src="{{ asset('assets/images/jepk32.jpg') }}" alt="Plaids">
                     <div class="sc-overlay">
                         <span class="sc-nom">Plaids & Couvertures</span>
                         <span class="sc-nb">Confort & chaleur</span>
@@ -110,7 +132,7 @@
             </div>
             <div style="display:flex;flex-direction:column;gap:18px">
                 <a href="{{ route('categories.show', 'maison') }}" class="sous-card" style="height:144px">
-                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&q=80" alt="Déco">
+                    <img src="{{ asset('assets/images/jepk28.jpg') }}" alt="Déco">
                     <div class="sc-overlay">
                         <span class="sc-nom">Décorations</span>
                         <span class="sc-nb">Objets & ornements</span>
@@ -118,7 +140,7 @@
                     <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
                 </a>
                 <a href="{{ route('categories.show', 'maison') }}" class="sous-card h-med">
-                    <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80" alt="Tapis">
+                    <img src="{{ asset('assets/images/jepk37.jpg') }}" alt="Tapis">
                     <div class="sc-overlay">
                         <span class="sc-nom">Tapis & Descentes de lit</span>
                         <span class="sc-nb">Sol & ambiance</span>
@@ -130,7 +152,7 @@
     </div>
 
     {{-- ══════ ADULTE ══════ --}}
-    <div class="coll-bloc">
+    <div class="coll-bloc" id="adulte">
         <div class="coll-bloc-header">
             <div>
                 <span style="font-family:var(--f-script);font-size:20px;color:var(--rose-v)">Collection</span>
@@ -141,7 +163,7 @@
         </div>
         <div class="sous-grid col4">
             <a href="{{ route('categories.show', 'adulte') }}" class="sous-card h-med">
-                <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&q=80" alt="Pulls">
+                <img src="{{ asset('assets/images/jepk5.jpg') }}" alt="Pulls">
                 <div class="sc-overlay">
                     <span class="sc-nom">Pulls & Gilets</span>
                     <span class="sc-nb">Mode femme</span>
@@ -149,7 +171,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'adulte') }}" class="sous-card h-med">
-                <img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=500&q=80" alt="Écharpes">
+                <img src="{{ asset('assets/images/jepk2.jpg') }}" alt="Écharpes">
                 <div class="sc-overlay">
                     <span class="sc-nom">Écharpes & Châles</span>
                     <span class="sc-nb">Accessoires mode</span>
@@ -157,7 +179,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'adulte') }}" class="sous-card h-med">
-                <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&q=80" alt="Bonnets">
+                <img src="{{ asset('assets/images/jepk6.jpg') }}" alt="Bonnets">
                 <div class="sc-overlay">
                     <span class="sc-nom">Bonnets & Bérets</span>
                     <span class="sc-nb">Tête & cheveux</span>
@@ -165,10 +187,10 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'adulte') }}" class="sous-card h-med">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Cardigans">
+                <img src="{{ asset('assets/images/jepk4.jpg') }}" alt="Mode homme">
                 <div class="sc-overlay">
-                    <span class="sc-nom">Cardigans & Vestes</span>
-                    <span class="sc-nb">Pièces signatures</span>
+                    <span class="sc-nom">Mode Homme</span>
+                    <span class="sc-nb">Chemises & vestes</span>
                 </div>
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
@@ -187,7 +209,7 @@
     </div>
 
     {{-- ══════ ENFANT ══════ --}}
-    <div class="coll-bloc">
+    <div class="coll-bloc" id="enfant">
         <div class="coll-bloc-header">
             <div>
                 <span style="font-family:var(--f-script);font-size:20px;color:var(--rose-v)">Collection</span>
@@ -198,7 +220,7 @@
         </div>
         <div class="sous-grid col2">
             <a href="{{ route('categories.show', 'enfant') }}" class="sous-card h-tall">
-                <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=700&q=80" alt="Layettes">
+                <img src="{{ asset('assets/images/jepk10.jpg') }}" alt="Layettes">
                 <div class="sc-overlay">
                     <span class="sc-nom">Layettes & Naissance</span>
                     <span class="sc-nb">Pour les tout-petits</span>
@@ -207,7 +229,7 @@
             </a>
             <div style="display:flex;flex-direction:column;gap:18px">
                 <a href="{{ route('categories.show', 'enfant') }}" class="sous-card h-med">
-                    <img src="https://images.unsplash.com/photo-1558618047-3c8c5d20c2c3?w=500&q=80" alt="Doudous">
+                    <img src="{{ asset('assets/images/jepk17.jpg') }}" alt="Doudous">
                     <div class="sc-overlay">
                         <span class="sc-nom">Doudous & Peluches</span>
                         <span class="sc-nb">Compagnons de jeux</span>
@@ -215,7 +237,7 @@
                     <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
                 </a>
                 <a href="{{ route('categories.show', 'enfant') }}" class="sous-card h-med">
-                    <img src="https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=500&q=80" alt="Vêtements enfant">
+                    <img src="{{ asset('assets/images/jepk3.jpg') }}" alt="Vêtements enfant">
                     <div class="sc-overlay">
                         <span class="sc-nom">Vêtements Enfant</span>
                         <span class="sc-nb">Pulls, bonnets, écharpes</span>
@@ -227,7 +249,7 @@
     </div>
 
     {{-- ══════ ACCESSOIRES ══════ --}}
-    <div class="coll-bloc">
+    <div class="coll-bloc" id="accessoires">
         <div class="coll-bloc-header">
             <div>
                 <span style="font-family:var(--f-script);font-size:20px;color:var(--rose-v)">Collection</span>
@@ -238,7 +260,7 @@
         </div>
         <div class="sous-grid col3">
             <a href="{{ route('categories.show', 'accessoires') }}" class="sous-card h-med">
-                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80" alt="Sacs">
+                <img src="{{ asset('assets/images/jepk25.jpg') }}" alt="Sacs">
                 <div class="sc-overlay">
                     <span class="sc-nom">Sacs & Pochettes</span>
                     <span class="sc-nb">Tote bags, clutchs…</span>
@@ -246,7 +268,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'accessoires') }}" class="sous-card h-med">
-                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=80" alt="Bijoux">
+                <img src="{{ asset('assets/images/jepk12.jpg') }}" alt="Bijoux">
                 <div class="sc-overlay">
                     <span class="sc-nom">Bijoux & Parures</span>
                     <span class="sc-nb">Colliers, bracelets…</span>
@@ -254,7 +276,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'accessoires') }}" class="sous-card h-med">
-                <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=500&q=80" alt="Cadeaux">
+                <img src="{{ asset('assets/images/jepk29.jpg') }}" alt="Cadeaux">
                 <div class="sc-overlay">
                     <span class="sc-nom">Idées Cadeaux</span>
                     <span class="sc-nb">Coffrets & surprises</span>

@@ -11,6 +11,15 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\ProductController as AdminProduct;
+use App\Http\Controllers\Admin\CategoryController as AdminCategory;
+use App\Http\Controllers\Admin\OrderController as AdminOrder;
+use App\Http\Controllers\Admin\BlogController as AdminBlog;
+use App\Http\Controllers\Admin\MediaController as AdminMedia;
+use App\Http\Controllers\Admin\UserController as AdminUser;
+use App\Http\Controllers\Admin\AuthController as AdminAuth;
+use App\Http\Controllers\Admin\SlideController as AdminSlide;
 
 /* ═══════════════════════════════════════════════════════
    PAGES PUBLIQUES
@@ -153,3 +162,56 @@ Route::prefix('favoris')->middleware('auth')->group(function () {
     Route::post('/supprimer',    [WishlistController::class, 'remove'])->name('wishlist.remove');
     Route::post('/basculer',     [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 });
+
+/* ═══════════════════════════════════════════════════════
+   ADMINISTRATION — accès admin uniquement
+═══════════════════════════════════════════════════════ */
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Connexion admin — pas de guest middleware (géré dans le controller)
+    Route::get('/connexion',  [AdminAuth::class, 'loginForm'])->name('login');
+    Route::post('/connexion', [AdminAuth::class, 'login'])->name('login.post');
+
+    // Déconnexion admin (guard admin uniquement, pas le client)
+    Route::post('/deconnexion', [AdminAuth::class, 'logout'])->name('logout');
+
+    // Routes protégées — uniquement le middleware admin (guard admin)
+    Route::middleware(['admin'])->group(function () {
+
+    // Tableau de bord
+    Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
+
+    // Produits
+    Route::resource('produits', AdminProduct::class)->parameters(['produits' => 'product']);
+
+    // Catégories
+    Route::resource('categories', AdminCategory::class)->parameters(['categories' => 'category']);
+
+    // Commandes
+    Route::get('commandes',              [AdminOrder::class, 'index'])->name('orders.index');
+    Route::get('commandes/{order}',      [AdminOrder::class, 'show'])->name('orders.show');
+    Route::put('commandes/{order}/statut', [AdminOrder::class, 'updateStatus'])->name('orders.status');
+
+    // Blog
+    Route::resource('blog', AdminBlog::class)->parameters(['blog' => 'post']);
+
+    // Médias
+    Route::get('medias',          [AdminMedia::class, 'index'])->name('media.index');
+    Route::post('medias/upload',  [AdminMedia::class, 'upload'])->name('media.upload');
+    Route::delete('medias',       [AdminMedia::class, 'destroy'])->name('media.destroy');
+
+    // Clients (inscrits sur le site)
+    Route::get('utilisateurs',           [AdminUser::class, 'index'])->name('users.index');
+    Route::delete('utilisateurs/{user}', [AdminUser::class, 'destroy'])->name('users.destroy');
+
+    // Équipe admin (accès créés depuis le dashboard)
+    Route::get('equipe',              [AdminUser::class, 'team'])->name('team.index');
+    Route::post('equipe',             [AdminUser::class, 'teamStore'])->name('team.store');
+    Route::delete('equipe/{user}',    [AdminUser::class, 'teamDestroy'])->name('team.destroy');
+
+    // Carrousel
+    Route::resource('carrousel', AdminSlide::class)->parameters(['carrousel' => 'slide']);
+
+    }); // fin middleware auth+admin
+}); // fin prefix admin

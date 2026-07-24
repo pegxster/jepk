@@ -3,31 +3,61 @@
 
 @push('styles')
 <style>
-.page-hero{background:linear-gradient(135deg,var(--creme2),var(--peche),var(--lavande));padding:70px 50px;text-align:center;border-bottom:1px solid var(--peche)}
-.breadcrumb{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--texte2);justify-content:center;margin-top:14px}
-.breadcrumb a{color:var(--texte2);text-decoration:none}.breadcrumb a:hover{color:var(--rose-v)}
+/* ── Hero ── */
+.page-hero{
+    background:linear-gradient(135deg,var(--creme2) 0%,var(--blanc) 50%,var(--peche) 100%);
+    padding:80px 50px 60px;text-align:center;border-bottom:1px solid var(--peche);
+    position:relative;overflow:hidden;
+}
+.page-hero::before{content:'';position:absolute;right:-100px;top:-100px;
+    width:360px;height:360px;border-radius:50%;
+    background:linear-gradient(135deg,var(--lavande),var(--lavande2));opacity:.15;pointer-events:none}
+.breadcrumb{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--texte2);justify-content:center;margin-top:16px}
+.breadcrumb a{color:var(--texte2);text-decoration:none;transition:color .3s}.breadcrumb a:hover{color:var(--rose-v)}
 .breadcrumb span{color:var(--rose-p)}
-.blog-layout{max-width:1200px;margin:0 auto;padding:64px 50px}
-.blog-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px;justify-content:center}
-.blog-cat-btn{padding:8px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:transparent;border:1.5px solid var(--peche2);color:var(--texte2);cursor:pointer;border-radius:50px;transition:var(--trans);font-family:var(--f-corps);text-decoration:none}
-.blog-cat-btn.on,.blog-cat-btn:hover{background:var(--rose-v);color:var(--blanc);border-color:var(--rose-v)}
-.blog-grid-principale{display:grid;grid-template-columns:1.5fr 1fr;gap:24px;margin-bottom:24px}
-.blog-card{border-radius:var(--rayon);overflow:hidden;background:var(--blanc);box-shadow:var(--ombre-sm);transition:var(--trans);text-decoration:none;display:block}
-.blog-card:hover{transform:translateY(-5px);box-shadow:var(--ombre)}
-.blog-img{overflow:hidden}
-.blog-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s;display:block}
-.blog-card:hover .blog-img img{transform:scale(1.05)}
+
+/* ── Layout ── */
+.blog-layout{max-width:1200px;margin:0 auto;padding:70px 50px}
+.blog-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:50px;justify-content:center}
+.blog-cat-btn{padding:9px 22px;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    background:var(--blanc);border:1.5px solid var(--peche);color:var(--texte2);cursor:pointer;
+    border-radius:50px;transition:var(--trans);font-family:var(--f-corps);text-decoration:none;
+    box-shadow:var(--ombre-sm)}
+.blog-cat-btn.on,.blog-cat-btn:hover{background:var(--rose-v);color:var(--blanc);border-color:var(--rose-v);
+    box-shadow:0 4px 14px rgba(201,112,128,.35)}
+
+/* ── Grilles ── */
+.blog-grid-principale{display:grid;grid-template-columns:1.5fr 1fr;gap:22px;margin-bottom:22px}
+.blog-card{border-radius:16px;overflow:hidden;background:var(--blanc);
+    box-shadow:var(--ombre-sm);transition:var(--trans);text-decoration:none;display:block;
+    border:1px solid var(--peche)}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(90,48,64,.12);border-color:var(--rose-p)}
+.blog-img{overflow:hidden;position:relative}
+.blog-img img{width:100%;height:100%;object-fit:cover;transition:transform .65s ease;display:block}
+.blog-card:hover .blog-img img{transform:scale(1.06)}
 .blog-principale .blog-img{height:300px}
-.blog-card.secondaire .blog-img{height:200px}
+.blog-card.secondaire .blog-img{height:190px}
+.blog-lire{position:absolute;bottom:14px;right:14px;background:var(--blanc);
+    color:var(--rose-v);font-size:10px;letter-spacing:1px;text-transform:uppercase;
+    padding:6px 14px;border-radius:50px;opacity:0;transition:opacity .3s;font-family:var(--f-corps)}
+.blog-card:hover .blog-lire{opacity:1}
 .blog-body{padding:22px}
-.blog-cat-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--rose-v);margin-bottom:8px;display:block}
-.blog-titre{font-family:var(--f-titre);font-size:22px;font-weight:300;color:var(--texte);margin-bottom:10px;line-height:1.4}
+.blog-cat-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--rose-v);
+    margin-bottom:9px;display:block;font-weight:500}
+.blog-titre{font-family:var(--f-titre);font-size:22px;font-weight:300;color:var(--texte);
+    margin-bottom:10px;line-height:1.35;transition:color .3s}
+.blog-card:hover .blog-titre{color:var(--rose-v)}
 .blog-card.secondaire .blog-titre{font-size:17px}
-.blog-extrait{font-size:13px;color:var(--texte2);line-height:1.8;margin-bottom:16px}
-.blog-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--texte2)}
+.blog-extrait{font-size:13px;color:var(--texte2);line-height:1.85;margin-bottom:16px}
+.blog-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;
+    color:var(--texte2);padding-top:14px;border-top:1px solid var(--peche)}
 .blog-meta span{display:flex;align-items:center;gap:5px}
-.blog-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-@media(max-width:900px){.blog-layout{padding:40px 24px}.blog-grid-principale{grid-template-columns:1fr}.blog-grid-3{grid-template-columns:1fr 1fr}}
+.blog-temps{background:var(--peche);color:var(--rose-f);padding:3px 10px;border-radius:50px;font-size:10px;font-weight:500}
+
+/* ── Grille 3 ── */
+.blog-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+@media(max-width:900px){.blog-layout{padding:50px 24px}.blog-grid-principale{grid-template-columns:1fr}.blog-grid-3{grid-template-columns:1fr 1fr}}
 @media(max-width:500px){.blog-grid-3{grid-template-columns:1fr}}
 </style>
 @endpush
@@ -65,7 +95,7 @@
             <div class="blog-body">
                 <span class="blog-cat-tag">Tutoriels</span>
                 <h2 class="blog-titre">Comment réussir son premier pull : guide complet pour débutantes</h2>
-                <p class="blog-extrait">Découvrez toutes les étapes, les astuces et les erreurs à éviter pour tricoter votre premier pull avec succès.</p>
+                <p class="blog-extrait">Découvrez toutes les étapes, les astuces et les erreurs à éviter pour réaliser votre première création au crochet avec succès.</p>
                 <div class="blog-meta">
                     <span><i class="far fa-calendar"></i> 18 Fév. 2024</span>
                     <span><i class="far fa-clock"></i> 8 min de lecture</span>

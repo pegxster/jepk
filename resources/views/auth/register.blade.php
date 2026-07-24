@@ -2,10 +2,20 @@
 @section('title','Créer un compte — JEKP Store')
 @push('styles')
 <style>
-.auth-page{min-height:calc(100vh - 160px);display:flex;align-items:center;justify-content:center;padding:60px 24px;background:linear-gradient(135deg,var(--creme2) 0%,var(--peche) 50%,var(--lavande) 100%);position:relative;overflow:hidden}
-.auth-page::before{content:'✦';position:absolute;font-size:400px;color:rgba(255,255,255,.2);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;font-family:serif}
-.auth-card{background:var(--blanc);border-radius:20px;padding:48px 44px;width:100%;max-width:500px;box-shadow:var(--ombre);position:relative;overflow:hidden;z-index:1}
-.auth-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--peche),var(--rose-v),var(--lavande2))}
+.auth-page{min-height:calc(100vh - 78px);display:flex;align-items:center;justify-content:center;
+    padding:60px 24px;
+    background:linear-gradient(135deg,var(--creme2) 0%,var(--blanc) 40%,var(--peche) 70%,var(--lavande) 100%);
+    position:relative;overflow:hidden}
+.auth-page::before{content:'';position:absolute;right:-150px;bottom:-150px;
+    width:500px;height:500px;border-radius:50%;
+    background:linear-gradient(135deg,var(--rose-p),var(--lavande2));opacity:.1;pointer-events:none}
+.auth-page::after{content:'';position:absolute;left:-100px;top:-100px;
+    width:350px;height:350px;border-radius:50%;background:var(--peche);opacity:.2;pointer-events:none}
+.auth-card{background:var(--blanc);border-radius:22px;padding:48px 44px;width:100%;max-width:500px;
+    box-shadow:0 20px 60px rgba(90,48,64,.14);position:relative;overflow:hidden;z-index:1;
+    border:1px solid var(--peche)}
+.auth-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;
+    background:linear-gradient(90deg,var(--peche),var(--rose-v),var(--lavande2))}
 .auth-logo{text-align:center;margin-bottom:28px}
 .auth-logo .s-label{font-size:30px}
 .auth-logo span{font-family:var(--f-titre);font-size:16px;color:var(--texte2);letter-spacing:3px;text-transform:uppercase;display:block;margin-top:2px}
@@ -31,8 +41,7 @@
 <div class="auth-page">
     <div class="auth-card">
         <div class="auth-logo">
-            <span class="s-label">JEKP</span>
-            <span>Store</span>
+            <img src="{{ asset('assets/images/jepklogo.png') }}" alt="JEPK" style="height:80px;object-fit:contain;border-radius:12px;mix-blend-mode:multiply">
         </div>
         <h2 class="auth-titre">Bienvenue !</h2>
         <p class="auth-sous">Créez votre compte et rejoignez notre communauté de créatrices.</p>

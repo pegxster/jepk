@@ -2,9 +2,18 @@
 @section('title','Mot de passe oublié — JEKP Store')
 @push('styles')
 <style>
-.auth-page{min-height:calc(100vh - 160px);display:flex;align-items:center;justify-content:center;padding:60px 24px;background:linear-gradient(135deg,var(--creme2),var(--lavande))}
-.auth-card{background:var(--blanc);border-radius:20px;padding:52px 44px;width:100%;max-width:420px;box-shadow:var(--ombre);position:relative;overflow:hidden}
-.auth-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--peche),var(--rose-v),var(--lavande2))}
+.auth-page{min-height:calc(100vh - 78px);display:flex;align-items:center;justify-content:center;
+    padding:60px 24px;
+    background:linear-gradient(135deg,var(--creme2) 0%,var(--blanc) 40%,var(--peche) 70%,var(--lavande) 100%);
+    position:relative;overflow:hidden}
+.auth-page::before{content:'';position:absolute;right:-150px;bottom:-150px;
+    width:500px;height:500px;border-radius:50%;
+    background:linear-gradient(135deg,var(--rose-p),var(--lavande2));opacity:.1;pointer-events:none}
+.auth-card{background:var(--blanc);border-radius:22px;padding:52px 44px;width:100%;max-width:420px;
+    box-shadow:0 20px 60px rgba(90,48,64,.14);position:relative;overflow:hidden;z-index:1;
+    border:1px solid var(--peche)}
+.auth-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;
+    background:linear-gradient(90deg,var(--peche),var(--rose-v),var(--lavande2))}
 .auth-logo{text-align:center;margin-bottom:28px}
 .auth-logo .s-label{font-size:30px}
 .auth-titre{font-family:var(--f-titre);font-size:24px;font-weight:300;color:var(--texte);text-align:center;margin-bottom:8px}
@@ -21,7 +30,7 @@
 @section('content')
 <div class="auth-page">
     <div class="auth-card">
-        <div class="auth-logo"><span class="s-label">JEKP</span></div>
+        <div class="auth-logo"><img src="{{ asset('assets/images/jepklogo.png') }}" alt="JEPK" style="height:80px;object-fit:contain;border-radius:12px;mix-blend-mode:multiply"></div>
         <h2 class="auth-titre">Mot de passe oublié</h2>
         <p class="auth-sous">Entrez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe.</p>
         @if(session('status'))<div class="flash flash-ok">{{ session('status') }}</div>@endif

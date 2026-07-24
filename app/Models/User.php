@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use MongoDB\Laravel\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -12,34 +11,67 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $connection = 'mongodb';
+    protected $collection = 'users';
+
     protected $fillable = [
         'name',
+        'prenom',
+        'nom',
         'email',
         'password',
+        'telephone',
+        'birthday',
+        'avatar',
+        'is_admin',
+        'newsletter',
+        'loyalty_points',
+        'addresses',
+        'wishlist',
+        'reset_token',
+        'reset_token_at',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
+        'is_admin'          => 'boolean',
+        'newsletter'        => 'boolean',
+        'loyalty_points'    => 'integer',
+        'addresses'         => 'array',
+        'wishlist'          => 'array',
     ];
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin === true;
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        if ($this->prenom || $this->nom) {
+            return trim($this->prenom . ' ' . $this->nom);
+        }
+        return $this->name ?? '';
+    }
+
+    public function getPrenomDisplayAttribute(): string
+    {
+        return $this->prenom ?? explode(' ', $this->name ?? 'Client')[0];
+    }
+
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->avatar) {
+            return str_starts_with($this->avatar, 'http')
+                ? $this->avatar
+                : asset('storage/' . $this->avatar);
+        }
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->full_name) . '&background=D4547A&color=fff&size=140';
+    }
 }

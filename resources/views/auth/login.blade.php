@@ -2,10 +2,21 @@
 @section('title','Connexion — JEKP Store')
 @push('styles')
 <style>
-.auth-page{min-height:calc(100vh - 160px);display:flex;align-items:center;justify-content:center;padding:60px 24px;background:linear-gradient(135deg,var(--creme2) 0%,var(--peche) 50%,var(--lavande) 100%);position:relative;overflow:hidden}
-.auth-page::before{content:'♡';position:absolute;font-size:500px;color:rgba(255,255,255,.25);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;font-family:serif;line-height:1}
-.auth-card{background:var(--blanc);border-radius:20px;padding:52px 48px;width:100%;max-width:440px;box-shadow:var(--ombre);position:relative;overflow:hidden;z-index:1}
-.auth-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--peche),var(--rose-v),var(--lavande2))}
+.auth-page{min-height:calc(100vh - 78px);display:flex;align-items:center;justify-content:center;
+    padding:60px 24px;
+    background:linear-gradient(135deg,var(--creme2) 0%,var(--blanc) 40%,var(--peche) 70%,var(--lavande) 100%);
+    position:relative;overflow:hidden}
+.auth-page::before{content:'';position:absolute;right:-150px;bottom:-150px;
+    width:500px;height:500px;border-radius:50%;
+    background:linear-gradient(135deg,var(--rose-p),var(--lavande2));opacity:.1;pointer-events:none}
+.auth-page::after{content:'';position:absolute;left:-100px;top:-100px;
+    width:350px;height:350px;border-radius:50%;
+    background:var(--peche);opacity:.2;pointer-events:none}
+.auth-card{background:var(--blanc);border-radius:22px;padding:52px 48px;width:100%;max-width:440px;
+    box-shadow:0 20px 60px rgba(90,48,64,.14);position:relative;overflow:hidden;z-index:1;
+    border:1px solid var(--peche)}
+.auth-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;
+    background:linear-gradient(90deg,var(--peche),var(--rose-v),var(--lavande2))}
 .auth-logo{text-align:center;margin-bottom:32px}
 .auth-logo .s-label{font-size:32px;margin-bottom:0}
 .auth-logo span{font-family:var(--f-titre);font-size:18px;color:var(--texte2);letter-spacing:3px;text-transform:uppercase;display:block;margin-top:4px}
@@ -13,8 +24,11 @@
 .auth-sous{font-size:13px;color:var(--texte2);text-align:center;margin-bottom:30px;line-height:1.7}
 .f-g{margin-bottom:16px}
 .f-g label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--texte2);display:block;margin-bottom:6px;font-weight:500}
-.f-g input{width:100%;padding:13px 16px;border:1.5px solid var(--peche);border-radius:10px;font-family:var(--f-corps);font-size:14px;color:var(--texte);outline:none;background:var(--creme2);transition:border-color .3s}
-.f-g input:focus{border-color:var(--rose-v);background:var(--blanc)}
+.f-g input{width:100%;padding:13px 16px;border:1.5px solid var(--peche);border-radius:11px;
+    font-family:var(--f-corps);font-size:14px;color:var(--texte);outline:none;
+    background:var(--creme2);transition:all .3s}
+.f-g input:focus{border-color:var(--rose-v);background:var(--blanc);
+    box-shadow:0 0 0 4px rgba(201,112,128,.08)}
 .f-g .input-icon{position:relative}
 .f-g .input-icon i{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--texte2);font-size:14px;cursor:pointer}
 .auth-opts{display:flex;justify-content:space-between;align-items:center;margin:14px 0 22px;font-size:12px}
@@ -36,8 +50,7 @@
 <div class="auth-page">
     <div class="auth-card">
         <div class="auth-logo">
-            <span class="s-label">JEKP</span>
-            <span>Store</span>
+            <img src="{{ asset('assets/images/jepklogo.png') }}" alt="JEPK" style="height:80px;object-fit:contain;border-radius:12px;mix-blend-mode:multiply">
         </div>
         <h2 class="auth-titre">Bon retour !</h2>
         <p class="auth-sous">Connectez-vous pour accéder à votre espace personnel.</p>

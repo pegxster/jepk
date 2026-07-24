@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="x-auth" content="{{ auth()->check() ? '1' : '0' }}">
     <title>@yield('title', 'JEKP Store — Créations Artisanales')</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/jepklogo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/jepklogo.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@200;300;400;500&family=Alex+Brush&display=swap" rel="stylesheet">
@@ -16,37 +19,31 @@
    Palette : Rose poudré · Lavande · Pêche · Blanc cassé · Vieux rose
    ================================================================ */
         :root {
-            /* Couleurs principales — douces et féminines */
-            --blanc: #ffffff;
-            --creme: #fdf8f6;
-            --creme2: #f9f0eb;
-            --peche: #f7d9cc;
-            --peche2: #eebbaa;
-            --rose-p: #e8a0a8;
-            /* rose poudré */
-            --rose-v: #c97080;
-            /* vieux rose (accent principal) */
-            --rose-f: #b05060;
-            /* rose foncé (hover) */
-            --lavande: #d8cce8;
-            /* lavande douce */
-            --lavande2: #b8a4d4;
-            /* lavande accent */
-            --nude: #e8d5c8;
-            --beige: #f0e4da;
-            --brun-d: #5a3040;
-            /* brun violacé foncé */
-            --brun-2: #7a5060;
-            --texte: #3d2030;
-            --texte2: #8a6070;
-            --gris: #f7f2ef;
+            /* ── Palette Tendre · inspirée du logo Jepk rose doux ── */
+            --blanc:   #ffffff;
+            --creme:   #fff8fb;   /* blanc rosé ultra doux */
+            --creme2:  #fef0f5;   /* crème rosée */
+            --peche:   #fde8f2;   /* rose blush très clair */
+            --peche2:  #f9cce0;   /* rose blush accent */
+            --rose-p:  #f4b0cc;   /* rose poudré */
+            --rose-v:  #C96880;   /* rose tendre — accent principal */
+            --rose-f:  #A85068;   /* rose foncé hover */
+            --lavande: #eedcf8;   /* lavande très douce */
+            --lavande2:#cdb0ec;   /* lavande accent */
+            --nude:    #f5e0ea;   /* nude rosé */
+            --beige:   #faecf2;   /* beige rosé */
+            --brun-d:  #5a3040;   /* prune foncé footer */
+            --brun-2:  #7a4860;   /* prune moyen */
+            --texte:   #3c1e2c;   /* texte foncé */
+            --texte2:  #8c6070;   /* texte secondaire */
+            --gris:    #fcf0f6;   /* gris rosé */
 
             --f-titre: 'Cormorant Garamond', Georgia, serif;
             --f-script: 'Alex Brush', cursive;
             --f-corps: 'Nunito', sans-serif;
 
-            --ombre: 0 8px 40px rgba(90, 48, 64, 0.10);
-            --ombre-sm: 0 2px 16px rgba(90, 48, 64, 0.07);
+            --ombre:    0 8px 40px rgba(201, 104, 128, 0.11);
+            --ombre-sm: 0 2px 16px rgba(201, 104, 128, 0.07);
             --trans: all 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --rayon: 12px;
         }
@@ -57,6 +54,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box
+        }
+
+        img {
+            image-rendering: -webkit-optimize-contrast;
         }
 
         html {
@@ -111,13 +112,13 @@
         .btn-rose {
             background: var(--rose-v);
             color: var(--blanc);
-            box-shadow: 0 4px 20px rgba(201, 112, 128, 0.35)
+            box-shadow: 0 4px 20px rgba(201, 104, 128, 0.32)
         }
 
         .btn-rose:hover {
             background: var(--rose-f);
             transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(201, 112, 128, 0.45)
+            box-shadow: 0 8px 28px rgba(201, 104, 128, 0.42)
         }
 
         .btn-peche {
@@ -207,21 +208,27 @@
 
         /* ── FLASH ── */
         .flash {
-            padding: 14px 30px;
+            padding: 14px 20px;
             font-size: 13px;
-            margin: 12px 50px
+            margin: 14px 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .flash-ok {
             background: #fdf5f7;
             color: var(--rose-f);
-            border-left: 3px solid var(--rose-p)
+            border-left: 4px solid var(--rose-p);
+            box-shadow: 0 2px 12px rgba(201, 104, 128, .08);
         }
 
         .flash-err {
             background: #fff5f5;
             color: #9b3535;
-            border-left: 3px solid #f0a0a0
+            border-left: 4px solid #f0a0a0;
+            box-shadow: 0 2px 12px rgba(155, 53, 53, .08);
         }
 
         /* ================================================================
@@ -256,9 +263,8 @@
             position: sticky;
             top: 0;
             z-index: 900;
-            background: rgba(253, 248, 246, 0.97);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--peche);
+            background: rgba(255, 248, 251, 0.98);
+            border-bottom: 1px solid var(--peche2);
             box-shadow: 0 1px 20px rgba(90, 48, 64, 0.06);
             transition: var(--trans);
         }
@@ -270,7 +276,7 @@
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            height: 78px;
+            height: 128px;
         }
 
         .nav-g,
@@ -286,11 +292,11 @@
 
         .nav-a {
             text-decoration: none;
-            color: var(--texte2);
+            color: var(--rose-v);
             font-size: 10px;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
-            font-weight: 500;
+            font-weight: 600;
             position: relative;
             padding-bottom: 3px;
             transition: color 0.3s;
@@ -310,7 +316,7 @@
         }
 
         .nav-a:hover {
-            color: var(--rose-v)
+            color: var(--rose-f)
         }
 
         .nav-a:hover::after {
@@ -323,20 +329,16 @@
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            align-items: center
-        
+            align-items: center;
         }
 
         .logo-img {
-            height: 70px;
+            height: 140px;
             width: auto;
             object-fit: contain;
-            
-            
+            border-radius: 18px;
         }
 
-
-  
         /* Icônes */
         .h-icons {
             display: flex;
@@ -345,15 +347,15 @@
         }
 
         .h-icons a {
-            color: var(--texte2);
+            color: var(--rose-v);
             text-decoration: none;
-            font-size: 16px;
+            font-size: 17px;
             transition: color 0.3s;
             position: relative
         }
 
         .h-icons a:hover {
-            color: var(--rose-v)
+            color: var(--rose-f)
         }
 
         .badge-panier {
@@ -372,23 +374,23 @@
             justify-content: center;
         }
 
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
-            padding: 3px
-        }
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+    padding: 2px
+}
 
-        .hamburger span {
-            width: 22px;
-            height: 1.5px;
-            background: var(--texte);
-            display: block;
-            transition: 0.3s
-        }
+.hamburger span {
+    width: 18px;
+    height: 1.5px;
+    background: var(--texte);
+    display: block;
+    transition: 0.3s
+}
 
         /* Barre recherche */
         .s-bar {
@@ -456,16 +458,16 @@
             color: var(--rose-v)
         }
 
-        .m-close {
-            position: absolute;
-            top: 28px;
-            right: 36px;
-            background: none;
-            border: none;
-            font-size: 22px;
-            color: var(--texte2);
-            cursor: pointer
-        }
+.m-close {
+    position: absolute;
+    top: 28px;
+    right: 36px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--texte2);
+    cursor: pointer
+}
 
         /* ================================================================
    WHATSAPP — Discret, dans les tons du site
@@ -486,14 +488,14 @@
             font-size: 22px;
             color: var(--blanc);
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(201, 112, 128, 0.4);
+            box-shadow: 0 4px 20px rgba(201, 104, 128, 0.4);
             transition: var(--trans);
         }
 
         .wa-float:hover {
             background: var(--rose-f);
             transform: scale(1.08);
-            box-shadow: 0 6px 28px rgba(201, 112, 128, 0.55)
+            box-shadow: 0 6px 28px rgba(201, 104, 128, 0.55)
         }
 
         .wa-tip {
@@ -570,6 +572,16 @@
             gap: 56px;
             padding-bottom: 46px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.07)
+        }
+
+        .f-logo-img {
+            height: 120px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 14px;
+            border-radius: 16px;
+            filter: drop-shadow(0 0 14px rgba(201, 104, 128, 0.55)) brightness(1.05);
         }
 
         .f-brand-name {
@@ -711,6 +723,145 @@
                 padding: 0 20px
             }
         }
+
+        /* ================================================================
+   MODAL AUTH INVITÉ
+   ================================================================ */
+        .auth-mo-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(58, 28, 42, 0.55);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: moFadeIn .25s ease;
+        }
+
+        @keyframes moFadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .auth-mo-card {
+            background: var(--blanc);
+            border-radius: 24px;
+            padding: 48px 44px 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 32px 80px rgba(90, 48, 64, 0.28);
+            position: relative;
+            border: 1px solid var(--peche);
+            animation: moSlideUp .3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        @keyframes moSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.97)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1)
+            }
+        }
+
+        .auth-mo-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--creme2);
+            border: none;
+            font-size: 14px;
+            color: var(--texte2);
+            cursor: pointer;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--trans);
+        }
+
+        .auth-mo-close:hover {
+            background: var(--peche);
+            color: var(--rose-v)
+        }
+
+        .auth-mo-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 28px
+        }
+
+        .auth-mo-btns .btn {
+            justify-content: center;
+            width: 100%
+        }
+
+        /* ================================================================
+   FOOTER — PAIEMENTS
+   ================================================================ */
+        .f-pay {
+            max-width: 1360px;
+            margin: 30px auto 0;
+            padding: 24px 0 26px;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .f-pay-label {
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+            white-space: nowrap;
+        }
+
+        .f-pay-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .pay-badge {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-family: var(--f-corps);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            line-height: 1;
+        }
+
+        .pay-badge svg {
+            flex-shrink: 0
+        }
+
+        @media(max-width:700px) {
+            .f-pay {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px
+            }
+        }
     </style>
     @stack('styles')
 </head>
@@ -748,9 +899,9 @@
                     <a href="{{ route('account.index') }}"><i class="far fa-user"></i></a>
                     <a href="{{ route('wishlist.index') }}"><i class="far fa-heart"></i></a>
                     @else
-                    <a href="{{ route('auth.login') }}"><i class="far fa-user"></i></a>
+                    <a href="#" id="guest-user-icon" title="Se connecter ou créer un compte"><i class="far fa-user"></i></a>
                     @endauth
-                    <a href="{{ route('cart.index') }}" style="position:relative">
+                    <a href="{{ route('cart.index') }}" id="cart-icon-link" style="position:relative">
                         <i class="fas fa-shopping-bag"></i>
                         @if(session('cart') && count(session('cart'))>0)
                         <span class="badge-panier">{{ count(session('cart')) }}</span>
@@ -784,18 +935,24 @@
     </div>
 
     <main>
-        @if(session('success'))<div class="flash flash-ok">{{ session('success') }}</div>@endif
-        @if(session('error'))<div class="flash flash-err">{{ session('error') }}</div>@endif
+        @if(session('success'))
+            <div class="flash flash-ok"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>
+        @endif
+        @if(session('error'))
+            <div class="flash flash-err"><i class="fas fa-exclamation-circle"></i> {{ session('error') }}</div>
+        @endif
+        @if(session('info'))
+            <div class="flash flash-ok"><i class="fas fa-info-circle"></i> {{ session('info') }}</div>
+        @endif
         @yield('content')
     </main>
 
     <footer>
         <div class="f-grid">
             <div class="f-brand">
-                <span class="f-brand-name">JEKP</span>
-                <span class="f-brand-script">Store</span>
+                <img src="{{ asset('assets/images/jepklogo.png') }}" alt="JEKP Store" class="f-logo-img">
                 <div class="f-sep"></div>
-                <p>Maison de création artisanale dédiée au tricot d'exception. Des fils rares, des kits exclusifs, pensés pour les femmes qui aiment créer.</p>
+                <p>Maison de création artisanale dédiée au crochet d'exception. Des fils rares, des créations exclusives, pensées pour les femmes qui aiment créer.</p>
                 <div class="f-socials">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-pinterest"></i></a>
@@ -819,7 +976,7 @@
                 <ul>
                     <li><a href="#">Livraison</a></li>
                     <li><a href="#">Retours</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="{{ route('pages.faq') }}">FAQ</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="https://wa.me/0153928572">WhatsApp</a></li>
                 </ul>
@@ -827,11 +984,9 @@
             <div>
                 <h4>À propos</h4>
                 <ul>
-                    <li><a href="#">Notre histoire</a></li>
                     <li><a href="{{ route('pages.blog') }}">Blog</a></li>
                     <li><a href="{{ route('pages.atelier') }}">L'Atelier</a></li>
                     <li><a href="{{ route('pages.terms') }}">CGV</a></li>
-                    <li><a href="{{ route('pages.privacy') }}">Confidentialité</a></li>
                 </ul>
             </div>
         </div>
@@ -841,14 +996,94 @@
         </div>
     </footer>
 
+    {{-- Modal connexion invité --}}
+    <div id="auth-modal" class="auth-mo-overlay" style="display:none" role="dialog" aria-modal="true" aria-label="Connexion requise">
+        <div class="auth-mo-card">
+            <button class="auth-mo-close" id="auth-modal-close" aria-label="Fermer"><i class="fas fa-times"></i></button>
+            <div style="text-align:center">
+                <img src="{{ asset('assets/images/jepklogo.png') }}" alt="JEKP" style="height:72px;object-fit:contain;margin-bottom:16px;border-radius:12px;mix-blend-mode:multiply">
+                <h3 style="font-family:var(--f-titre);font-size:26px;font-weight:300;color:var(--texte);margin-bottom:8px">Espace réservé aux membres</h3>
+                <p style="font-size:13px;color:var(--texte2);line-height:1.75;max-width:320px;margin:0 auto">Connectez-vous ou créez un compte gratuit pour ajouter des articles à votre panier et passer commande.</p>
+            </div>
+            <div class="auth-mo-btns">
+                <a href="{{ route('auth.login') }}" class="btn btn-rose">
+                    <i class="fas fa-sign-in-alt"></i> Se connecter
+                </a>
+                <a href="{{ route('auth.register') }}" class="btn btn-outline-rose">
+                    <i class="fas fa-user-plus"></i> Créer un compte gratuit
+                </a>
+            </div>
+            <p style="text-align:center;font-size:11px;color:var(--texte2);margin-top:18px;letter-spacing:0.5px">
+                <i class="fas fa-lock" style="font-size:9px;margin-right:4px"></i>
+                Inscription gratuite · Paiement Wave (+225) & À la livraison
+            </p>
+        </div>
+    </div>
+
+    @if(session('needs_auth'))<span id="x-open-auth-modal" hidden></span>@endif
+
     <script>
-        window.addEventListener('scroll', () => document.getElementById('header').style.boxShadow = window.scrollY > 40 ? '0 4px 30px rgba(90,48,64,0.12)' : '0 1px 20px rgba(90,48,64,0.06)');
-        document.getElementById('s-toggle').addEventListener('click', e => {
-            e.preventDefault();
-            document.getElementById('s-bar').classList.toggle('oui')
+        window.addEventListener('scroll', function() {
+            document.getElementById('header').style.boxShadow = window.scrollY > 40
+                ? '0 4px 30px rgba(90,48,64,0.12)'
+                : '0 1px 20px rgba(90,48,64,0.06)';
         });
-        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('m-menu').classList.add('oui'));
-        document.getElementById('m-close').addEventListener('click', () => document.getElementById('m-menu').classList.remove('oui'));
+        document.getElementById('s-toggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('s-bar').classList.toggle('oui');
+        });
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('m-menu').classList.add('oui');
+        });
+        document.getElementById('m-close').addEventListener('click', function() {
+            document.getElementById('m-menu').classList.remove('oui');
+        });
+
+        // ── Modal auth ──
+        // L'état auth vient d'une <meta> côté HTML, pas d'une directive Blade dans le JS
+        var authMeta = document.querySelector('meta[name="x-auth"]');
+        window.JEPK_AUTH = authMeta ? authMeta.getAttribute('content') === '1' : false;
+
+        function showAuthModal() {
+            document.getElementById('auth-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function hideAuthModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('auth-modal-close').addEventListener('click', hideAuthModal);
+        document.getElementById('auth-modal').addEventListener('click', function(e) {
+            if (e.target === this) hideAuthModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') hideAuthModal();
+        });
+
+        if (!window.JEPK_AUTH) {
+            // Icônes panier et utilisateur → modal pour les invités
+            ['cart-icon-link', 'guest-user-icon'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showAuthModal();
+                });
+            });
+
+            // Intercepter les formulaires "ajouter au panier"
+            document.addEventListener('submit', function(e) {
+                if (e.target.querySelector('input[name="product_id"]')) {
+                    e.preventDefault();
+                    showAuthModal();
+                }
+            }, true);
+        }
+
+        // Ouvrir la modal si la session l'indique (redirect depuis CartController)
+        if (document.getElementById('x-open-auth-modal')) {
+            showAuthModal();
+        }
     </script>
     @stack('scripts')
 </body>

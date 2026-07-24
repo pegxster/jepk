@@ -138,53 +138,34 @@
 .cats-in{max-width:1360px;margin:0 auto}
 .ent-c{text-align:center;margin-bottom:54px}
 .ent-c .s-sous{max-width:480px;margin:12px auto 0}
-.cats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.cat-c{position:relative;overflow:hidden;border-radius:var(--rayon);text-decoration:none;display:block;transition:var(--trans)}
-.cat-c:hover{transform:translateY(-6px);box-shadow:var(--ombre)}
-.cat-c img{width:100%;aspect-ratio:3/4;object-fit:cover;transition:transform .8s;display:block;filter:brightness(.75)}
-.cat-c:hover img{transform:scale(1.07);filter:brightness(.6)}
-.cat-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(90,48,64,.85) 0%,rgba(90,48,64,.1) 55%);border-radius:var(--rayon);display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
-.cat-nom{font-family:var(--f-titre);font-size:21px;font-weight:300;color:var(--blanc);display:block;margin-bottom:4px}
-.cat-nb{font-size:9px;letter-spacing:2px;color:var(--peche);text-transform:uppercase}
-.cat-arrow{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-60%) scale(0);
-    width:44px;height:44px;background:rgba(255,255,255,.15);
-    border:1.5px solid rgba(255,255,255,.5);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--blanc);font-size:15px;backdrop-filter:blur(4px);
-    transition:transform .4s;
-}
-.cat-c:hover .cat-arrow{transform:translate(-50%,-50%) scale(1)}
+.cats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.cat-c{position:relative;overflow:hidden;border-radius:var(--rayon);text-decoration:none;display:block;transition:var(--trans);height:400px}
+.cat-c:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(90,48,64,.22)}
+.cat-c img{width:100%;height:100%;object-fit:cover;transition:transform .8s;display:block;filter:brightness(.68)}
+.cat-c:hover img{transform:scale(1.06);filter:brightness(.55)}
+.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(61,18,32,.82) 0%,rgba(61,18,32,.2) 45%,transparent 70%);border-radius:var(--rayon);display:flex;flex-direction:column;justify-content:flex-end;padding:34px;transition:background .4s}
+.cat-c:hover .cat-overlay{background:linear-gradient(to top,rgba(61,18,32,.9) 0%,rgba(61,18,32,.3) 50%,transparent 70%)}
+.cat-label-s{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--rose-p);margin-bottom:8px;font-weight:500;display:block}
+.cat-nom{font-family:var(--f-titre);font-size:34px;font-weight:300;color:var(--blanc);display:block;margin-bottom:8px;line-height:1.1}
+.cat-nb{font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:20px;display:block}
+.cat-btn-s{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:10px 22px;border-radius:50px;transition:all .3s;width:fit-content}
+.cat-c:hover .cat-btn-s{background:var(--rose-v);border-color:var(--rose-v)}
+.cat-btn-s i{font-size:10px;transition:transform .3s}
+.cat-c:hover .cat-btn-s i{transform:translateX(4px)}
 
-/* ══════════ PRODUITS ══════════ */
+/* ══════════ COUPS DE CŒUR — statique ══════════ */
 .prods{padding:90px 50px;max-width:1360px;margin:0 auto}
-.prods-ent{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
-.filtres{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:40px}
-.f-b{padding:8px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:transparent;border:1.5px solid var(--peche2);color:var(--texte2);cursor:pointer;border-radius:50px;transition:var(--trans);font-family:var(--f-corps)}
-.f-b.on,.f-b:hover{background:var(--rose-v);color:var(--blanc);border-color:var(--rose-v)}
+.prods-ent{display:flex;justify-content:center;align-items:flex-end;margin-bottom:48px;text-align:center}
 .prods-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .p-carte{position:relative}
 .p-img{position:relative;overflow:hidden;aspect-ratio:3/4;border-radius:var(--rayon);margin-bottom:14px;background:var(--beige)}
 .p-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s;display:block}
-.p-carte:hover .p-img img{transform:scale(1.06)}
+.p-carte:hover .p-img img{transform:scale(1.04)}
 .p-badge{position:absolute;top:11px;left:11px;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:50px;font-weight:500}
 .b-n{background:var(--rose-v);color:var(--blanc)}
 .b-p{background:var(--lavande2);color:var(--blanc)}
-.p-act{position:absolute;top:11px;right:11px;display:flex;flex-direction:column;gap:7px;opacity:0;transform:translateX(10px);transition:var(--trans)}
-.p-carte:hover .p-act{opacity:1;transform:translateX(0)}
-.p-btn{width:36px;height:36px;background:var(--blanc);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--texte);box-shadow:var(--ombre-sm);transition:var(--trans)}
-.p-btn:hover{background:var(--rose-v);color:var(--blanc)}
-.p-cart{
-    position:absolute;bottom:0;left:0;right:0;
-    background:linear-gradient(0deg,rgba(90,48,64,.9),transparent);
-    padding:28px 14px 14px;transform:translateY(100%);transition:transform .4s;
-    border-radius:0 0 var(--rayon) var(--rayon);
-}
-.p-carte:hover .p-cart{transform:translateY(0)}
-.p-cart .btn{width:100%;justify-content:center;font-size:10px}
 .p-cat{font-size:10px;color:var(--rose-v);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;display:block}
-.p-nom{font-family:var(--f-titre);font-size:18px;font-weight:300;color:var(--texte);text-decoration:none;display:block;margin-bottom:6px;transition:color .3s}
-.p-nom:hover{color:var(--rose-v)}
+.p-nom{font-family:var(--f-titre);font-size:18px;font-weight:300;color:var(--texte);display:block;margin-bottom:6px}
 .p-prix-l{display:flex;align-items:center;gap:9px}
 .p-prix{font-size:16px;font-weight:400;color:var(--brun-d)}
 .p-prix-b{font-size:12px;color:var(--texte2);text-decoration:line-through}
@@ -241,6 +222,30 @@
 }
 .f-g input:focus,.f-g select:focus,.f-g textarea:focus{border-color:var(--rose-v);background:var(--blanc)}
 .f-sub{width:100%;justify-content:center;margin-top:6px;border-radius:50px}
+/* ── Upload photo ── */
+.f-upload-zone{
+    border:2px dashed var(--peche2);border-radius:12px;padding:22px 16px;
+    text-align:center;cursor:pointer;transition:border-color .3s,background .3s;
+    background:var(--creme2);position:relative;
+}
+.f-upload-zone:hover,.f-upload-zone.dragover{border-color:var(--rose-v);background:#fdf0f3}
+.f-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.f-upload-icon{font-size:26px;color:var(--rose-v);margin-bottom:8px;display:block}
+.f-upload-label{font-size:12px;color:var(--texte2);line-height:1.7}
+.f-upload-label strong{color:var(--rose-v)}
+.f-upload-label small{display:block;font-size:10px;color:var(--texte2);margin-top:3px;letter-spacing:.5px}
+.f-upload-preview{
+    display:none;margin-top:14px;position:relative;
+    border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.12);
+}
+.f-upload-preview img{width:100%;height:160px;object-fit:cover;display:block}
+.f-upload-preview-del{
+    position:absolute;top:8px;right:8px;width:28px;height:28px;
+    background:rgba(61,32,48,.75);color:#fff;border:none;border-radius:50%;
+    cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;
+    transition:background .3s;
+}
+.f-upload-preview-del:hover{background:var(--rose-v)}
 
 /* ══════════ STATS ══════════ */
 .stats{background:var(--brun-d);padding:64px 50px}
@@ -294,7 +299,6 @@
 /* ══════════ RESPONSIVE ══════════ */
 @media(max-width:1100px){
     .prods-grid{grid-template-columns:repeat(3,1fr)}
-    .cats-grid{grid-template-columns:repeat(2,1fr)}
     .avantages{grid-template-columns:repeat(2,1fr)}
     .blog-grid{grid-template-columns:1fr 1fr}
     .inspi-grid{grid-template-columns:1fr 1fr}
@@ -312,7 +316,8 @@
 }
 @media(max-width:600px){
     .prods-grid{grid-template-columns:1fr 1fr;gap:14px}
-    .cats-grid{grid-template-columns:1fr 1fr}
+    .cats-grid{grid-template-columns:1fr}
+    .cat-c{height:300px}
     .avantages{grid-template-columns:1fr}
     .av-item{border-right:none;border-bottom:1px solid var(--peche)}
     .nwsl-form{flex-direction:column;border-radius:12px}
@@ -327,55 +332,86 @@
 @section('content')
 
 {{-- ══════ CAROUSEL ══════ --}}
+@php
+$staticSlides = [
+    [
+        'image'    => asset('assets/images/slider lt.png'),
+        'badge'    => 'Nouvelle Collection',
+        'script'   => "L'art du fil précieux",
+        'title'    => "Création\nArtisanale",
+        'phrase'   => 'Des laines d\'exception, sélectionnées avec passion pour des créations qui vous ressemblent.',
+        'btn1_text'=> 'Découvrir la boutique',
+        'btn1_url' => route('shop.index'),
+        'btn2_text'=> "Voir l'atelier",
+        'btn2_url' => route('pages.atelier'),
+    ],
+    [
+        'image'    => asset('assets/images/slider 2.jpg'),
+        'badge'    => 'Kits Signature',
+        'script'   => 'Créer avec amour',
+        'title'    => "Kits\nExclusifs",
+        'phrase'   => 'Tout ce dont vous avez besoin pour réaliser des pièces uniques, du premier point au dernier.',
+        'btn1_text'=> 'Voir les kits',
+        'btn1_url' => route('shop.index'),
+        'btn2_text'=> null,
+        'btn2_url' => null,
+    ],
+    [
+        'image'    => asset('assets/images/slider 1.avif'),
+        'badge'    => 'Exclusif JEPK',
+        'script'   => 'Votre vision, notre savoir-faire',
+        'title'    => "Création\nSur Mesure",
+        'phrase'   => 'Confiez-nous votre idée, nous la transformons en une création unique et personnalisée.',
+        'btn1_text'=> 'Commander sur mesure',
+        'btn1_url' => '#sur-mesure',
+        'btn2_text'=> null,
+        'btn2_url' => null,
+    ],
+];
+
+$carouselSlides = isset($slides) && count($slides)
+    ? $slides->map(fn($s) => [
+        'image'    => product_image_url($s->image),
+        'badge'    => $s->badge,
+        'script'   => $s->script,
+        'title'    => $s->title,
+        'phrase'   => $s->phrase,
+        'btn1_text'=> $s->btn1_text,
+        'btn1_url' => $s->btn1_url,
+        'btn2_text'=> $s->btn2_text,
+        'btn2_url' => $s->btn2_url,
+    ])->toArray()
+    : $staticSlides;
+@endphp
+
 <section class="carousel">
     <div class="car-piste" id="car-piste">
-
-        <div class="car-slide on">
-            <img src="{{ asset('assets/images/slider lt.png') }}" alt="Collection">
+        @foreach($carouselSlides as $i => $s)
+        <div class="car-slide {{ $i === 0 ? 'on' : '' }}">
+            <img src="{{ $s['image'] }}" alt="{{ $s['badge'] ?? 'Slide' }}">
             <div class="car-txt">
-                <div class="car-deco">Nouvelle Collection</div>
-                <span class="car-script">L'art du fil précieux</span>
-                <h1 class="car-titre">Création<br>Artisanale</h1>
-                <p class="car-phrase">Des laines d'exception, sélectionnées avec passion pour des créations qui vous ressemblent.</p>
+                @if($s['badge'])<div class="car-deco">{{ $s['badge'] }}</div>@endif
+                @if($s['script'])<span class="car-script">{{ $s['script'] }}</span>@endif
+                <h1 class="car-titre">{!! nl2br(e($s['title'])) !!}</h1>
+                @if($s['phrase'])<p class="car-phrase">{{ $s['phrase'] }}</p>@endif
                 <div class="car-btns">
-                    <a href="{{ route('shop.index') }}" class="btn btn-rose">Découvrir la boutique</a>
-                    <a href="{{ route('pages.atelier') }}" class="btn btn-outline">Voir l'atelier</a>
+                    @if($s['btn1_text'])
+                        <a href="{{ $s['btn1_url'] ?? '#' }}" class="btn btn-rose">{{ $s['btn1_text'] }}</a>
+                    @endif
+                    @if($s['btn2_text'])
+                        <a href="{{ $s['btn2_url'] ?? '#' }}" class="btn btn-outline">{{ $s['btn2_text'] }}</a>
+                    @endif
                 </div>
             </div>
         </div>
-
-        <div class="car-slide">
-            <img src="{{ asset('assets/images/slider 2.jpg') }}" alt="Kits">
-            <div class="car-txt">
-                <div class="car-deco">Kits Signature</div>
-                <span class="car-script">Créer avec amour</span>
-                <h1 class="car-titre">Kits<br>Exclusifs</h1>
-                <p class="car-phrase">Tout ce dont vous avez besoin pour réaliser des pièces uniques, du premier point au dernier.</p>
-                <div class="car-btns">
-                    <a href="{{ route('shop.index') }}" class="btn btn-rose">Voir les kits</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="car-slide">
-            <img src="{{ asset('assets/images/slider 1.avif') }}" alt="Sur mesure">
-            <div class="car-txt">
-                <div class="car-deco">Exclusif JEKP</div>
-                <span class="car-script">Votre vision, notre savoir-faire</span>
-                <h1 class="car-titre">Création<br>Sur Mesure</h1>
-                <p class="car-phrase">Confiez-nous votre idée, nous la transformons en une création unique et personnalisée.</p>
-                <div class="car-btns">
-                    <a href="#sur-mesure" class="btn btn-rose">Commander sur mesure</a>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
     <button class="car-fl prev" id="prev"><i class="fas fa-chevron-left"></i></button>
     <button class="car-fl next" id="next"><i class="fas fa-chevron-right"></i></button>
-    <div class="car-dots">
-        <button class="car-dot on" data-i="0"></button>
-        <button class="car-dot" data-i="1"></button>
-        <button class="car-dot" data-i="2"></button>
+    <div class="car-dots" id="car-dots">
+        @foreach($carouselSlides as $i => $s)
+            <button class="car-dot {{ $i === 0 ? 'on' : '' }}" data-i="{{ $i }}"></button>
+        @endforeach
     </div>
     <div class="car-scroll"><div class="car-line"></div><span>Scroll</span></div>
 </section>
@@ -400,7 +436,7 @@
 <div class="avantages">
     <div class="av-item rev">
         <div class="av-icone"><i class="fas fa-truck"></i></div>
-        <div><div class="av-titre">Livraison offerte</div><div class="av-sous">Dès 60€ d'achat, partout</div></div>
+        <div><div class="av-titre">Livraison offerte</div><div class="av-sous">Dès 70 000 F CFA d'achat, partout</div></div>
     </div>
     <div class="av-item rev d1">
         <div class="av-icone"><i class="fas fa-undo"></i></div>
@@ -428,7 +464,7 @@
         <div class="qui-txt">
             <span class="s-label rev">Notre histoire</span>
             <h2 class="s-titre rev d1">Qui sommes-<em>nous</em> ?</h2>
-            <p class="qui-p rev d2">JEKP Store est né d'une passion profonde pour l'art du tricot et la création textile. Nous sommes une maison artisanale qui sélectionne avec soin des fils d'exception et crée des kits pensés pour toutes les niveaux.</p>
+            <p class="qui-p rev d2">JEKP Store est né d'une passion profonde pour l'art du crochet et la création textile. Nous sommes une maison artisanale qui sélectionne avec soin des fils d'exception et crée des pièces pensées pour tous les niveaux.</p>
             <p class="qui-p rev d2">Notre mission : vous offrir le meilleur de la création artisanale, avec des matières nobles et des designs qui traversent les tendances.</p>
             <div class="qui-vals rev d3">
                 <div class="val-item"><div class="val-i"><i class="fas fa-heart"></i></div><div><div class="val-nom">Fait avec passion</div><div class="val-desc">Chaque création porte notre amour du métier</div></div></div>
@@ -454,29 +490,25 @@
             $dc = [
                 [
                     'nom'  => 'Maison',
-                    'desc' => 'Coussins · Nappes · Plaids · Déco',
-                    'nb'   => 'Coussins, Nappes, Plaids…',
+                    'sous' => 'Coussins, plaids, nappes, tapis et décorations faites à la main pour votre intérieur.',
                     'slug' => 'maison',
                     'img'  => 'assets/images/jepk42.jpg',
                 ],
                 [
                     'nom'  => 'Adulte',
-                    'desc' => 'Pulls · Écharpes · Bonnets · Mode',
-                    'nb'   => 'Pulls, Écharpes, Bonnets…',
+                    'sous' => 'Pulls, gilets, écharpes et bonnets — des pièces uniques au crochet pour vous.',
                     'slug' => 'adulte',
-                    'img'  => 'assets/images/jepk3.jpg',
+                    'img'  => 'assets/images/jepk5.jpg',
                 ],
                 [
                     'nom'  => 'Enfant',
-                    'desc' => 'Layettes · Doudous · Vêtements',
-                    'nb'   => 'Layettes, Doudous, Jouets…',
+                    'sous' => 'Layettes, doudous, peluches et vêtements doux pour les bébés et les enfants.',
                     'slug' => 'enfant',
                     'img'  => 'assets/images/jepk10.jpg',
                 ],
                 [
                     'nom'  => 'Accessoires',
-                    'desc' => 'Sacs · Pochettes · Bijoux · Cadeaux',
-                    'nb'   => 'Sacs, Pochettes, Bijoux…',
+                    'sous' => 'Sacs, pochettes, bijoux et idées cadeaux — l\'art du crochet au quotidien.',
                     'slug' => 'accessoires',
                     'img'  => 'assets/images/jepk25.jpg',
                 ],
@@ -485,17 +517,18 @@
 
             @foreach(isset($categories) && count($categories) ? $categories : $dc as $i => $c)
             @php
-                $nom  = $c['nom']  ?? $c->name;
-                $desc = $c['desc'] ?? ($c->description ?? '');
-                $slug = $c['slug'] ?? $c->slug;
-                $img  = $c['img']  ?? $c->image;
+                $nom  = is_array($c) ? $c['nom']  : $c->name;
+                $sous = is_array($c) ? $c['sous']  : ($c->description ?? '');
+                $slug = is_array($c) ? $c['slug']  : $c->slug;
+                $img  = is_array($c) ? asset($c['img']) : product_image_url($c->image);
             @endphp
             <a href="{{ route('categories.show', $slug) }}" class="cat-c rev d{{ $i+1 }}">
-                <img src="{{ asset($img) }}" alt="{{ $nom }}">
+                <img src="{{ $img }}" alt="{{ $nom }}">
                 <div class="cat-overlay">
-                    <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <span class="cat-label-s">Collection</span>
                     <span class="cat-nom">{{ $nom }}</span>
-                    <span class="cat-nb">{{ $desc }}</span>
+                    <span class="cat-nb">{{ $sous }}</span>
+                    <span class="cat-btn-s">Découvrir <i class="fas fa-arrow-right"></i></span>
                 </div>
             </a>
             @endforeach
@@ -512,55 +545,7 @@
     </div>
 </section>
 
-{{-- ══════ PRODUITS VEDETTES ══════ --}}
-<section class="prods">
-    <div class="prods-ent rev">
-        <div>
-            <span class="s-label">Sélection</span>
-            <h2 class="s-titre">Nos <em>Coups de Cœur</em></h2>
-        </div>
-        <a href="{{ route('shop.index') }}" class="btn btn-outline-rose">Voir tout →</a>
-    </div>
-    <div class="filtres">
-        <button class="f-b on">Tout</button>
-        <button class="f-b">Nouveautés</button>
-        <button class="f-b">Fils & Laines</button>
-        <button class="f-b">Kits</button>
-        <button class="f-b">Promotions</button>
-    </div>
-    <div class="prods-grid">
-        @php
-        $dp=[['nom'=>'Belle robe laine verte','cat'=>'Fils Rares','prix'=>'37500','anc'=>null,'badge'=>'n','img'=>'assets/images/jepk5.jpg'],
-        ['nom'=>'Chemise pour homme élegant','cat'=>'Kits Signature','prix'=>'17300','anc'=>'25500','badge'=>'p','img'=>'assets/images/jepk4.jpg'],
-        ['nom'=>'Aiguilles Bambou Premium','cat'=>'Accessoires','prix'=>'18,50','anc'=>null,'badge'=>null,'img'=>'assets/images/jepk25.jpg'],
-        ['nom'=>'Alpaga des Andes','cat'=>'Fils Rares','prix'=>'28,50','anc'=>null,'badge'=>'n','img'=>'assets/images/jepk12.jpg'],
-        ['nom'=>'Kit Écharpe Hiver','cat'=>'Kits Signature','prix'=>'42,00','anc'=>null,'badge'=>null,'img'=>'assets/images/jepk2.jpg'],
-        ['nom'=>'Mohair & Soie','cat'=>'Fils Rares','prix'=>'32,00','anc'=>'40,00','badge'=>'p','img'=>'assets/images/jepk1.jpg'],
-        ['nom'=>'Trousse Range-Aiguilles','cat'=>'Accessoires','prix'=>'24,00','anc'=>null,'badge'=>'n','img'=>'assets/images/jepk3.jpg'],
-        ['nom'=>'Kit Bonnet Débutant','cat'=>'Kits Signature','prix'=>'29,00','anc'=>null,'badge'=>null,'img'=>'assets/images/jepk6.jpg']];
-        @endphp
-        @foreach(isset($featured) && count($featured) ? $featured : $dp as $i=>$p)
-        <div class="p-carte rev d{{ ($i%4)+1 }}">
-            <div class="p-img">
-                <img src="{{ asset($p['img'] ?? $p->image) }}" alt="{{ $p['nom'] ?? $p->name }}">
-                @if(($p['badge'] ?? null)==='n') <span class="p-badge b-n">Nouveau</span>
-                @elseif(($p['badge'] ?? null)==='p') <span class="p-badge b-p">Promo</span>@endif
-                <div class="p-act">
-                    <button class="p-btn"><i class="far fa-heart"></i></button>
-                    <button class="p-btn"><i class="far fa-eye"></i></button>
-                </div>
-                <div class="p-cart"><a href="{{ route('shop.index') }}" class="btn btn-blanc">Ajouter au panier</a></div>
-            </div>
-            <span class="p-cat">{{ $p['cat'] ?? ($p->category->name ?? '') }}</span>
-            <a href="{{ route('shop.index') }}" class="p-nom">{{ $p['nom'] ?? $p->name }}</a>
-            <div class="p-prix-l">
-                <span class="p-prix">{{ $p['prix'] ?? number_format($p->price,2,',',' ') }} CFA</span>
-                @if($p['anc'] ?? false)<span class="p-prix-b">{{ $p['anc'] }} CFA</span>@endif
-            </div>
-        </div>
-        @endforeach
-    </div>
-</section>
+
 
 {{-- ══════ INSPIRATION GRILLE ══════ --}}
 <section class="inspi">
@@ -569,11 +554,11 @@
         <h2 class="s-titre">Notre <em>Univers</em></h2>
     </div>
     <div class="inspi-grid">
-        <a href="#" class="inspi-card rev"><img src="{{ asset('assets/images/jepk32.jpg') }}" alt=""><span class="inspi-tag">Collection Automne</span></a>
-        <a href="#" class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk40.jpg') }}" alt=""><span class="inspi-tag">Kits & Tutoriels</span></a>
-        <a href="#" class="inspi-card rev d2"><img src="{{ asset('assets/images/jepk28.jpg') }}" alt=""><span class="inspi-tag">Accessoires</span></a>
-        <a href="#" class="inspi-card rev"><img src="{{ asset('assets/images/jepk37.jpg') }}" alt=""><span class="inspi-tag">Collection Automne</span></a>
-        <a href="#" class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk27.jpg') }}" alt=""><span class="inspi-tag">Kits & Tutoriels</span></a>
+        <div class="inspi-card rev"><img src="{{ asset('assets/images/jepk32.jpg') }}" alt=""><span class="inspi-tag">Collection Automne</span></div>
+        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk40.jpg') }}" alt=""><span class="inspi-tag">Kits & Tutoriels</span></div>
+        <div class="inspi-card rev d2"><img src="{{ asset('assets/images/jepk28.jpg') }}" alt=""><span class="inspi-tag">Accessoires</span></div>
+        <div class="inspi-card rev"><img src="{{ asset('assets/images/jepk37.jpg') }}" alt=""><span class="inspi-tag">Collection Automne</span></div>
+        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk27.jpg') }}" alt=""><span class="inspi-tag">Kits & Tutoriels</span></div>
     </div>
 </section>
 
@@ -598,7 +583,7 @@
         <div class="form-card rev d2">
             <h3 class="fc-titre">Décrivez votre projet</h3>
             <p class="fc-sous">Remplissez ce formulaire — nous vous recontactons sous 24h.</p>
-            <form action="{{ route('home') }}" method="POST">
+            <form action="{{ route('home') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="type" value="sur_mesure">
                 <div class="f-row">
@@ -631,15 +616,35 @@
                     <label>Décrivez votre projet</label>
                     <textarea name="description" rows="4" placeholder="Votre idée, votre style, vos inspirations… Soyez aussi précise que vous le souhaitez !"></textarea>
                 </div>
+                {{-- ── Champ photo d'inspiration ── --}}
+                <div class="f-g">
+                    <label><i class="fas fa-camera" style="margin-right:5px;color:var(--rose-v)"></i>Photo d'inspiration (optionnel)</label>
+                    <div class="f-upload-zone" id="uploadZone">
+                        <input type="file" name="photo_inspiration" id="photoInput"
+                               accept="image/jpeg,image/png,image/webp,image/gif"
+                               aria-label="Ajouter une photo d'inspiration">
+                        <span class="f-upload-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                        <div class="f-upload-label">
+                            <strong>Cliquez ou glissez votre photo ici</strong>
+                            <small>JPG, PNG, WEBP · Max 5 Mo</small>
+                        </div>
+                    </div>
+                    <div class="f-upload-preview" id="uploadPreview">
+                        <img src="" alt="Aperçu" id="previewImg">
+                        <button type="button" class="f-upload-preview-del" id="deletePhoto" title="Supprimer la photo">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
                 <div class="f-row">
                     <div class="f-g">
                         <label>Budget approximatif</label>
                         <select name="budget">
                             <option value="">Choisir…</option>
-                            <option>Moins de 50€</option>
-                            <option>50€ – 100€</option>
-                            <option>100€ – 200€</option>
-                            <option>Plus de 200€</option>
+                            <option>Moins de 30 000 F CFA</option>
+                            <option>30 000 – 60 000 F CFA</option>
+                            <option>60 000 – 120 000 F CFA</option>
+                            <option>Plus de 120 000 F CFA</option>
                             <option>À définir ensemble</option>
                         </select>
                     </div>
@@ -680,7 +685,7 @@
             <h2 class="s-titre">Ce qu'elles <em>disent de nous</em></h2>
         </div>
         <div class="temos-grid">
-            @foreach([['★★★★★','La qualité des laines est absolument exceptionnelle. Le mérinos extra-fin est d\'une douceur incomparable et les coloris sont magnifiques. Je suis cliente à vie !','Marie L.','Paris · Tricoteuse','47'],['★★★★★','J\'ai commandé une création sur mesure pour ma mère. Le résultat a dépassé toutes mes espérances ! L\'équipe est à l\'écoute et très professionnelle.','Nathalie B.','Lyon · Créatrice','32'],['★★★★★','Service client au top, livraison ultra rapide et les produits sont encore plus beaux en vrai. JEKP c\'est une boutique à part entière. Je recommande !','Sophie M.','Bordeaux · Artiste','56']] as $i=>$t)
+            @foreach([['★★★★★','La qualité des fils est absolument exceptionnelle. Les créations au crochet sont d\'une douceur incomparable et les coloris sont magnifiques. Je suis cliente à vie !','Marie L.','Paris · Crocheteuse','47'],['★★★★★','J\'ai commandé une création sur mesure pour ma mère. Le résultat a dépassé toutes mes espérances ! L\'équipe est à l\'écoute et très professionnelle.','Nathalie B.','Lyon · Créatrice','32'],['★★★★★','Service client au top, livraison ultra rapide et les produits sont encore plus beaux en vrai. JEKP c\'est une boutique à part entière. Je recommande !','Sophie M.','Bordeaux · Artiste','56']] as $i=>$t)
             <div class="t-carte rev d{{ $i+1 }}">
                 <div class="t-etoiles">{{ $t[0] }}</div>
                 <p class="t-txt">{{ $t[1] }}</p>
@@ -701,7 +706,7 @@
         <h2 class="s-titre">Inspirations & <em>Conseils</em></h2>
     </div>
     <div class="blog-grid" style="margin-top:44px">
-        @foreach([['Tutoriels','Comment réussir son premier pull : guide complet pour débutantes','Découvrez toutes les étapes, les astuces et les erreurs à éviter pour tricoter votre premier pull avec succès.','assets/images/jepk39.jpg'],
+        @foreach([['Tutoriels','Comment réussir sa première création au crochet : guide complet pour débutantes','Découvrez toutes les étapes, les astuces et les erreurs à éviter pour réaliser votre première création au crochet.','assets/images/jepk39.jpg'],
             ['Tendances','Les couleurs de la saison : tons doux et naturels à la une','Pantone a parlé : cette saison mise sur les tons pêche, lavande et crème. Voici comment les intégrer à vos créations.','assets/images/jepk29.jpg'],
             ['Matières','Mérinos, alpaga, mohair : comment choisir son fil ?','Un guide complet pour comprendre les différentes fibres naturelles et choisir celle qui convient à votre projet.','assets/images/jepk44.jpg']] as $i=>$b)
         <a href="{{ route('pages.blog') }}" class="bl-carte rev d{{ $i }}">
@@ -750,5 +755,48 @@ document.querySelectorAll('.f-b').forEach(b=>b.addEventListener('click',()=>{doc
 // Scroll reveal
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+
+// ── Upload photo inspiration ──
+(function(){
+    const zone=document.getElementById('uploadZone');
+    const input=document.getElementById('photoInput');
+    const preview=document.getElementById('uploadPreview');
+    const previewImg=document.getElementById('previewImg');
+    const delBtn=document.getElementById('deletePhoto');
+    if(!zone||!input)return;
+
+    function showPreview(file){
+        if(!file||!file.type.startsWith('image/'))return;
+        if(file.size>5*1024*1024){
+            alert('La photo ne doit pas dépasser 5 Mo.');
+            input.value='';return;
+        }
+        const reader=new FileReader();
+        reader.onload=e=>{
+            previewImg.src=e.target.result;
+            preview.style.display='block';
+            zone.style.display='none';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    input.addEventListener('change',()=>{ if(input.files[0]) showPreview(input.files[0]); });
+
+    // Drag & drop
+    ['dragenter','dragover'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.add('dragover');}));
+    ['dragleave','drop'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.remove('dragover');}));
+    zone.addEventListener('drop',e=>{
+        const f=e.dataTransfer.files[0];
+        if(f){ const dt=new DataTransfer();dt.items.add(f);input.files=dt.files;showPreview(f); }
+    });
+
+    // Supprimer la photo
+    delBtn&&delBtn.addEventListener('click',()=>{
+        input.value='';
+        previewImg.src='';
+        preview.style.display='none';
+        zone.style.display='block';
+    });
+})();
 </script>
 @endpush
