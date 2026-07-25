@@ -739,27 +739,40 @@
 
             .h-inner {
                 padding: 0 20px;
-                height: 80px;
+                height: 100px;
             }
 
             .logo-img {
-                height: 90px;
+                height: 110px;
             }
 
             .h-icons {
-                gap: 14px;
+                gap: 10px;
             }
 
             .h-icons a {
-                font-size: 20px;
+                font-size: 22px;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--creme2);
+                border-radius: 12px;
+                border: 1px solid var(--peche);
+            }
+
+            .h-icons a:hover {
+                background: var(--rose-v);
+                color: var(--blanc);
             }
 
             .badge-panier {
-                width: 19px;
-                height: 19px;
-                font-size: 9px;
-                top: -9px;
-                right: -10px;
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+                top: -6px;
+                right: -6px;
             }
 
             .ann-bar {
@@ -801,25 +814,33 @@
         /* ── MOBILE : Grande nav avec items larges ── */
         @media(max-width:900px) {
             .m-menu {
-                padding: 80px 20px 30px;
-                gap: 6px;
+                padding: 90px 20px 30px;
+                gap: 10px;
                 justify-content: flex-start;
             }
 
             .m-menu a {
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-start;
                 width: 100%;
-                font-size: 22px;
-                padding: 18px 16px;
-                border-radius: 14px;
+                font-size: 20px;
+                padding: 20px 24px;
+                border-radius: 16px;
                 border-bottom: none;
                 background: var(--creme2);
                 border: 1.5px solid var(--peche);
-                text-align: center;
+                text-align: left;
                 transition: all 0.3s;
                 letter-spacing: 1px;
+            }
+
+            .m-menu a i {
+                font-size: 20px;
+                width: 28px;
+                text-align: center;
+                margin-right: 14px;
+                flex-shrink: 0;
             }
 
             .m-menu a:hover {
@@ -831,12 +852,12 @@
             }
 
             .m-close {
-                top: 18px;
+                top: 22px;
                 right: 20px;
-                font-size: 24px;
+                font-size: 26px;
                 background: var(--creme2);
-                width: 42px;
-                height: 42px;
+                width: 46px;
+                height: 46px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
