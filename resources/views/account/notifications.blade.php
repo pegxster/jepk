@@ -20,6 +20,7 @@
 .notif-vide h3{font-family:var(--f-titre);font-size:22px;font-weight:300;color:var(--texte);margin-bottom:8px}
 .notif-vide p{font-size:13px;color:var(--texte2);max-width:360px;margin:0 auto}
 @media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}}
+@media(max-width:600px){.page-hero h1{font-size:28px}.acc-titre{font-size:22px}.notif-vide{padding:40px 16px}}
 </style>
 @endpush
 @section('content')

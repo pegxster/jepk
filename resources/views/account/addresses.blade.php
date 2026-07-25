@@ -41,6 +41,7 @@
 .f-g input:focus,.f-g select:focus{border-color:var(--rose-v);background:var(--blanc)}
 .f-g .f-error{color:#e74c3c;font-size:11px;margin-top:4px}
 @media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}.f-row{grid-template-columns:1fr}}
+@media(max-width:600px){.page-hero h1{font-size:28px}.acc-titre{font-size:22px}.form-card{padding:20px 16px}.addr-card{padding:18px}}
 </style>
 @endpush
 @section('content')

@@ -36,6 +36,15 @@
 .vide{text-align:center;padding:60px 0;color:var(--texte2)}
 .vide i{font-size:40px;color:var(--peche2);margin-bottom:14px;display:block}
 @media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}}
+@media(max-width:600px){
+    .page-hero h1{font-size:28px}
+    .acc-titre{font-size:22px}
+    .cmd-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -14px;padding:0 14px 8px}
+    .cmd-table{min-width:580px}
+    .cmd-table th,.cmd-table td{padding:10px 8px;font-size:12px}
+    .statut{font-size:9px;padding:3px 8px}
+    .vide{padding:40px 0}
+}
 </style>
 @endpush
 @section('content')
@@ -59,6 +68,7 @@
         <h2 class="acc-titre">Toutes vos <em>commandes</em></h2>
         <p class="acc-sous">Suivez l'état de vos commandes et consultez leurs détails.</p>
         <div class="acc-bloc">
+            <div class="cmd-scroll">
             <table class="cmd-table">
                 <thead><tr><th>Commande</th><th>Date</th><th>Articles</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
                 <tbody>
@@ -92,6 +102,7 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
         @if(method_exists($orders, 'links'))
             <div class="pagination">{{ $orders->links() }}</div>

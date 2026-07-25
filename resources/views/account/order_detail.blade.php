@@ -32,6 +32,7 @@
 .back-link{color:var(--rose-v);text-decoration:none;font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:color .3s}
 .back-link:hover{color:var(--rose-f)}
 @media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}.info-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.page-hero h1{font-size:28px}.acc-titre{font-size:22px}.detail-card{padding:18px 14px}.detail-card h3{font-size:16px}.cmd-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -14px;padding:0 14px 8px}.cmd-table{min-width:420px}.cmd-table th,.cmd-table td{padding:10px 8px;font-size:12px}}
 </style>
 @endpush
 @section('content')
@@ -94,6 +95,7 @@
 
         <div class="detail-card">
             <h3><i class="fas fa-shopping-bag"></i> Articles commandés</h3>
+            <div class="cmd-scroll">
             <table class="cmd-table">
                 <thead><tr><th>Produit</th><th>Prix unitaire</th><th>Qté</th><th>Sous-total</th></tr></thead>
                 <tbody>
@@ -137,6 +139,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
 
         @if($order->notes)

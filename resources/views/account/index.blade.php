@@ -84,8 +84,24 @@
 .acc-cta-txt h3{font-family:var(--f-titre);font-size:20px;font-weight:300;color:var(--texte);margin-bottom:4px}
 .acc-cta-txt p{font-size:13px;color:var(--texte2)}
 
-@media(max-width:900px){.account-layout{grid-template-columns:1fr;padding:24px 16px}.account-sidebar{position:static}.acc-stats{grid-template-columns:1fr 1fr}.page-hero{padding:36px 20px}.cmd-table{font-size:12px}.cmd-table th,.cmd-table td{padding:10px 8px}}
-@media(max-width:500px){.acc-stats{grid-template-columns:1fr}.acc-cta{flex-direction:column;text-align:center}}
+@media(max-width:900px){.account-layout{grid-template-columns:1fr;padding:24px 16px}.account-sidebar{position:static}.acc-stats{grid-template-columns:1fr 1fr}.page-hero{padding:36px 20px}.page-hero h1{font-size:28px}}
+@media(max-width:600px){
+    .acc-stats{grid-template-columns:1fr 1fr}
+    .acc-cta{flex-direction:column;text-align:center}
+    .acc-cta-txt h3{font-size:17px}
+    .acc-titre{font-size:22px}
+    .acc-bloc{padding:18px 14px}
+    .acc-bloc-header{flex-direction:column;align-items:flex-start;gap:8px}
+    .cmd-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -14px;padding:0 14px 8px}
+    .cmd-table{min-width:520px}
+    .cmd-table th,.cmd-table td{padding:10px 8px;font-size:12px}
+    .statut{font-size:9px;padding:3px 8px}
+}
+@media(max-width:400px){
+    .acc-stats{grid-template-columns:1fr}
+    .acc-cta .btn{width:100%}
+    .cmd-table{min-width:480px}
+}
 </style>
 @endpush
 @section('content')
@@ -156,6 +172,7 @@
                 <span class="acc-bloc-titre">Dernières commandes</span>
                 <a href="{{ route('account.orders') }}" class="cmd-link">Tout voir <i class="fas fa-chevron-right" style="font-size:9px"></i></a>
             </div>
+            <div class="cmd-scroll">
             <table class="cmd-table">
                 <thead>
                     <tr><th>Commande</th><th>Date</th><th>Montant</th><th>Statut</th><th></th></tr>
@@ -190,6 +207,7 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div class="acc-cta">

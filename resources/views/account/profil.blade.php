@@ -36,6 +36,7 @@
 .alert-ok{background:#f0faf5;border:1px solid #a8d5be;color:#2d6a4f;padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:13px}
 .alert-err{background:#fff0f0;border:1px solid #f5baba;color:#c0392b;padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:13px}
 @media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}.f-row{grid-template-columns:1fr}}
+@media(max-width:600px){.page-hero h1{font-size:28px}.profil-avatar-zone{flex-direction:column;text-align:center}.profil-card{padding:20px 16px}}
 </style>
 @endpush
 @section('content')
