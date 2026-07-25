@@ -52,9 +52,9 @@
 .cat-empty{text-align:center;padding:80px 20px;color:var(--texte2)}
 .cat-empty i{font-size:52px;opacity:.25;display:block;margin-bottom:18px;color:var(--rose-p)}
 
-@media(max-width:1000px){.cat-grid{grid-template-columns:repeat(3,1fr)}.cat-layout{padding:40px 24px}}
+@media(max-width:1000px){.cat-grid{grid-template-columns:repeat(3,1fr)}.cat-layout{padding:40px 16px}}
 @media(max-width:700px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:14px}.cat-hero{height:240px}.cat-hero-titre{font-size:38px}}
-@media(max-width:400px){.cat-grid{grid-template-columns:1fr}}
+@media(max-width:400px){.cat-grid{grid-template-columns:1fr}.page-hero{padding:36px 20px}}
 </style>
 @endpush
 
@@ -62,7 +62,7 @@
 
 {{-- Hero --}}
 <div class="cat-hero">
-    <img src="{{ $catImg }}" alt="{{ $catName }}">
+    <img src="{{ $catImg }}" alt="{{ $catName }}" loading="lazy">
     <div class="cat-hero-txt">
         <span class="cat-hero-script">Collection</span>
         <h1 class="cat-hero-titre">{{ $catName }}</h1>
@@ -101,7 +101,7 @@
         <div class="p-carte">
             <div class="p-img">
                 @if(!empty($p->images))
-                    <img src="{{ product_image_url($p->images[0] ?? null) }}" alt="{{ $p->name }}">
+                    <img src="{{ product_image_url($p->images[0] ?? null) }}" alt="{{ $p->name }}" loading="lazy">
                 @else
                     <div style="width:100%;height:100%;background:var(--creme2);display:flex;align-items:center;justify-content:center">
                         <i class="fas fa-image" style="font-size:40px;color:var(--peche2);opacity:.4"></i>

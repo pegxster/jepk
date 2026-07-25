@@ -120,7 +120,7 @@
 {{-- ══ INTRO / HISTOIRE ══ --}}
 <div class="at-intro" id="histoire">
     <div class="at-intro-img rev">
-        <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=800&q=80" alt="L'Atelier JEKP">
+        <img src="{{ asset('assets/images/jepk1.jpg') }}" alt="L'Atelier JEKP" loading="lazy">
         <div class="at-intro-badge">
             <span>Fait à la main</span>
             <small>Avec amour ✦ Depuis toujours</small>
@@ -184,7 +184,7 @@
                 <h3>Le choix du fil</h3>
                 <p>Tout commence par la sélection minutieuse des matières. Nous choisissons chaque fil pour sa douceur, sa tenue et sa beauté — des fibres naturelles et nobles qui durent dans le temps.</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Choix du fil" class="at-step-img">
+            <img src="{{ asset('assets/images/jepk2.jpg') }}" alt="Choix du fil" class="at-step-img" loading="lazy">
         </div>
         <div class="at-step rev">
             <div class="at-step-num">02</div>
@@ -192,7 +192,7 @@
                 <h3>La création du patron</h3>
                 <p>Chaque modèle est dessiné et adapté à la main. Nous travaillons les points, les formes et les proportions jusqu'à obtenir un résultat parfait, élégant et flatteur.</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=700&q=80" alt="Patron" class="at-step-img">
+            <img src="{{ asset('assets/images/jepk3.jpg') }}" alt="Patron" class="at-step-img" loading="lazy">
         </div>
         <div class="at-step rev">
             <div class="at-step-num">03</div>
@@ -200,7 +200,7 @@
                 <h3>Le crochet</h3>
                 <p>Maille après maille, la pièce prend vie entre nos mains. C'est la partie la plus méditative et la plus précieuse — là où l'amour du métier s'exprime pleinement.</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=700&q=80" alt="Crochet" class="at-step-img">
+            <img src="{{ asset('assets/images/jepk6.jpg') }}" alt="Crochet" class="at-step-img" loading="lazy">
         </div>
         <div class="at-step rev">
             <div class="at-step-num">04</div>
@@ -208,7 +208,7 @@
                 <h3>Les finitions & l'envoi</h3>
                 <p>Chaque pièce est soigneusement vérifiée, bloquée et emballée dans un packaging délicat. Votre commande part avec une petite carte personnalisée — parce que les détails font tout.</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=700&q=80" alt="Finitions" class="at-step-img">
+            <img src="{{ asset('assets/images/jepk7.jpg') }}" alt="Finitions" class="at-step-img" loading="lazy">
         </div>
     </div>
 </div>
@@ -223,23 +223,23 @@
         </div>
         <div class="at-galerie-grid">
             <div class="at-gal-item">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Atelier 1">
+                <img src="{{ asset('assets/images/jepk8.jpg') }}" alt="Atelier 1" loading="lazy">
                 <div class="at-gal-overlay"><i class="fas fa-expand"></i></div>
             </div>
             <div class="at-gal-item">
-                <img src="https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=600&q=80" alt="Atelier 2">
+                <img src="{{ asset('assets/images/jepk9.jpg') }}" alt="Atelier 2" loading="lazy">
                 <div class="at-gal-overlay"><i class="fas fa-expand"></i></div>
             </div>
             <div class="at-gal-item">
-                <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=600&q=80" alt="Atelier 3">
+                <img src="{{ asset('assets/images/jepk11.jpg') }}" alt="Atelier 3" loading="lazy">
                 <div class="at-gal-overlay"><i class="fas fa-expand"></i></div>
             </div>
             <div class="at-gal-item">
-                <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=600&q=80" alt="Atelier 4">
+                <img src="{{ asset('assets/images/jepk12.jpg') }}" alt="Atelier 4" loading="lazy">
                 <div class="at-gal-overlay"><i class="fas fa-expand"></i></div>
             </div>
             <div class="at-gal-item">
-                <img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&q=80" alt="Atelier 5">
+                <img src="{{ asset('assets/images/jepk13.jpg') }}" alt="Atelier 5" loading="lazy">
                 <div class="at-gal-overlay"><i class="fas fa-expand"></i></div>
             </div>
         </div>
@@ -255,7 +255,7 @@
     </div>
     <div class="at-mat-grid">
         <a href="{{ route('shop.index') }}" class="at-mat-card rev">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Mérinos">
+            <img src="{{ asset('assets/images/jepk14.jpg') }}" alt="Mérinos" loading="lazy">
             <div class="mat-overlay">
                 <h3>Laine Mérinos</h3>
                 <p>Ultra-douce · Thermorégulatrice</p>
@@ -263,7 +263,7 @@
             <span class="mat-tag">Premium</span>
         </a>
         <a href="{{ route('shop.index') }}" class="at-mat-card rev">
-            <img src="https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=500&q=80" alt="Alpaga">
+            <img src="{{ asset('assets/images/jepk15.jpg') }}" alt="Alpaga" loading="lazy">
             <div class="mat-overlay">
                 <h3>Alpaga</h3>
                 <p>Luxueux · Léger · Soyeux</p>
@@ -271,7 +271,7 @@
             <span class="mat-tag">Luxe</span>
         </a>
         <a href="{{ route('shop.index') }}" class="at-mat-card rev">
-            <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=500&q=80" alt="Mohair">
+            <img src="{{ asset('assets/images/jepk16.jpg') }}" alt="Mohair" loading="lazy">
             <div class="mat-overlay">
                 <h3>Mohair</h3>
                 <p>Délicat · Duveteux · Chic</p>
@@ -279,7 +279,7 @@
             <span class="mat-tag">Douceur</span>
         </a>
         <a href="{{ route('shop.index') }}" class="at-mat-card rev">
-            <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=500&q=80" alt="Coton Bio">
+            <img src="{{ asset('assets/images/jepk18.jpg') }}" alt="Coton Bio" loading="lazy">
             <div class="mat-overlay">
                 <h3>Coton Bio</h3>
                 <p>Naturel · Respirant · Éco</p>

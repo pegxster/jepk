@@ -98,11 +98,24 @@
 .pay-opt-info span{font-size:11px;color:var(--texte2)}
 
 @media(max-width:900px){
-    .cart-layout{grid-template-columns:1fr;padding:40px 24px}
+    .cart-layout{grid-template-columns:1fr;padding:24px 16px}
     .cart-header{display:none}
     .cart-item{grid-template-columns:1fr;position:relative;padding:16px 0 16px 92px;min-height:100px}
     .ci-prod{position:absolute;left:0;top:16px}
     .ci-img{width:72px;height:82px}
+    .page-hero{padding:36px 20px}
+    .cart-items-bloc{padding:16px;border-radius:12px}
+    .cart-recap{padding:20px 16px;border-radius:12px;position:static}
+    .recap-titre{font-size:18px}
+    .payer-btn{padding:13px;font-size:11px}
+    .cart-actions{flex-direction:column;gap:10px}
+    .cart-actions .btn{width:100%;justify-content:center}
+}
+@media(max-width:500px){
+    .cart-item{padding:14px 0 14px 80px;min-height:85px}
+    .ci-img{width:62px;height:72px}
+    .ci-nom{font-size:14px}
+    .ci-prix,.ci-total{font-size:13px}
 }
 </style>
 @endpush

@@ -71,9 +71,10 @@ class ProductController extends Controller
 
         $images = [];
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('images/products', 'public');
-                $images[] = $path;
+            foreach ($request->file('images') as $index => $image) {
+                $filename = 'prod-' . Str::slug($data['name']) . '-' . time() . '-' . $index . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('assets/images/products'), $filename);
+                $images[] = 'assets/images/products/' . $filename;
             }
         }
         $data['images'] = $images;
@@ -125,15 +126,17 @@ class ProductController extends Controller
 
         if (!empty($request->remove_images)) {
             foreach ($request->remove_images as $path) {
-                Storage::disk('public')->delete($path);
+                $fullPath = public_path($path);
+                if (file_exists($fullPath)) @unlink($fullPath);
                 $existingImages = array_filter($existingImages, fn($img) => $img !== $path);
             }
         }
 
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('images/products', 'public');
-                $existingImages[] = $path;
+            foreach ($request->file('images') as $idx => $image) {
+                $filename = 'prod-' . Str::slug($data['name']) . '-' . time() . '-' . $idx . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('assets/images/products'), $filename);
+                $existingImages[] = 'assets/images/products/' . $filename;
             }
         }
         $data['images'] = array_values($existingImages);
@@ -146,7 +149,10 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         foreach ($product->images ?? [] as $image) {
-            Storage::disk('public')->delete($image);
+            if (str_starts_with($image, 'assets/images/products/')) {
+                $path = public_path($image);
+                if (file_exists($path)) @unlink($path);
+            }
         }
         $product->delete();
 

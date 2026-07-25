@@ -57,7 +57,7 @@
 /* ── Grille 3 ── */
 .blog-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 
-@media(max-width:900px){.blog-layout{padding:50px 24px}.blog-grid-principale{grid-template-columns:1fr}.blog-grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.blog-layout{padding:30px 16px}.blog-grid-principale{grid-template-columns:1fr}.blog-grid-3{grid-template-columns:1fr 1fr}.page-hero{padding:36px 20px}}
 @media(max-width:500px){.blog-grid-3{grid-template-columns:1fr}}
 </style>
 @endpush
@@ -90,7 +90,7 @@
 
         <a href="#" class="blog-card blog-principale">
             <div class="blog-img">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Article principal">
+                <img src="{{ asset('assets/images/jepk19.jpg') }}" alt="Article principal" loading="lazy">
             </div>
             <div class="blog-body">
                 <span class="blog-cat-tag">Tutoriels</span>
@@ -106,7 +106,7 @@
         <div>
             <a href="#" class="blog-card secondaire" style="margin-bottom:22px">
                 <div class="blog-img">
-                    <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=600&q=80" alt="Article 2">
+                    <img src="{{ asset('assets/images/jepk20.jpg') }}" alt="Article 2" loading="lazy">
                 </div>
                 <div class="blog-body">
                     <span class="blog-cat-tag">Tendances</span>
@@ -119,7 +119,7 @@
 
             <a href="#" class="blog-card secondaire">
                 <div class="blog-img">
-                    <img src="https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=600&q=80" alt="Article 3">
+                    <img src="{{ asset('assets/images/jepk21.jpg') }}" alt="Article 3" loading="lazy">
                 </div>
                 <div class="blog-body">
                     <span class="blog-cat-tag">Matières</span>
@@ -139,7 +139,7 @@
 
         <a href="#" class="blog-card">
             <div class="blog-img" style="height:180px">
-                <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=500&q=80" alt="Article 4">
+                <img src="{{ asset('assets/images/jepk22.jpg') }}" alt="Article 4" loading="lazy">
             </div>
             <div class="blog-body">
                 <span class="blog-cat-tag">Inspiration</span>
@@ -153,7 +153,7 @@
 
         <a href="#" class="blog-card">
             <div class="blog-img" style="height:180px">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Article 5">
+                <img src="{{ asset('assets/images/jepk23.jpg') }}" alt="Article 5" loading="lazy">
             </div>
             <div class="blog-body">
                 <span class="blog-cat-tag">Sur mesure</span>
@@ -167,7 +167,7 @@
 
         <a href="#" class="blog-card">
             <div class="blog-img" style="height:180px">
-                <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=500&q=80" alt="Article 6">
+                <img src="{{ asset('assets/images/jepk24.jpg') }}" alt="Article 6" loading="lazy">
             </div>
             <div class="blog-body">
                 <span class="blog-cat-tag">Tutoriels</span>

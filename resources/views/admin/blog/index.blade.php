@@ -31,7 +31,7 @@
                 <tr>
                     <td>
                         @if($post->image)
-                            <img src="{{ asset('storage/'.$post->image) }}" class="prod-thumb" style="border-radius:6px" alt="">
+                            <img src="{{ product_image_url($post->image ?? null) }}" class="prod-thumb" style="border-radius:6px" alt="">
                         @else
                             <div class="prod-thumb" style="border-radius:6px;display:flex;align-items:center;justify-content:center;color:#C0B0A8">
                                 <i class="fa-solid fa-newspaper"></i>

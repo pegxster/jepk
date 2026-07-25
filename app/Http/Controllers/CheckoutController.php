@@ -19,23 +19,17 @@ class CheckoutController extends Controller
     public function process(Request $request)
     {
         $request->validate([
-            'nom'       => 'nullable|string|max:100',
-            'adresse'   => 'nullable|string|max:255',
-            'telephone' => 'nullable|string|max:30',
+            'nom'             => 'required|string|max:100',
+            'adresse'         => 'required|string|max:255',
+            'telephone'       => 'required|string|max:30',
+            'ville'           => 'nullable|string|max:100',
+            'payment_method'  => 'nullable|string|max:100',
         ]);
 
         $cart = session('cart', []);
 
         if (empty($cart)) {
-            // Commande de démonstration si le panier était vide
-            $cart = [
-                'p1' => [
-                    'product_id' => 'p1',
-                    'name'       => 'Kit Pull Couture N°1',
-                    'price'      => 45000,
-                    'quantity'   => 1,
-                ]
-            ];
+            return back()->with('error', 'Votre panier est vide. Ajoutez des produits avant de commander.');
         }
 
         $subtotal = array_sum(array_map(fn($i) => ($i['price'] ?? 0) * ($i['quantity'] ?? 1), $cart));

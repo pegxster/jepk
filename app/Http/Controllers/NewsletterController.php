@@ -22,10 +22,12 @@ class NewsletterController extends Controller
         return back()->with('success', 'Merci pour votre inscription !');
     }
 
-    public function unsubscribe($email)
+    public function unsubscribe(Request $request, $email)
     {
+        $request->validate(['email' => 'required|email']);
+
         Newsletter::where('email', $email)->update(['is_active' => false]);
 
-        return view('pages.home')->with('success', 'Vous êtes désabonné(e).');
+        return redirect()->route('home')->with('success', 'Vous êtes désabonné(e) de la newsletter.');
     }
 }

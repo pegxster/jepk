@@ -84,7 +84,28 @@
 .p-cat{font-size:10px;color:var(--rose-v);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;display:block}
 .p-prix{font-size:15px;color:var(--brun-d);font-weight:400}
 
-@media(max-width:900px){.produit-layout{grid-template-columns:1fr;padding:30px 24px;gap:32px}.galerie{position:static}.similaires{padding:0 24px 50px}.similaires-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){
+    .produit-layout{grid-template-columns:1fr;padding:24px 16px;gap:32px}
+    .galerie{position:static}
+    .similaires{padding:0 16px 50px}
+    .similaires-grid{grid-template-columns:repeat(2,1fr)}
+    .page-hero{padding:16px 16px}
+    .prod-info h1{font-size:28px}
+    .prix-actuel{font-size:26px}
+    .prod-info{padding:0}
+    .similaires h2{font-size:22px}
+}
+@media(max-width:500px){
+    .produit-layout{padding:16px 12px}
+    .galerie-main{border-radius:12px}
+    .galerie-thumbs{gap:6px}
+    .galerie-thumb{width:56px;height:56px}
+    .add-row{flex-wrap:wrap}
+    .btn-cart{width:100%}
+    .similaires-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .p-nom{font-size:13px}
+    .p-prix{font-size:12px}
+}
 </style>
 @endpush
 
@@ -115,7 +136,7 @@
                 <span class="galerie-badge b-promo">Promo</span>
             @endif
             @if(!empty($product->images))
-                <img id="mainImg" src="{{ product_image_url($product->images[0] ?? null) }}" alt="{{ $product->name }}">
+                <img id="mainImg" src="{{ product_image_url($product->images[0] ?? null) }}" alt="{{ $product->name }}" loading="lazy">
             @else
                 <div style="width:100%;height:100%;background:var(--creme2);display:flex;align-items:center;justify-content:center">
                     <i class="fas fa-image" style="font-size:60px;color:var(--peche2);opacity:.5"></i>
@@ -126,7 +147,7 @@
         <div class="galerie-thumbs">
             @foreach($product->images as $i => $img)
             <div class="galerie-thumb {{ $i === 0 ? 'on' : '' }}" onclick="switchImg(this, '{{ product_image_url($img) }}')">
-                <img src="{{ product_image_url($img) }}" alt="">
+                <img src="{{ product_image_url($img) }}" alt="" loading="lazy">
             </div>
             @endforeach
         </div>
@@ -264,7 +285,7 @@
         <div class="p-carte">
             <div class="p-img">
                 @if(!empty($p->images))
-                    <img src="{{ product_image_url($p->images[0] ?? $p->image ?? null) }}" alt="{{ $p->name }}">
+                    <img src="{{ product_image_url($p->images[0] ?? $p->image ?? null) }}" alt="{{ $p->name }}" loading="lazy">
                 @else
                     <div style="width:100%;height:100%;background:var(--creme2);display:flex;align-items:center;justify-content:center"><i class="fas fa-image" style="color:var(--peche2);font-size:30px;opacity:.4"></i></div>
                 @endif

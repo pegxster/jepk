@@ -36,7 +36,7 @@
             <div class="card-header"><h2 class="card-title">Image principale</h2></div>
             <div class="card-body">
                 @if($post->image)
-                    <img src="{{ asset('storage/'.$post->image) }}" style="width:100%;border-radius:10px;margin-bottom:16px;max-height:200px;object-fit:cover" alt="">
+                    <img src="{{ product_image_url($post->image ?? null) }}" style="width:100%;border-radius:10px;margin-bottom:16px;max-height:200px;object-fit:cover" alt="">
                 @endif
                 <div class="upload-zone" onclick="document.getElementById('blogImage').click()">
                     <div class="icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>

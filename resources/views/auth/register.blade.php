@@ -35,6 +35,7 @@
 .force-mdp{margin-top:6px}
 .force-bar{height:3px;border-radius:2px;background:var(--peche);transition:all .4s;margin-bottom:4px}
 .force-txt{font-size:11px;color:var(--texte2)}
+@media(max-width:500px){.auth-card{padding:36px 24px;border-radius:16px}.auth-logo .s-label{font-size:26px}.auth-titre{font-size:22px}.f-row{grid-template-columns:1fr}}
 </style>
 @endpush
 @section('content')

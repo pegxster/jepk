@@ -84,7 +84,7 @@
 .acc-cta-txt h3{font-family:var(--f-titre);font-size:20px;font-weight:300;color:var(--texte);margin-bottom:4px}
 .acc-cta-txt p{font-size:13px;color:var(--texte2)}
 
-@media(max-width:900px){.account-layout{grid-template-columns:1fr;padding:30px 24px}.account-sidebar{position:static}.acc-stats{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.account-layout{grid-template-columns:1fr;padding:24px 16px}.account-sidebar{position:static}.acc-stats{grid-template-columns:1fr 1fr}.page-hero{padding:36px 20px}.cmd-table{font-size:12px}.cmd-table th,.cmd-table td{padding:10px 8px}}
 @media(max-width:500px){.acc-stats{grid-template-columns:1fr}.acc-cta{flex-direction:column;text-align:center}}
 </style>
 @endpush

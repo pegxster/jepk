@@ -65,8 +65,8 @@
 .coll-band span{font-size:12px;color:rgba(255,255,255,.45);letter-spacing:3px;text-transform:uppercase}
 
 /* Responsive */
-@media(max-width:1000px){.sous-grid.col4{grid-template-columns:repeat(2,1fr)}.sous-grid.mix{grid-template-columns:1fr 1fr}.coll-layout{padding:40px 24px}}
-@media(max-width:600px){.sous-grid.col4,.sous-grid.col3,.sous-grid.mix,.sous-grid.col2{grid-template-columns:1fr}.page-hero{padding:50px 24px}}
+@media(max-width:1000px){.sous-grid.col4{grid-template-columns:repeat(2,1fr)}.sous-grid.mix{grid-template-columns:1fr 1fr}.coll-layout{padding:40px 16px}}
+@media(max-width:600px){.sous-grid.col4,.sous-grid.col3,.sous-grid.mix,.sous-grid.col2{grid-template-columns:1fr}.page-hero{padding:36px 20px}}
 </style>
 @endpush
 
@@ -105,7 +105,7 @@
         </div>
         <div class="sous-grid mix">
             <a href="{{ route('categories.show', 'maison') }}" class="sous-card h-tall">
-                <img src="{{ asset('assets/images/jepk42.jpg') }}" alt="Coussins">
+                <img src="{{ asset('assets/images/jepk42.jpg') }}" alt="Coussins" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Coussins</span>
                     <span class="sc-nb">Décoration intérieure</span>
@@ -114,7 +114,7 @@
             </a>
             <div style="display:flex;flex-direction:column;gap:18px">
                 <a href="{{ route('categories.show', 'maison') }}" class="sous-card h-med">
-                    <img src="{{ asset('assets/images/jepk40.jpg') }}" alt="Nappes">
+                    <img src="{{ asset('assets/images/jepk40.jpg') }}" alt="Nappes" loading="lazy">
                     <div class="sc-overlay">
                         <span class="sc-nom">Nappes & Sets de table</span>
                         <span class="sc-nb">Art de la table</span>
@@ -122,7 +122,7 @@
                     <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
                 </a>
                 <a href="{{ route('categories.show', 'maison') }}" class="sous-card" style="height:144px">
-                    <img src="{{ asset('assets/images/jepk32.jpg') }}" alt="Plaids">
+                    <img src="{{ asset('assets/images/jepk32.jpg') }}" alt="Plaids" loading="lazy">
                     <div class="sc-overlay">
                         <span class="sc-nom">Plaids & Couvertures</span>
                         <span class="sc-nb">Confort & chaleur</span>
@@ -132,7 +132,7 @@
             </div>
             <div style="display:flex;flex-direction:column;gap:18px">
                 <a href="{{ route('categories.show', 'maison') }}" class="sous-card" style="height:144px">
-                    <img src="{{ asset('assets/images/jepk28.jpg') }}" alt="Déco">
+                    <img src="{{ asset('assets/images/jepk28.jpg') }}" alt="Déco" loading="lazy">
                     <div class="sc-overlay">
                         <span class="sc-nom">Décorations</span>
                         <span class="sc-nb">Objets & ornements</span>
@@ -140,7 +140,7 @@
                     <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
                 </a>
                 <a href="{{ route('categories.show', 'maison') }}" class="sous-card h-med">
-                    <img src="{{ asset('assets/images/jepk37.jpg') }}" alt="Tapis">
+                    <img src="{{ asset('assets/images/jepk37.jpg') }}" alt="Tapis" loading="lazy">
                     <div class="sc-overlay">
                         <span class="sc-nom">Tapis & Descentes de lit</span>
                         <span class="sc-nb">Sol & ambiance</span>
@@ -163,7 +163,7 @@
         </div>
         <div class="sous-grid col4">
             <a href="{{ route('categories.show', 'adulte') }}" class="sous-card h-med">
-                <img src="{{ asset('assets/images/jepk5.jpg') }}" alt="Pulls">
+                <img src="{{ asset('assets/images/jepk5.jpg') }}" alt="Pulls" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Pulls & Gilets</span>
                     <span class="sc-nb">Mode femme</span>
@@ -171,7 +171,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'adulte') }}" class="sous-card h-med">
-                <img src="{{ asset('assets/images/jepk2.jpg') }}" alt="Écharpes">
+                <img src="{{ asset('assets/images/jepk2.jpg') }}" alt="Écharpes" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Écharpes & Châles</span>
                     <span class="sc-nb">Accessoires mode</span>
@@ -179,7 +179,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'adulte') }}" class="sous-card h-med">
-                <img src="{{ asset('assets/images/jepk6.jpg') }}" alt="Bonnets">
+                <img src="{{ asset('assets/images/jepk6.jpg') }}" alt="Bonnets" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Bonnets & Bérets</span>
                     <span class="sc-nb">Tête & cheveux</span>
@@ -187,7 +187,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'adulte') }}" class="sous-card h-med">
-                <img src="{{ asset('assets/images/jepk4.jpg') }}" alt="Mode homme">
+                <img src="{{ asset('assets/images/jepk4.jpg') }}" alt="Mode homme" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Mode Homme</span>
                     <span class="sc-nb">Chemises & vestes</span>
@@ -220,7 +220,7 @@
         </div>
         <div class="sous-grid col2">
             <a href="{{ route('categories.show', 'enfant') }}" class="sous-card h-tall">
-                <img src="{{ asset('assets/images/jepk10.jpg') }}" alt="Layettes">
+                <img src="{{ asset('assets/images/jepk10.jpg') }}" alt="Layettes" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Layettes & Naissance</span>
                     <span class="sc-nb">Pour les tout-petits</span>
@@ -229,7 +229,7 @@
             </a>
             <div style="display:flex;flex-direction:column;gap:18px">
                 <a href="{{ route('categories.show', 'enfant') }}" class="sous-card h-med">
-                    <img src="{{ asset('assets/images/jepk17.jpg') }}" alt="Doudous">
+                    <img src="{{ asset('assets/images/jepk17.jpg') }}" alt="Doudous" loading="lazy">
                     <div class="sc-overlay">
                         <span class="sc-nom">Doudous & Peluches</span>
                         <span class="sc-nb">Compagnons de jeux</span>
@@ -237,7 +237,7 @@
                     <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
                 </a>
                 <a href="{{ route('categories.show', 'enfant') }}" class="sous-card h-med">
-                    <img src="{{ asset('assets/images/jepk3.jpg') }}" alt="Vêtements enfant">
+                    <img src="{{ asset('assets/images/jepk3.jpg') }}" alt="Vêtements enfant" loading="lazy">
                     <div class="sc-overlay">
                         <span class="sc-nom">Vêtements Enfant</span>
                         <span class="sc-nb">Pulls, bonnets, écharpes</span>
@@ -260,7 +260,7 @@
         </div>
         <div class="sous-grid col3">
             <a href="{{ route('categories.show', 'accessoires') }}" class="sous-card h-med">
-                <img src="{{ asset('assets/images/jepk25.jpg') }}" alt="Sacs">
+                <img src="{{ asset('assets/images/jepk25.jpg') }}" alt="Sacs" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Sacs & Pochettes</span>
                     <span class="sc-nb">Tote bags, clutchs…</span>
@@ -268,7 +268,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'accessoires') }}" class="sous-card h-med">
-                <img src="{{ asset('assets/images/jepk12.jpg') }}" alt="Bijoux">
+                <img src="{{ asset('assets/images/jepk12.jpg') }}" alt="Bijoux" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Bijoux & Parures</span>
                     <span class="sc-nb">Colliers, bracelets…</span>
@@ -276,7 +276,7 @@
                 <div class="sc-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             <a href="{{ route('categories.show', 'accessoires') }}" class="sous-card h-med">
-                <img src="{{ asset('assets/images/jepk29.jpg') }}" alt="Cadeaux">
+                <img src="{{ asset('assets/images/jepk29.jpg') }}" alt="Cadeaux" loading="lazy">
                 <div class="sc-overlay">
                     <span class="sc-nom">Idées Cadeaux</span>
                     <span class="sc-nb">Coffrets & surprises</span>

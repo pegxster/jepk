@@ -14,7 +14,7 @@
 .legal-block ul{list-style:none;margin:8px 0}
 .legal-block li{padding:4px 0;padding-left:18px;position:relative}
 .legal-block li::before{content:'·';position:absolute;left:0;color:var(--rose-v);font-weight:bold}
-@media(max-width:700px){.legal-wrap{padding:40px 24px}}
+@media(max-width:700px){.legal-wrap{padding:30px 16px}.page-hero{padding:36px 20px}}
 </style>
 @endpush
 @section('content')

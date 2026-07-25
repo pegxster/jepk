@@ -217,6 +217,14 @@
             gap: 10px;
         }
 
+        @media(max-width:900px) {
+            .flash {
+                margin: 10px 16px;
+                font-size: 12px;
+                padding: 12px 16px;
+            }
+        }
+
         .flash-ok {
             background: #fdf5f7;
             color: var(--rose-f);
@@ -694,11 +702,11 @@
         @media(max-width:600px) {
             .f-grid {
                 grid-template-columns: 1fr;
-                gap: 30px
+                gap: 24px
             }
 
             footer {
-                padding: 50px 24px 22px
+                padding: 40px 16px 18px
             }
 
             .f-bas {
@@ -706,8 +714,18 @@
                 gap: 8px;
                 text-align: center
             }
+
+            .f-logo-img {
+                height: 80px;
+            }
+
+            .f-brand-name {
+                font-size: 18px;
+                letter-spacing: 4px;
+            }
         }
 
+        /* ── RESPONSIVE GLOBAL ── */
         @media(max-width:900px) {
 
             .nav-g,
@@ -720,7 +738,110 @@
             }
 
             .h-inner {
-                padding: 0 20px
+                padding: 0 20px;
+                height: 80px;
+            }
+
+            .logo-img {
+                height: 90px;
+            }
+
+            .h-icons {
+                gap: 14px;
+            }
+
+            .h-icons a {
+                font-size: 20px;
+            }
+
+            .badge-panier {
+                width: 19px;
+                height: 19px;
+                font-size: 9px;
+                top: -9px;
+                right: -10px;
+            }
+
+            .ann-bar {
+                font-size: 8px;
+                letter-spacing: 2px;
+                padding: 8px 10px;
+            }
+
+            .s-bar {
+                padding: 12px 20px;
+            }
+
+            .wa-float {
+                bottom: 20px;
+                right: 16px;
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+
+            .wa-tip {
+                display: none;
+            }
+
+            footer {
+                padding: 40px 16px 18px;
+            }
+
+            .f-brand p {
+                max-width: 100%;
+            }
+
+            .f-socials a {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+        }
+        /* ── MOBILE : Grande nav avec items larges ── */
+        @media(max-width:900px) {
+            .m-menu {
+                padding: 80px 20px 30px;
+                gap: 6px;
+                justify-content: flex-start;
+            }
+
+            .m-menu a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                font-size: 22px;
+                padding: 18px 16px;
+                border-radius: 14px;
+                border-bottom: none;
+                background: var(--creme2);
+                border: 1.5px solid var(--peche);
+                text-align: center;
+                transition: all 0.3s;
+                letter-spacing: 1px;
+            }
+
+            .m-menu a:hover {
+                background: var(--rose-v);
+                color: var(--blanc);
+                border-color: var(--rose-v);
+                transform: scale(1.02);
+                box-shadow: 0 4px 18px rgba(201, 104, 128, 0.3);
+            }
+
+            .m-close {
+                top: 18px;
+                right: 20px;
+                font-size: 24px;
+                background: var(--creme2);
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--peche);
             }
         }
 
@@ -921,17 +1042,18 @@
     {{-- Menu mobile --}}
     <div class="m-menu" id="m-menu">
         <button class="m-close" id="m-close"><i class="fas fa-times"></i></button>
-        <a href="{{ route('shop.index') }}">Boutique</a>
-        <a href="{{ route('categories.index') }}">Collections</a>
-        <a href="{{ route('pages.atelier') }}">L'Atelier</a>
-        <a href="{{ route('pages.blog') }}">Blog</a>
+        <a href="{{ route('home') }}"><i class="fas fa-home" style="margin-right:10px"></i> Accueil</a>
+        <a href="{{ route('shop.index') }}"><i class="fas fa-shopping-bag" style="margin-right:10px"></i> Boutique</a>
+        <a href="{{ route('categories.index') }}"><i class="fas fa-th-large" style="margin-right:10px"></i> Collections</a>
+        <a href="{{ route('pages.atelier') }}"><i class="fas fa-palette" style="margin-right:10px"></i> L'Atelier</a>
+        <a href="{{ route('pages.blog') }}"><i class="fas fa-feather-alt" style="margin-right:10px"></i> Blog</a>
+        <a href="#sur-mesure"><i class="fas fa-cut" style="margin-right:10px"></i> Sur Mesure</a>
         @auth
-        <a href="{{ route('account.index') }}">Mon Compte</a>
+        <a href="{{ route('account.index') }}"><i class="fas fa-user-circle" style="margin-right:10px"></i> Mon Compte</a>
         @else
-        <a href="{{ route('auth.login') }}">Connexion</a>
-        <a href="{{ route('auth.register') }}">Créer un compte</a>
+        <a href="{{ route('auth.login') }}"><i class="fas fa-sign-in-alt" style="margin-right:10px"></i> Connexion</a>
+        <a href="{{ route('auth.register') }}"><i class="fas fa-user-plus" style="margin-right:10px"></i> Créer un compte</a>
         @endauth
-        <a href="#sur-mesure">Sur Mesure</a>
     </div>
 
     <main>

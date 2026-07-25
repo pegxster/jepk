@@ -40,7 +40,7 @@
 .f-g input,.f-g select{width:100%;padding:12px 15px;border:1.5px solid var(--peche);border-radius:10px;font-family:var(--f-corps);font-size:13.5px;color:var(--texte);outline:none;background:var(--creme2);transition:border-color .3s}
 .f-g input:focus,.f-g select:focus{border-color:var(--rose-v);background:var(--blanc)}
 .f-g .f-error{color:#e74c3c;font-size:11px;margin-top:4px}
-@media(max-width:900px){.account-layout{grid-template-columns:1fr;padding:30px 24px}.account-sidebar{position:static}.f-row{grid-template-columns:1fr}}
+@media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}.f-row{grid-template-columns:1fr}}
 </style>
 @endpush
 @section('content')

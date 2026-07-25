@@ -43,7 +43,7 @@
                 <div class="image-preview-grid" style="margin-bottom:20px">
                     @foreach($product->images as $img)
                     <div class="image-preview-item" id="img-{{ $loop->index }}">
-                        <img src="{{ asset('storage/'.$img) }}" alt="">
+                        <img src="{{ product_image_url($img) }}" alt="">
                         <label style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:4px;cursor:pointer">
                             <input type="checkbox" name="remove_images[]" value="{{ $img }}"
                                 onchange="this.closest('.image-preview-item').style.opacity=this.checked?'.4':'1'">

@@ -20,6 +20,16 @@
 .f-g label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--texte2);display:block;margin-bottom:6px;font-weight:500}
 .f-g input,.f-g select,.f-g textarea{width:100%;padding:12px 15px;border:1.5px solid var(--peche);border-radius:10px;font-family:var(--f-corps);font-size:13.5px;color:var(--texte);outline:none;background:var(--creme2);transition:border-color .3s}
 .f-g input:focus,.f-g select:focus,.f-g textarea:focus{border-color:var(--rose-v);background:var(--blanc)}
+/* Quartier search */
+.quartier-wrap{position:relative}
+.quartier-search{width:100%;padding:12px 15px;border:1.5px solid var(--peche);border-radius:10px;font-family:var(--f-corps);font-size:13.5px;color:var(--texte);outline:none;background:var(--creme2);transition:border-color .3s;box-sizing:border-box}
+.quartier-search:focus{border-color:var(--rose-v);background:var(--blanc)}
+.quartier-list{position:absolute;top:100%;left:0;right:0;max-height:220px;overflow-y:auto;background:var(--blanc);border:1.5px solid var(--peche);border-radius:10px;box-shadow:0 8px 24px rgba(90,48,64,.12);z-index:50;display:none;margin-top:4px}
+.quartier-list.aff{display:block}
+.quartier-list div{padding:10px 15px;font-size:13px;color:var(--texte);cursor:pointer;transition:background .2s;border-bottom:1px solid var(--peche)}
+.quartier-list div:last-child{border-bottom:none}
+.quartier-list div:hover,.quartier-list div.hl{background:var(--peche);color:var(--rose-v)}
+.quartier-list div .q-commune{font-size:10px;color:var(--texte2);margin-left:4px}
 /* Méthodes livraison */
 .livraison-opts{display:flex;flex-direction:column;gap:10px}
 .livr-opt{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1.5px solid var(--peche);border-radius:10px;cursor:pointer;transition:var(--trans)}
@@ -45,7 +55,23 @@
 .recap-ligne{display:flex;justify-content:space-between;font-size:13px;color:var(--texte2);margin-bottom:8px}
 .recap-total{display:flex;justify-content:space-between;font-size:16px;font-weight:500;color:var(--texte);padding-top:12px;border-top:1px solid var(--peche);margin-top:8px}
 .recap-total span:last-child{color:var(--rose-v)}
-@media(max-width:900px){.checkout-layout{grid-template-columns:1fr;padding:30px 24px}.f-row{grid-template-columns:1fr}.paiement-opts{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){
+    .checkout-layout{grid-template-columns:1fr;padding:24px 16px}
+    .f-row{grid-template-columns:1fr}
+    .paiement-opts{grid-template-columns:1fr 1fr}
+    .page-hero{padding:30px 20px}
+    .steps{margin:20px auto}
+    .step-label{font-size:9px}
+    .checkout-bloc{padding:20px;border-radius:12px}
+    .recap-card{position:static;padding:20px}
+    .recap-item img{width:42px;height:54px}
+    .livr-opt{padding:12px 14px;flex-wrap:wrap}
+    .livr-prix{margin-left:auto}
+}
+@media(max-width:500px){
+    .steps{flex-direction:column;align-items:center;gap:0}
+    .step-line{width:1.5px;height:20px;max-width:unset;margin:4px 0}
+}
 </style>
 @endpush
 @section('content')
@@ -72,9 +98,16 @@
                     <div class="f-g"><label>Prénom</label><input type="text" name="prenom" value="{{ auth()->user()->prenom ?? '' }}" placeholder="Ex: Aminata" required></div>
                     <div class="f-g"><label>Nom</label><input type="text" name="nom" value="{{ auth()->user()->nom ?? '' }}" placeholder="Ex: Kouassi" required></div>
                 </div>
-                <div class="f-g"><label>Adresse de livraison</label><input type="text" name="adresse" placeholder="Ex: Cocody Angré 8ème Tranche, Rue L12" required></div>
+                <div class="f-g"><label>Adresse de livraison</label><input type="text" name="adresse" placeholder="Ex: Rue L12, près du..." required></div>
                 <div class="f-row">
-                    <div class="f-g"><label>Ville / Commune</label><input type="text" name="ville" placeholder="Ex: Abidjan (Cocody)" required></div>
+                    <div class="f-g">
+                        <label>Quartier / Commune</label>
+                        <input type="text" name="quartier" id="quartierInput" placeholder="Rechercher votre quartier..." autocomplete="off" required>
+                        <div class="quartier-list" id="quartierList"></div>
+                    </div>
+                    <div class="f-g"><label>Ville</label><input type="text" name="ville" value="Abidjan" placeholder="Abidjan"></div>
+                </div>
+                <div class="f-row">
                     <div class="f-g">
                         <label>Pays</label>
                         <select name="pays">
@@ -85,9 +118,9 @@
                             <option>Autre (Zone UEMOA)</option>
                         </select>
                     </div>
+                    <div class="f-g"><label>Téléphone (+225)</label><input type="tel" name="telephone" placeholder="+225 07 00 00 00 00" required></div>
                 </div>
-                <div class="f-g"><label>Téléphone (+225)</label><input type="tel" name="telephone" placeholder="+225 07 00 00 00 00" required></div>
-                <div class="f-g"><label>Note pour le livreur (optionnel)</label><input type="text" name="note" placeholder="Précisions de repère, quartier, heure de passage…"></div>
+                <div class="f-g"><label>Note pour le livreur (optionnel)</label><input type="text" name="note" placeholder="Précisions de repère, heure de passage…"></div>
             </div>
 
             {{-- Méthode de livraison --}}
@@ -178,7 +211,7 @@
                 $iPrix = $item['price'] ?? $item['prix'] ?? 0;
                 $iQte  = $item['quantity'] ?? $item['qte'] ?? 1;
                 $iImg  = $item['image'] ?? $item['img'] ?? null;
-                $iImg  = product_image_url($iImg, 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200');
+                $iImg  = product_image_url($iImg, asset('assets/images/jepk1.jpg'));
                 $sous  = $iPrix * $iQte;
                 $total += $sous;
             @endphp
@@ -188,7 +221,7 @@
             </div>
             @endforeach
         @else
-            <div class="recap-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200" alt=""><div><div class="ri-nom">Kit Pull Couture N°1 x1</div><div class="ri-prix">45 000 F CFA</div></div></div>
+            <div class="recap-item"><img src="{{ asset('assets/images/jepk1.jpg') }}" alt=""><div><div class="ri-nom">Kit Pull Couture N°1 x1</div><div class="ri-prix">45 000 F CFA</div></div></div>
             @php $total=45000; @endphp
         @endif
         <div class="recap-ligne"><span>Sous-total</span><span>{{ number_format($total,0,',',' ') }} F CFA</span></div>
@@ -245,6 +278,135 @@ function selectCheckoutPayment(method) {
         boxWave.style.display = 'none';
         boxLivr.style.display = 'block';
     }
+}
+
+// ── Quartiers d'Abidjan (OpenStreetMap data) ──
+const quartiers = [
+    // Abobo
+    {nom:"Abobo", commune:"Abobo"},{nom:"Abobo-Gare", commune:"Abobo"},{nom:"PK18", commune:"Abobo"},
+    {nom:"Pk18-Plateau", commune:"Abobo"},{nom:"Abobo-Peulh", commune:"Abobo"},{nom:"Gboh-Kouéhi", commune:"Abobo"},
+    {nom:"Kouhikro", commune:"Abobo"},{nom:"Lokojah", commune:"Abobo"},{nom:"Morogbè", commune:"Abobo"},
+    {nom:"Abobo-Assagnier", commune:"Abobo"},{nom:"Boulisth", commune:"Abobo"},{nom:"Baldwin", commune:"Abobo"},
+    // Adjamé
+    {nom:"Adjamé", commune:"Adjamé"},{nom:"Boulay", commune:"Adjamé"},{nom:"Chapelle", commune:"Adjamé"},
+    {nom:"Carrefour", commune:"Adjamé"},{nom:"Atéouè", commune:"Adjamé"},{nom:"Koutte", commune:"Adjamé"},
+    {nom:"Sépoto", commune:"Adjamé"},{nom:"Issia", commune:"Adjamé"},{nom:"Nouveau Marché", commune:"Adjamé"},
+    {nom:"Comité", commune:"Adjamé"},{nom:"Liberté", commune:"Adjamé"},
+    // Attécoubé
+    {nom:"Attécoubé", commune:"Attécoubé"},{nom:"Adama Sanogo", commune:"Attécoubé"},
+    {nom:"Bédié", commune:"Attécoubé"},{nom:"Gbégbéni", commune:"Attécoubé"},
+    {nom:"Kili", commune:"Attécoubé"},{nom:"Yopougon Kouté", commune:"Attécoubé"},
+    {nom:"Abdjouhi", commune:"Attécoubé"},{nom:"Bèmè", commune:"Attécoubé"},
+    // Cocody
+    {nom:"Cocody", commune:"Cocody"},{nom:"Riviera", commune:"Cocody"},{nom:"Riviera 2", commune:"Cocody"},
+    {nom:"Riviera Palmeraie", commune:"Cocody"},{nom:"Angré", commune:"Cocody"},
+    {nom:"Angré 8ème Tranche", commune:"Cocody"},{nom:"Angré 9ème Tranche", commune:"Cocody"},
+    {nom:"Angré Château", commune:"Cocody"},{nom:"An 2", commune:"Cocody"},
+    {nom:"Djorobè", commune:"Cocody"},{nom:"Deux Plateaux", commune:"Cocody"},
+    {nom:"Les Ambassadeurs", commune:"Cocody"},{nom:"Belleville", commune:"Cocody"},
+    {nom:"Cocody Koutte", commune:"Cocody"},{nom:"Cocody II Plateaux", commune:"Cocody"},
+    {nom:"Murier", commune:"Cocody"},{nom:"Koumassi", commune:"Cocody"},
+    {nom:"Camp Galion", commune:"Cocody"},{nom:"Cocody Université", commune:"Cocody"},
+    // Koumassi
+    {nom:"Koumassi", commune:"Koumassi"},{nom:"Remblais", commune:"Koumassi"},
+    {nom:"Séhicourt", commune:"Koumassi"},{nom:"Kilometre 4", commune:"Koumassi"},
+    {nom:"Kilometre 8", commune:"Koumassi"},{nom:"Niangon", commune:"Koumassi"},
+    {nom:"Tayavon", commune:"Koumassi"},{nom:"Songon", commune:"Koumassi"},
+    // Marcory
+    {nom:"Marcory", commune:"Marcory"},{nom:"Zone 4", commune:"Marcory"},
+    {nom:"Zone 4B", commune:"Marcory"},{nom:"Kpouessé", commune:"Marcory"},
+    {nom:"Résidentiel", commune:"Marcory"},{nom:"Anoumabo", commune:"Marcory"},
+    {nom:"Biétry", commune:"Marcory"},{nom:"VGE", commune:"Marcory"},
+    {nom:"Torogué", commune:"Marcory"},{nom:"Marcory Sékou Touré", commune:"Marcory"},
+    // Plateau
+    {nom:"Plateau", commune:"Plateau"},{nom:"Centre-ville", commune:"Plateau"},
+    {nom:"Rue du Commerce", commune:"Plateau"},{nom:"Cocody Plateau", commune:"Plateau"},
+    // Port-Bouët
+    {nom:"Port-Bouët", commune:"Port-Bouët"},{nom:"Vridi", commune:"Port-Bouët"},
+    {nom:"Aéroport", commune:"Port-Bouët"},{nom:"Adjouffou", commune:"Port-Bouët"},
+    {nom:"Cocody Caviar", commune:"Port-Bouët"},{nom:"Akouédé", commune:"Port-Bouët"},
+    {nom:"Gbagba", commune:"Port-Bouët"},{nom:"Eselon", commune:"Port-Bouët"},
+    {nom:"Grand-Bassam Route", commune:"Port-Bouët"},
+    // Treichville
+    {nom:"Treichville", commune:"Treichville"},{nom:"Dar-Es-Salam", commune:"Treichville"},
+    {nom:"Belleville", commune:"Treichville"},{nom:"Boucotte", commune:"Treichville"},
+    {nom:"Fort Médée", commune:"Treichville"},{nom:"Kouamé Gnankpe", commune:"Treichville"},
+    {nom:"Madiano", commune:"Treichville"},{nom:"Nouvelle Ville", commune:"Treichville"},
+    // Yopougon
+    {nom:"Yopougon", commune:"Yopougon"},{nom:"Yopougon Kouté", commune:"Yopougon"},
+    {nom:"Yopougon Siporex", commune:"Yopougon"},{nom:"Yopougon Niangon", commune:"Yopougon"},
+    {nom:"Yopougon Selmer", commune:"Yopougon"},{nom:"Yopougon Andokoi", commune:"Yopougon"},
+    {nom:"Yopougon Mahou", commune:"Yopougon"},{nom:"Yopougon Stélicité", commune:"Yopougon"},
+    {nom:"Yopougon Angre", commune:"Yopougon"},{nom:"Yopougon Williamsville", commune:"Yopougon"},
+    {nom:"Yopougon Koumassi", commune:"Yopougon"},{nom:"Yopougon Kouté", commune:"Yopougon"},
+    {nom:"Yopougon Hill", commune:"Yopougon"},{nom:"Yopougon Koli", commune:"Yopougon"},
+    // Abobo (autres)
+    {nom:"Abobo-Niangon", commune:"Abobo"},{nom:"Abobo-Gare 2", commune:"Abobo"},
+    {nom:"Abobo Millionnaire", commune:"Abobo"},{nom:"Abobo Tampico", commune:"Abobo"},
+    {nom:"Abobo PK5", commune:"Abobo"},{nom:"Abobo Koumassi", commune:"Abobo"},
+    // Autres communes d'Abidjan
+    {nom:"Songon Agban", commune:"Songon"},{nom:"Songon Koutte", commune:"Songon"},
+    {nom:"Bingerville", commune:"Bingerville"},{nom:"Bingerville Centre", commune:"Bingerville"},
+    {nom:"Broukro", commune:"Bingerville"},{nom:"Cocody Angre", commune:"Cocody"},
+    {nom:"Abobo Ahouanikro", commune:"Abobo"},{nom:"Cocody Mermoz", commune:"Cocody"},
+    {nom:"Riviera Golf", commune:"Cocody"},{nom:"Cocody Les Palmiers", commune:"Cocody"},
+    {nom:"Marcory Zone Industrielle", commune:"Marcory"},
+    {nom:"Treichville Industriel", commune:"Treichville"},
+    {nom:"Abidjan Centre", commune:"Plateau"},
+    // Hors Abidjan
+    {nom:"Yamoussoukro", commune:"Yamoussoukro"},
+    {nom:"Bouaké", commune:"Bouaké"},
+    {nom:"San-Pédro", commune:"San-Pédro"},
+    {nom:"Daloa", commune:"Daloa"},
+    {nom:"Korhogo", commune:"Korhogo"},
+    {nom:"Man", commune:"Man"},
+    {nom:"Gagnoa", commune:"Gagnoa"},
+    {nom:"Abengourou", commune:"Abengourou"},
+    {nom:"Divo", commune:"Divo"},
+    {nom:"Grand-Bassam", commune:"Grand-Bassam"},
+];
+
+const qInput = document.getElementById('quartierInput');
+const qList = document.getElementById('quartierList');
+let qIndex = -1;
+
+function renderQuartiers(term) {
+    qList.innerHTML = '';
+    qIndex = -1;
+    if (!term || term.length < 1) { qList.classList.remove('aff'); return; }
+    const t = term.toLowerCase();
+    const matches = quartiers.filter(q => q.nom.toLowerCase().includes(t) || q.commune.toLowerCase().includes(t)).slice(0, 15);
+    if (!matches.length) { qList.classList.remove('aff'); return; }
+    matches.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.innerHTML = q.nom + '<span class="q-commune">' + q.commune + '</span>';
+        div.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            qInput.value = q.nom + ', ' + q.commune;
+            qList.classList.remove('aff');
+        });
+        div.addEventListener('mouseenter', function() {
+            document.querySelectorAll('#quartierList div').forEach(d => d.classList.remove('hl'));
+            div.classList.add('hl');
+            qIndex = i;
+        });
+        qList.appendChild(div);
+    });
+    qList.classList.add('aff');
+}
+
+if (qInput) {
+    qInput.addEventListener('input', function() { renderQuartiers(this.value); });
+    qInput.addEventListener('focus', function() { renderQuartiers(this.value); });
+    qInput.addEventListener('blur', function() { setTimeout(() => qList.classList.remove('aff'), 200); });
+    qInput.addEventListener('keydown', function(e) {
+        const items = qList.querySelectorAll('div');
+        if (!items.length) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); qIndex = Math.min(qIndex + 1, items.length - 1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); qIndex = Math.max(qIndex - 1, 0); }
+        else if (e.key === 'Enter' && qIndex >= 0) { e.preventDefault(); items[qIndex].click(); return; }
+        items.forEach((d, i) => d.classList.toggle('hl', i === qIndex));
+    });
 }
 </script>
 @endpush

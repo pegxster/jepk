@@ -26,7 +26,7 @@
 .blog-tags span{background:var(--peche);color:var(--rose-f);padding:5px 14px;border-radius:50px;font-size:11px;letter-spacing:0.5px}
 .back-link{color:var(--rose-v);text-decoration:none;font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:color .3s;margin-top:30px}
 .back-link:hover{color:var(--rose-f)}
-@media(max-width:700px){.blog-detail{padding:30px 24px 60px}}
+@media(max-width:700px){.blog-detail{padding:24px 16px 50px}.page-hero{padding:36px 20px}}
 </style>
 @endpush
 @section('content')
@@ -37,7 +37,7 @@
 </div>
 <div class="blog-detail">
     @if($post->image)
-        <img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" class="blog-detail-img">
+        <img src="{{ product_image_url($post->image ?? null) }}" alt="{{ $post->title }}" class="blog-detail-img">
     @endif
     <div class="blog-detail-meta">
         <span><i class="far fa-calendar"></i> {{ $post->published_at?->format('d M. Y') ?? $post->created_at?->format('d M. Y') }}</span>

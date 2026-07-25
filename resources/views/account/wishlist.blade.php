@@ -36,7 +36,7 @@
 .wish-vide h3{font-family:var(--f-titre);font-size:24px;font-weight:300;color:var(--texte);margin-bottom:10px}
 .wish-vide p{font-size:14px;color:var(--texte2);margin-bottom:28px}
 @media(max-width:1000px){.wish-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:900px){.wish-layout{padding:40px 24px}.wish-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.page-hero{padding:36px 20px}.wish-layout{padding:40px 16px}.wish-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:500px){.wish-grid{grid-template-columns:1fr}}
 </style>
 @endpush
@@ -66,7 +66,7 @@
                     @if($product->images && count($product->images))
                         <img src="{{ product_image_url($product->images[0] ?? null) }}" alt="{{ $product->name }}">
                     @else
-                        <img src="https://images.unsplash.com/photo-1584917865442-de89be371e2b?w=500" alt="{{ $product->name }}">
+                        <img src="{{ asset('assets/images/jepk25.jpg') }}" alt="{{ $product->name }}" loading="lazy">
                     @endif
                     <form action="{{ route('wishlist.remove', $product->_id) }}" method="POST">
                         @csrf

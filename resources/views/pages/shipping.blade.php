@@ -21,7 +21,7 @@
 .zone-card h3{font-family:var(--f-titre);font-size:18px;font-weight:300;color:var(--texte);margin-bottom:6px}
 .zone-card .time{font-size:22px;font-weight:600;color:var(--rose-v);margin-bottom:4px;font-family:var(--f-titre)}
 .zone-card p{font-size:12px;color:var(--texte2)}
-@media(max-width:700px){.ship-wrap{padding:40px 24px}.zones-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.ship-wrap{padding:30px 16px}.zones-grid{grid-template-columns:1fr}.page-hero{padding:36px 20px}.ship-block{padding:24px}}
 </style>
 @endpush
 @section('content')

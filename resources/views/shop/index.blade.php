@@ -151,13 +151,31 @@
     box-shadow:0 4px 14px rgba(201,112,128,.35)}
 
 @media(max-width:900px){
-    .shop-layout{grid-template-columns:1fr;padding:30px 24px}
+    .shop-layout{grid-template-columns:1fr;padding:24px 16px}
     .sidebar{display:none}
-    .shop-grid{grid-template-columns:1fr 1fr}
+    .shop-grid{grid-template-columns:1fr 1fr;gap:16px}
     .qv-modal-card{grid-template-columns:1fr}
     .qv-img{height:250px;min-height:auto}
+    .shop-hero{padding:50px 20px 40px}
+    .shop-hero .s-label{font-size:20px}
+    .shop-top{padding:12px 14px}
+    .shop-count{font-size:12px}
+    .p-info{padding:12px}
+    .p-nom{font-size:15px}
+    .p-prix{font-size:14px}
 }
-@media(max-width:500px){.shop-grid{grid-template-columns:1fr}}
+@media(max-width:500px){
+    .shop-grid{grid-template-columns:1fr 1fr;gap:10px}
+    .p-img{aspect-ratio:3/4}
+    .p-info{padding:10px 8px}
+    .p-nom{font-size:13px}
+    .p-cat{font-size:9px}
+    .p-prix{font-size:12px}
+    .p-stars{font-size:10px}
+    .p-badge{font-size:8px;padding:4px 10px}
+    .hero-tags{gap:4px}
+    .hero-tag{font-size:8px;padding:4px 10px}
+}
 </style>
 @endpush
 

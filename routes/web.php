@@ -59,6 +59,10 @@ Route::prefix('pages')->group(function () {
 Route::post('/newsletter/inscription', [NewsletterController::class, 'subscribe'])
     ->name('newsletter.subscribe');
 
+Route::get('/newsletter/desabonnement/{email}', [NewsletterController::class, 'unsubscribe'])
+    ->middleware('signed')
+    ->name('newsletter.unsubscribe');
+
 /* ═══════════════════════════════════════════════════════
    PANIER — accessible sans connexion
 ═══════════════════════════════════════════════════════ */

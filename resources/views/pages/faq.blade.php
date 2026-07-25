@@ -67,8 +67,11 @@
 
 /* ══ RESPONSIVE ══ */
 @media(max-width:700px){
-    .faq-wrap{padding:50px 24px}
-    .page-hero{padding:50px 24px}
+    .faq-wrap{padding:30px 16px}
+    .page-hero{padding:36px 20px}
+    .faq-contact{padding:36px 20px}
+    .faq-contact h3{font-size:24px}
+    .faq-tab{font-size:10px;padding:6px 14px}
 }
 </style>
 @endpush

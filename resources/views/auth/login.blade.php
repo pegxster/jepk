@@ -43,6 +43,7 @@
 .social-btn:hover{border-color:var(--rose-v);color:var(--rose-v)}
 .auth-lien{text-align:center;font-size:13px;color:var(--texte2);margin-top:6px}
 .auth-lien a{color:var(--rose-v);text-decoration:none;font-weight:500}.auth-lien a:hover{color:var(--rose-f)}
+@media(max-width:500px){.auth-card{padding:36px 24px;border-radius:16px}.auth-logo .s-label{font-size:26px}.auth-titre{font-size:22px}.auth-opts{flex-direction:column;gap:8px;text-align:center}}
 </style>
 @endpush
 

@@ -35,7 +35,7 @@
 .pagination .active{background:var(--rose-v);color:var(--blanc);border:1.5px solid var(--rose-v)}
 .vide{text-align:center;padding:60px 0;color:var(--texte2)}
 .vide i{font-size:40px;color:var(--peche2);margin-bottom:14px;display:block}
-@media(max-width:900px){.account-layout{grid-template-columns:1fr;padding:30px 24px}.account-sidebar{position:static}}
+@media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}}
 </style>
 @endpush
 @section('content')

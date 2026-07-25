@@ -56,7 +56,7 @@
                 <tr>
                     <td>
                         @if(!empty($product->images[0]))
-                            <img src="{{ asset('storage/'.$product->images[0]) }}" class="prod-thumb" alt="{{ $product->name }}">
+                            <img src="{{ product_image_url($product->images[0] ?? null) }}" class="prod-thumb" alt="{{ $product->name }}">
                         @else
                             <div class="prod-thumb" style="display:flex;align-items:center;justify-content:center;color:#C0B0A8">
                                 <i class="fa-solid fa-image"></i>

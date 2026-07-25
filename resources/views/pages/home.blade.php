@@ -313,11 +313,26 @@
     .qui,.cats,.prods,.mesure,.temos,.blog-mini,.nwsl,.inspi{padding-left:24px;padding-right:24px}
     .stats{padding-left:24px;padding-right:24px}
     .prods-ent{flex-direction:column;align-items:flex-start;gap:16px}
+    .carousel{min-height:500px}
+    .car-titre{font-size:clamp(28px,6vw,50px)}
+    .car-script{font-size:clamp(24px,4vw,40px)}
+    .car-btns{flex-direction:column;align-items:center}
+    .car-fl{width:38px;height:38px;font-size:11px}
+    .car-fl.prev{left:12px}.car-fl.next{right:12px}
+    .av-item{padding:16px 20px}
+    .av-icone{width:36px;height:36px;font-size:15px}
+    .av-titre{font-size:11px}
+    .av-sous{font-size:10px}
+    .cat-c{height:320px}
+    .cat-nom{font-size:28px}
+    .mesure{padding:60px 20px}
+    .form-card{padding:28px 22px}
+    .blog-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
     .prods-grid{grid-template-columns:1fr 1fr;gap:14px}
     .cats-grid{grid-template-columns:1fr}
-    .cat-c{height:300px}
+    .cat-c{height:260px}
     .avantages{grid-template-columns:1fr}
     .av-item{border-right:none;border-bottom:1px solid var(--peche)}
     .nwsl-form{flex-direction:column;border-radius:12px}
@@ -325,6 +340,14 @@
     .nwsl-form .btn{border-radius:0 0 12px 12px}
     .blog-grid,.inspi-grid{grid-template-columns:1fr}
     .f-row{grid-template-columns:1fr}
+    .carousel{min-height:420px}
+    .stats-in{grid-template-columns:1fr 1fr}
+    .stat-n{font-size:clamp(28px,4vw,40px)}
+    .prods{padding:60px 16px}
+    .cats{padding:60px 16px}
+    .nwsl{padding:60px 16px}
+    .blog-mini{padding:60px 16px}
+    .inspi{padding:0 16px 60px}
 }
 </style>
 @endpush
@@ -388,7 +411,7 @@ $carouselSlides = isset($slides) && count($slides)
     <div class="car-piste" id="car-piste">
         @foreach($carouselSlides as $i => $s)
         <div class="car-slide {{ $i === 0 ? 'on' : '' }}">
-            <img src="{{ $s['image'] }}" alt="{{ $s['badge'] ?? 'Slide' }}">
+            <img src="{{ $s['image'] }}" alt="{{ $s['badge'] ?? 'Slide' }}" loading="lazy">
             <div class="car-txt">
                 @if($s['badge'])<div class="car-deco">{{ $s['badge'] }}</div>@endif
                 @if($s['script'])<span class="car-script">{{ $s['script'] }}</span>@endif
@@ -457,8 +480,8 @@ $carouselSlides = isset($slides) && count($slides)
     <div class="qui-grid">
         <div class="qui-imgs rev">
             <div class="qi-deco"></div>
-            <img src="{{ asset('assets/images/jepk4.jpg') }}" alt="Atelier" class="qi-grande">
-            <img src="{{ asset('assets/images/jepk17.jpg') }}" alt="Détail" class="qi-petite">
+            <img src="{{ asset('assets/images/jepk4.jpg') }}" alt="Atelier" class="qi-grande" loading="lazy">
+            <img src="{{ asset('assets/images/jepk17.jpg') }}" alt="Détail" class="qi-petite" loading="lazy">
             <div class="qi-coeur"><i class="fas fa-heart"></i></div>
         </div>
         <div class="qui-txt">
@@ -523,7 +546,7 @@ $carouselSlides = isset($slides) && count($slides)
                 $img  = is_array($c) ? asset($c['img']) : product_image_url($c->image);
             @endphp
             <a href="{{ route('categories.show', $slug) }}" class="cat-c rev d{{ $i+1 }}">
-                <img src="{{ $img }}" alt="{{ $nom }}">
+                <img src="{{ $img }}" alt="{{ $nom }}" loading="lazy">
                 <div class="cat-overlay">
                     <span class="cat-label-s">Collection</span>
                     <span class="cat-nom">{{ $nom }}</span>
@@ -554,11 +577,11 @@ $carouselSlides = isset($slides) && count($slides)
         <h2 class="s-titre">Notre <em>Univers</em></h2>
     </div>
     <div class="inspi-grid">
-        <div class="inspi-card rev"><img src="{{ asset('assets/images/jepk32.jpg') }}" alt=""><span class="inspi-tag">Collection Automne</span></div>
-        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk40.jpg') }}" alt=""><span class="inspi-tag">Kits & Tutoriels</span></div>
-        <div class="inspi-card rev d2"><img src="{{ asset('assets/images/jepk28.jpg') }}" alt=""><span class="inspi-tag">Accessoires</span></div>
-        <div class="inspi-card rev"><img src="{{ asset('assets/images/jepk37.jpg') }}" alt=""><span class="inspi-tag">Collection Automne</span></div>
-        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk27.jpg') }}" alt=""><span class="inspi-tag">Kits & Tutoriels</span></div>
+        <div class="inspi-card rev"><img src="{{ asset('assets/images/jepk32.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Collection Automne</span></div>
+        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk40.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Kits & Tutoriels</span></div>
+        <div class="inspi-card rev d2"><img src="{{ asset('assets/images/jepk28.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Accessoires</span></div>
+        <div class="inspi-card rev"><img src="{{ asset('assets/images/jepk37.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Collection Automne</span></div>
+        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk27.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Kits & Tutoriels</span></div>
     </div>
 </section>
 
@@ -690,7 +713,7 @@ $carouselSlides = isset($slides) && count($slides)
                 <div class="t-etoiles">{{ $t[0] }}</div>
                 <p class="t-txt">{{ $t[1] }}</p>
                 <div class="t-aut">
-                    <div class="t-av"><img src="https://i.pravatar.cc/100?img={{ $t[4] }}" alt="{{ $t[2] }}"></div>
+                    <div class="t-av"><img src="{{ asset('assets/images/jepk30.jpg') }}" alt="{{ $t[2] }}" loading="lazy"></div>
                     <div><div class="t-nom">{{ $t[2] }}</div><div class="t-lieu">{{ $t[3] }}</div></div>
                 </div>
             </div>
@@ -710,7 +733,7 @@ $carouselSlides = isset($slides) && count($slides)
             ['Tendances','Les couleurs de la saison : tons doux et naturels à la une','Pantone a parlé : cette saison mise sur les tons pêche, lavande et crème. Voici comment les intégrer à vos créations.','assets/images/jepk29.jpg'],
             ['Matières','Mérinos, alpaga, mohair : comment choisir son fil ?','Un guide complet pour comprendre les différentes fibres naturelles et choisir celle qui convient à votre projet.','assets/images/jepk44.jpg']] as $i=>$b)
         <a href="{{ route('pages.blog') }}" class="bl-carte rev d{{ $i }}">
-            <div class="bl-img"><img src="{{ $b[3] }}" alt="{{ $b[1] }}"></div>
+            <div class="bl-img"><img src="{{ asset($b[3]) }}" alt="{{ $b[1] }}" loading="lazy"></div>
             <div class="bl-body">
                 <span class="bl-cat">{{ $b[0] }}</span>
                 <div class="bl-titre">{{ $b[1] }}</div>

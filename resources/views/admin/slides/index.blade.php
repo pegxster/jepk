@@ -32,7 +32,7 @@
         {{-- Aperçu image --}}
         <div style="position:relative;aspect-ratio:16/7;overflow:hidden;border-radius:14px 14px 0 0;background:#2A1D14">
             @if($slide->image)
-                <img src="{{ asset('storage/'.$slide->image) }}"
+                <img src="{{ product_image_url($slide->image ?? null) }}"
                      style="width:100%;height:100%;object-fit:cover;opacity:.7" alt="">
             @else
                 <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2)">

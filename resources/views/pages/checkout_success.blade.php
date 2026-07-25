@@ -29,6 +29,7 @@
 .recap-table th{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--texte2);padding:12px;border-bottom:1.5px solid var(--peche)}
 .recap-table td{padding:14px 12px;font-size:13.5px;color:var(--texte);border-bottom:1px solid var(--peche)}
 .success-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+@media(max-width:600px){.success-wrap{margin:40px auto;padding:0 16px}.success-card{padding:36px 20px;border-radius:18px}.success-card h1{font-size:28px}.recap-table th,.recap-table td{padding:10px 8px;font-size:12px}.success-actions{flex-direction:column;align-items:center}}
 </style>
 @endpush
 

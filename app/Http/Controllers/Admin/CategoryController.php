@@ -40,7 +40,9 @@ class CategoryController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images/categories', 'public');
+            $filename = 'cat-' . Str::slug($data['name']) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('assets/images/categories'), $filename);
+            $data['image'] = 'assets/images/categories/' . $filename;
         }
 
         Category::create($data);
@@ -66,10 +68,13 @@ class CategoryController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
-            if ($category->image) {
-                Storage::disk('public')->delete($category->image);
+            if ($category->image && str_starts_with($category->image, 'assets/images/categories/')) {
+                $oldPath = public_path($category->image);
+                if (file_exists($oldPath)) @unlink($oldPath);
             }
-            $data['image'] = $request->file('image')->store('images/categories', 'public');
+            $filename = 'cat-' . Str::slug($data['name']) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('assets/images/categories'), $filename);
+            $data['image'] = 'assets/images/categories/' . $filename;
         }
 
         $category->update($data);
@@ -79,8 +84,9 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        if ($category->image) {
-            Storage::disk('public')->delete($category->image);
+        if ($category->image && str_starts_with($category->image, 'assets/images/categories/')) {
+            $path = public_path($category->image);
+            if (file_exists($path)) @unlink($path);
         }
         $category->delete();
 

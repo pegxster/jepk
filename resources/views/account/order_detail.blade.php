@@ -31,7 +31,7 @@
 .total-row td{font-weight:600;font-size:15px;color:var(--brun-d);border-top:2px solid var(--peche);padding-top:14px}
 .back-link{color:var(--rose-v);text-decoration:none;font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:color .3s}
 .back-link:hover{color:var(--rose-f)}
-@media(max-width:900px){.account-layout{grid-template-columns:1fr;padding:30px 24px}.account-sidebar{position:static}.info-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}.info-grid{grid-template-columns:1fr}}
 </style>
 @endpush
 @section('content')

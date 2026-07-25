@@ -22,7 +22,7 @@
 .f-g input:focus,.f-g select:focus,.f-g textarea:focus{border-color:var(--rose-v);background:var(--blanc)}
 .f-g textarea{resize:vertical;min-height:120px}
 .f-error{color:#e74c3c;font-size:11px;margin-top:4px}
-@media(max-width:800px){.contact-wrap{grid-template-columns:1fr;padding:40px 24px}}
+@media(max-width:800px){.contact-wrap{grid-template-columns:1fr;padding:30px 20px}.page-hero{padding:50px 20px}.contact-form-card{padding:24px}}
 </style>
 @endpush
 @section('content')

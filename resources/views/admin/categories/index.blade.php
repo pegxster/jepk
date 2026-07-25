@@ -51,7 +51,7 @@
                 <tr>
                     <td>
                         @if($cat->image)
-                            <img src="{{ asset('storage/'.$cat->image) }}" class="prod-thumb" alt="">
+                            <img src="{{ product_image_url($cat->image ?? null) }}" class="prod-thumb" alt="">
                         @else
                             <div class="prod-thumb" style="display:flex;align-items:center;justify-content:center;color:#C0B0A8">
                                 <i class="fa-solid fa-tag"></i>
