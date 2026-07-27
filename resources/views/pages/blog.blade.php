@@ -57,8 +57,21 @@
 /* ── Grille 3 ── */
 .blog-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 
-@media(max-width:900px){.blog-layout{padding:30px 16px}.blog-grid-principale{grid-template-columns:1fr}.blog-grid-3{grid-template-columns:1fr 1fr}.page-hero{padding:36px 20px}}
-@media(max-width:500px){.blog-grid-3{grid-template-columns:1fr}}
+@media(max-width:900px){.blog-layout{padding:30px 16px}.blog-grid-principale{grid-template-columns:1fr}.blog-grid-3{grid-template-columns:1fr 1fr}.page-hero{padding:36px 20px}.blog-principale .blog-img{height:240px}}
+@media(max-width:500px){
+    .blog-layout{padding:24px 14px}
+    .page-hero{padding:28px 16px 24px}
+    .blog-grid-3{grid-template-columns:1fr;gap:16px}
+    .blog-cats{gap:6px;margin-bottom:32px}
+    .blog-cat-btn{padding:7px 15px;font-size:9px}
+    .blog-principale .blog-img{height:190px}
+    .blog-card.secondaire .blog-img{height:150px}
+    .blog-body{padding:16px}
+    .blog-titre{font-size:18px;line-height:1.3}
+    .blog-card.secondaire .blog-titre{font-size:15px}
+    .blog-extrait{font-size:12.5px;line-height:1.7;margin-bottom:12px}
+    .blog-meta{font-size:10px;flex-wrap:wrap;gap:6px}
+}
 </style>
 @endpush
 

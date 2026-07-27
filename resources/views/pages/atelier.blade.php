@@ -89,16 +89,30 @@
 @media(max-width:600px){
     .page-hero{padding:50px 24px}
     .at-intro{padding:50px 24px}
+    .at-intro-img img{height:300px}
+    .at-intro-badge{padding:12px 16px;bottom:14px;left:14px}
+    .at-intro-badge span{font-size:18px}
     .at-valeurs{padding:60px 24px}
-    .at-valeurs-grid{grid-template-columns:1fr}
+    .at-valeurs-grid{grid-template-columns:1fr;gap:16px}
+    .at-val-card{padding:26px 22px}
     .at-process{padding:60px 24px}
+    .at-step{padding:22px;gap:18px}
     .at-galerie{padding:60px 24px}
-    .at-galerie-grid{grid-template-columns:1fr}
-    .at-gal-item:nth-child(1){grid-column:span 1}
+    .at-galerie-grid{grid-template-columns:1fr;gap:12px}
+    .at-gal-item:nth-child(1){grid-column:span 1;height:220px}
+    .at-gal-item:nth-child(2),.at-gal-item:nth-child(3),.at-gal-item:nth-child(4),.at-gal-item:nth-child(5){height:200px}
     .at-matieres{padding:60px 24px}
-    .at-mat-grid{grid-template-columns:1fr}
+    .at-mat-grid{grid-template-columns:1fr;gap:14px}
+    .at-mat-card{height:200px}
     .at-cta{padding:70px 24px}
     .at-cta h2{font-size:32px}
+}
+@media(max-width:500px){
+    .at-step{grid-template-columns:1fr;text-align:left}
+    .at-step-num{width:44px;height:44px;font-size:18px;margin-bottom:4px}
+    .at-step-img{margin-top:12px;height:140px}
+    .at-intro-img img{height:240px}
+    .at-intro-badge{position:static;display:inline-block;margin-top:14px}
 }
 </style>
 @endpush

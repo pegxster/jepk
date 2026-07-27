@@ -14,7 +14,14 @@
 .legal-block ul{list-style:none;margin:8px 0}
 .legal-block li{padding:4px 0;padding-left:18px;position:relative}
 .legal-block li::before{content:'·';position:absolute;left:0;color:var(--rose-v);font-weight:bold}
-@media(max-width:700px){.legal-wrap{padding:30px 16px}.page-hero{padding:36px 20px}}
+@media(max-width:900px){.legal-wrap{padding:30px 16px}.page-hero{padding:36px 20px}}
+@media(max-width:500px){
+    .page-hero{padding:28px 14px}
+    .legal-wrap{padding:20px 12px}
+    .legal-block{padding:20px 16px;margin-bottom:16px}
+    .legal-block h2{font-size:18px;margin-bottom:10px;padding-bottom:8px}
+    .legal-block p,.legal-block li{font-size:12.5px;line-height:1.85}
+}
 </style>
 @endpush
 @section('content')

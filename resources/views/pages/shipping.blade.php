@@ -21,7 +21,17 @@
 .zone-card h3{font-family:var(--f-titre);font-size:18px;font-weight:300;color:var(--texte);margin-bottom:6px}
 .zone-card .time{font-size:22px;font-weight:600;color:var(--rose-v);margin-bottom:4px;font-family:var(--f-titre)}
 .zone-card p{font-size:12px;color:var(--texte2)}
-@media(max-width:700px){.ship-wrap{padding:30px 16px}.zones-grid{grid-template-columns:1fr}.page-hero{padding:36px 20px}.ship-block{padding:24px}}
+@media(max-width:900px){.ship-wrap{padding:30px 16px}.zones-grid{grid-template-columns:1fr}.page-hero{padding:36px 20px}.ship-block{padding:24px}}
+@media(max-width:500px){
+    .page-hero{padding:28px 14px}
+    .ship-wrap{padding:20px 12px}
+    .ship-block{padding:18px 16px;margin-bottom:16px}
+    .ship-block h2{font-size:19px;gap:8px}
+    .ship-block p,.ship-block li{font-size:13px}
+    .ship-block li{gap:8px;padding:7px 0}
+    .zone-card{padding:16px}
+    .zone-card .time{font-size:18px}
+}
 </style>
 @endpush
 @section('content')

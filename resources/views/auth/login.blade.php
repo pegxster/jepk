@@ -43,7 +43,7 @@
 .social-btn:hover{border-color:var(--rose-v);color:var(--rose-v)}
 .auth-lien{text-align:center;font-size:13px;color:var(--texte2);margin-top:6px}
 .auth-lien a{color:var(--rose-v);text-decoration:none;font-weight:500}.auth-lien a:hover{color:var(--rose-f)}
-@media(max-width:500px){.auth-card{padding:36px 24px;border-radius:16px}.auth-logo .s-label{font-size:26px}.auth-titre{font-size:22px}.auth-opts{flex-direction:column;gap:8px;text-align:center}}
+@media(max-width:500px){.auth-page{padding:32px 16px}.auth-card{padding:36px 24px;border-radius:16px}.auth-logo .s-label{font-size:26px}.auth-titre{font-size:22px}.auth-opts{flex-direction:column;gap:8px;text-align:center}.f-g input{font-size:16px}.auth-social{gap:8px}.social-btn{font-size:11.5px;padding:11px 6px}}
 </style>
 @endpush
 

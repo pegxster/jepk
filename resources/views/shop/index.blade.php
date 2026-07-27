@@ -163,6 +163,9 @@
     .p-info{padding:12px}
     .p-nom{font-size:15px}
     .p-prix{font-size:14px}
+    /* Sur tactile il n'y a pas de :hover — rendre visibles favoris/vue rapide/ajout au panier */
+    .p-act{opacity:1;transform:none}
+    .p-cart{transform:translateY(0);position:static;background:none;padding:10px 0 0}
 }
 @media(max-width:500px){
     .shop-grid{grid-template-columns:1fr 1fr;gap:10px}

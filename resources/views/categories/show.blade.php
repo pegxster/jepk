@@ -9,7 +9,7 @@
 .cat-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(90,48,64,.45),rgba(155,142,196,.3))}
 .cat-hero-txt{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
 .cat-hero-script{font-family:var(--f-script);font-size:28px;color:var(--peche);display:block;margin-bottom:6px}
-.cat-hero-titre{font-family:var(--f-titre);font-size:54px;font-weight:300;color:#fff;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.cat-hero-titre{font-family:var(--f-titre);font-size:54px;font-weight:300;color:#fff;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;word-break:break-word}
 .cat-hero-desc{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7)}
 .breadcrumb{display:flex;gap:8px;align-items:center;font-size:11px;color:rgba(255,255,255,.6);margin-top:14px}
 .breadcrumb a{color:rgba(255,255,255,.7);text-decoration:none}.breadcrumb a:hover{color:#fff}
@@ -52,9 +52,42 @@
 .cat-empty{text-align:center;padding:80px 20px;color:var(--texte2)}
 .cat-empty i{font-size:52px;opacity:.25;display:block;margin-bottom:18px;color:var(--rose-p)}
 
-@media(max-width:1000px){.cat-grid{grid-template-columns:repeat(3,1fr)}.cat-layout{padding:40px 16px}}
-@media(max-width:700px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:14px}.cat-hero{height:240px}.cat-hero-titre{font-size:38px}}
-@media(max-width:400px){.cat-grid{grid-template-columns:1fr}.page-hero{padding:36px 20px}}
+.cat-cta{padding:50px;text-align:center;margin-top:20px}
+.cat-cta-titre{font-family:var(--f-script);font-size:32px;color:var(--brun-d);display:block;margin-bottom:8px}
+.cat-cta p{font-size:14px;color:var(--brun-2);margin-bottom:20px}
+
+@media(max-width:900px){
+    .cat-layout{padding:30px 16px}
+    .cat-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+    .cat-hero{height:220px}
+    .cat-hero-script{font-size:22px}
+    .cat-hero-titre{font-size:32px}
+    .cat-top{padding:12px 14px}
+    .p-nom{font-size:16px}
+    /* Actions & ajout panier accessibles au tactile (pas de hover sur mobile) */
+    .p-act{opacity:1;transform:translateX(0)}
+    .p-cart-slide{transform:translateY(0);padding:14px 10px 10px}
+    .cat-cta{padding:36px 20px}
+    .cat-empty{padding:50px 20px}
+}
+@media(max-width:500px){
+    .cat-grid{gap:10px}
+    .cat-hero{height:190px}
+    .cat-hero-txt{padding:14px}
+    .cat-hero-script{font-size:16px}
+    .cat-hero-titre{font-size:22px;letter-spacing:1.5px}
+    .cat-hero-desc{font-size:9px;letter-spacing:1.5px}
+    .breadcrumb{font-size:10px;gap:6px}
+    .cat-top{flex-direction:column;align-items:flex-start;gap:10px;padding:12px 14px}
+    .cat-sort{width:100%}
+    .cat-top form{width:100%;flex-direction:column;align-items:flex-start;gap:6px}
+    .p-nom{font-size:13px}
+    .p-cat{font-size:9px}
+    .p-prix{font-size:12px}
+    .p-badge{font-size:8px;padding:4px 10px}
+    .cat-cta{padding:30px 16px}
+    .cat-cta-titre{font-size:22px}
+}
 </style>
 @endpush
 
@@ -162,9 +195,9 @@
 </div>
 
 {{-- Bandeau sur mesure --}}
-<div style="background:linear-gradient(135deg,var(--peche),var(--lavande));padding:50px;text-align:center;margin-top:20px">
-    <span style="font-family:var(--f-script);font-size:32px;color:var(--brun-d);display:block;margin-bottom:8px">Vous ne trouvez pas ce que vous cherchez ?</span>
-    <p style="font-size:14px;color:var(--brun-2);margin-bottom:20px">Demandez une création sur mesure, rien que pour vous.</p>
+<div class="cat-cta" style="background:linear-gradient(135deg,var(--peche),var(--lavande))">
+    <span class="cat-cta-titre">Vous ne trouvez pas ce que vous cherchez ?</span>
+    <p>Demandez une création sur mesure, rien que pour vous.</p>
     <a href="{{ route('home') }}#sur-mesure" class="btn btn-rose"><i class="fas fa-magic"></i> Commander sur mesure</a>
 </div>
 

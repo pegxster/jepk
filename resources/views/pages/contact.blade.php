@@ -22,7 +22,18 @@
 .f-g input:focus,.f-g select:focus,.f-g textarea:focus{border-color:var(--rose-v);background:var(--blanc)}
 .f-g textarea{resize:vertical;min-height:120px}
 .f-error{color:#e74c3c;font-size:11px;margin-top:4px}
-@media(max-width:800px){.contact-wrap{grid-template-columns:1fr;padding:30px 20px}.page-hero{padding:50px 20px}.contact-form-card{padding:24px}}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:900px){.contact-wrap{grid-template-columns:1fr;padding:30px 20px}.page-hero{padding:50px 20px}.contact-form-card{padding:24px}}
+@media(max-width:500px){
+    .page-hero{padding:36px 16px}
+    .contact-wrap{padding:24px 14px;gap:28px}
+    .contact-info h2{font-size:22px}
+    .contact-form-card{padding:18px}
+    .contact-form-card h3{font-size:19px}
+    .two-col{grid-template-columns:1fr;gap:0}
+    .info-item{gap:10px}
+    .info-item .icon{width:38px;height:38px;font-size:14px}
+}
 </style>
 @endpush
 @section('content')
@@ -60,7 +71,7 @@
         <h3>Envoyez-nous un message</h3>
         <form action="#" method="POST">
             @csrf
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="two-col">
                 <div class="f-g">
                     <label>Prénom *</label>
                     <input type="text" name="prenom" value="{{ auth()->user()->prenom ?? '' }}" placeholder="Votre prénom" required>

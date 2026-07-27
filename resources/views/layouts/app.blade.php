@@ -774,25 +774,46 @@
                 height: 110px;
             }
 
+            .nav-d {
+                width: 100%;
+            }
+
             .h-icons {
-                gap: 10px;
+                flex: 1;
+                width: 100%;
+                justify-content: space-between;
+                gap: 6px;
             }
 
             .h-icons a {
-                font-size: 22px;
-                width: 44px;
-                height: 44px;
+                font-size: 24px;
+                width: 50px;
+                height: 50px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 background: var(--creme2);
-                border-radius: 12px;
+                border-radius: 14px;
                 border: 1px solid var(--peche);
             }
 
             .h-icons a:hover {
                 background: var(--rose-v);
                 color: var(--blanc);
+            }
+
+            .hamburger {
+                width: 50px;
+                height: 50px;
+                align-items: center;
+                justify-content: center;
+                background: var(--creme2);
+                border-radius: 14px;
+                border: 1px solid var(--peche);
+            }
+
+            .hamburger span {
+                width: 24px;
             }
 
             .badge-panier {
@@ -804,9 +825,17 @@
             }
 
             .ann-bar {
-                font-size: 8px;
-                letter-spacing: 2px;
-                padding: 8px 10px;
+                font-size: 7.5px;
+                letter-spacing: 1.5px;
+                padding: 6px 10px;
+                white-space: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .ann-bar::-webkit-scrollbar {
+                display: none;
             }
 
             .s-bar {
@@ -1040,7 +1069,7 @@
     </a>
 
     {{-- Barre annonce --}}
-    <div class="ann-bar">✦ Livraison offerte dès 70000fr &nbsp;·&nbsp; Créations artisanales &nbsp;·&nbsp; Sur mesure disponible &nbsp;·&nbsp; Retours 14 jours ✦</div>
+    <div class="ann-bar">✦ L'art du crochet, fait main avec amour &nbsp;·&nbsp; Livraison offerte dès 70 000 F CFA &nbsp;·&nbsp; Sur-mesure disponible ✦</div>
 
     {{-- Header --}}
     <header id="header">

@@ -280,102 +280,17 @@ function selectCheckoutPayment(method) {
     }
 }
 
-// ── Quartiers d'Abidjan (OpenStreetMap data) ──
-const quartiers = [
-    // Abobo
-    {nom:"Abobo", commune:"Abobo"},{nom:"Abobo-Gare", commune:"Abobo"},{nom:"PK18", commune:"Abobo"},
-    {nom:"Pk18-Plateau", commune:"Abobo"},{nom:"Abobo-Peulh", commune:"Abobo"},{nom:"Gboh-Kouéhi", commune:"Abobo"},
-    {nom:"Kouhikro", commune:"Abobo"},{nom:"Lokojah", commune:"Abobo"},{nom:"Morogbè", commune:"Abobo"},
-    {nom:"Abobo-Assagnier", commune:"Abobo"},{nom:"Boulisth", commune:"Abobo"},{nom:"Baldwin", commune:"Abobo"},
-    // Adjamé
-    {nom:"Adjamé", commune:"Adjamé"},{nom:"Boulay", commune:"Adjamé"},{nom:"Chapelle", commune:"Adjamé"},
-    {nom:"Carrefour", commune:"Adjamé"},{nom:"Atéouè", commune:"Adjamé"},{nom:"Koutte", commune:"Adjamé"},
-    {nom:"Sépoto", commune:"Adjamé"},{nom:"Issia", commune:"Adjamé"},{nom:"Nouveau Marché", commune:"Adjamé"},
-    {nom:"Comité", commune:"Adjamé"},{nom:"Liberté", commune:"Adjamé"},
-    // Attécoubé
-    {nom:"Attécoubé", commune:"Attécoubé"},{nom:"Adama Sanogo", commune:"Attécoubé"},
-    {nom:"Bédié", commune:"Attécoubé"},{nom:"Gbégbéni", commune:"Attécoubé"},
-    {nom:"Kili", commune:"Attécoubé"},{nom:"Yopougon Kouté", commune:"Attécoubé"},
-    {nom:"Abdjouhi", commune:"Attécoubé"},{nom:"Bèmè", commune:"Attécoubé"},
-    // Cocody
-    {nom:"Cocody", commune:"Cocody"},{nom:"Riviera", commune:"Cocody"},{nom:"Riviera 2", commune:"Cocody"},
-    {nom:"Riviera Palmeraie", commune:"Cocody"},{nom:"Angré", commune:"Cocody"},
-    {nom:"Angré 8ème Tranche", commune:"Cocody"},{nom:"Angré 9ème Tranche", commune:"Cocody"},
-    {nom:"Angré Château", commune:"Cocody"},{nom:"An 2", commune:"Cocody"},
-    {nom:"Djorobè", commune:"Cocody"},{nom:"Deux Plateaux", commune:"Cocody"},
-    {nom:"Les Ambassadeurs", commune:"Cocody"},{nom:"Belleville", commune:"Cocody"},
-    {nom:"Cocody Koutte", commune:"Cocody"},{nom:"Cocody II Plateaux", commune:"Cocody"},
-    {nom:"Murier", commune:"Cocody"},{nom:"Koumassi", commune:"Cocody"},
-    {nom:"Camp Galion", commune:"Cocody"},{nom:"Cocody Université", commune:"Cocody"},
-    // Koumassi
-    {nom:"Koumassi", commune:"Koumassi"},{nom:"Remblais", commune:"Koumassi"},
-    {nom:"Séhicourt", commune:"Koumassi"},{nom:"Kilometre 4", commune:"Koumassi"},
-    {nom:"Kilometre 8", commune:"Koumassi"},{nom:"Niangon", commune:"Koumassi"},
-    {nom:"Tayavon", commune:"Koumassi"},{nom:"Songon", commune:"Koumassi"},
-    // Marcory
-    {nom:"Marcory", commune:"Marcory"},{nom:"Zone 4", commune:"Marcory"},
-    {nom:"Zone 4B", commune:"Marcory"},{nom:"Kpouessé", commune:"Marcory"},
-    {nom:"Résidentiel", commune:"Marcory"},{nom:"Anoumabo", commune:"Marcory"},
-    {nom:"Biétry", commune:"Marcory"},{nom:"VGE", commune:"Marcory"},
-    {nom:"Torogué", commune:"Marcory"},{nom:"Marcory Sékou Touré", commune:"Marcory"},
-    // Plateau
-    {nom:"Plateau", commune:"Plateau"},{nom:"Centre-ville", commune:"Plateau"},
-    {nom:"Rue du Commerce", commune:"Plateau"},{nom:"Cocody Plateau", commune:"Plateau"},
-    // Port-Bouët
-    {nom:"Port-Bouët", commune:"Port-Bouët"},{nom:"Vridi", commune:"Port-Bouët"},
-    {nom:"Aéroport", commune:"Port-Bouët"},{nom:"Adjouffou", commune:"Port-Bouët"},
-    {nom:"Cocody Caviar", commune:"Port-Bouët"},{nom:"Akouédé", commune:"Port-Bouët"},
-    {nom:"Gbagba", commune:"Port-Bouët"},{nom:"Eselon", commune:"Port-Bouët"},
-    {nom:"Grand-Bassam Route", commune:"Port-Bouët"},
-    // Treichville
-    {nom:"Treichville", commune:"Treichville"},{nom:"Dar-Es-Salam", commune:"Treichville"},
-    {nom:"Belleville", commune:"Treichville"},{nom:"Boucotte", commune:"Treichville"},
-    {nom:"Fort Médée", commune:"Treichville"},{nom:"Kouamé Gnankpe", commune:"Treichville"},
-    {nom:"Madiano", commune:"Treichville"},{nom:"Nouvelle Ville", commune:"Treichville"},
-    // Yopougon
-    {nom:"Yopougon", commune:"Yopougon"},{nom:"Yopougon Kouté", commune:"Yopougon"},
-    {nom:"Yopougon Siporex", commune:"Yopougon"},{nom:"Yopougon Niangon", commune:"Yopougon"},
-    {nom:"Yopougon Selmer", commune:"Yopougon"},{nom:"Yopougon Andokoi", commune:"Yopougon"},
-    {nom:"Yopougon Mahou", commune:"Yopougon"},{nom:"Yopougon Stélicité", commune:"Yopougon"},
-    {nom:"Yopougon Angre", commune:"Yopougon"},{nom:"Yopougon Williamsville", commune:"Yopougon"},
-    {nom:"Yopougon Koumassi", commune:"Yopougon"},{nom:"Yopougon Kouté", commune:"Yopougon"},
-    {nom:"Yopougon Hill", commune:"Yopougon"},{nom:"Yopougon Koli", commune:"Yopougon"},
-    // Abobo (autres)
-    {nom:"Abobo-Niangon", commune:"Abobo"},{nom:"Abobo-Gare 2", commune:"Abobo"},
-    {nom:"Abobo Millionnaire", commune:"Abobo"},{nom:"Abobo Tampico", commune:"Abobo"},
-    {nom:"Abobo PK5", commune:"Abobo"},{nom:"Abobo Koumassi", commune:"Abobo"},
-    // Autres communes d'Abidjan
-    {nom:"Songon Agban", commune:"Songon"},{nom:"Songon Koutte", commune:"Songon"},
-    {nom:"Bingerville", commune:"Bingerville"},{nom:"Bingerville Centre", commune:"Bingerville"},
-    {nom:"Broukro", commune:"Bingerville"},{nom:"Cocody Angre", commune:"Cocody"},
-    {nom:"Abobo Ahouanikro", commune:"Abobo"},{nom:"Cocody Mermoz", commune:"Cocody"},
-    {nom:"Riviera Golf", commune:"Cocody"},{nom:"Cocody Les Palmiers", commune:"Cocody"},
-    {nom:"Marcory Zone Industrielle", commune:"Marcory"},
-    {nom:"Treichville Industriel", commune:"Treichville"},
-    {nom:"Abidjan Centre", commune:"Plateau"},
-    // Hors Abidjan
-    {nom:"Yamoussoukro", commune:"Yamoussoukro"},
-    {nom:"Bouaké", commune:"Bouaké"},
-    {nom:"San-Pédro", commune:"San-Pédro"},
-    {nom:"Daloa", commune:"Daloa"},
-    {nom:"Korhogo", commune:"Korhogo"},
-    {nom:"Man", commune:"Man"},
-    {nom:"Gagnoa", commune:"Gagnoa"},
-    {nom:"Abengourou", commune:"Abengourou"},
-    {nom:"Divo", commune:"Divo"},
-    {nom:"Grand-Bassam", commune:"Grand-Bassam"},
-];
-
+// ── Quartiers d'Abidjan — recherche live depuis notre liste (base OpenStreetMap,
+//    enrichie automatiquement à chaque nouveau quartier saisi par une cliente) ──
 const qInput = document.getElementById('quartierInput');
 const qList = document.getElementById('quartierList');
 let qIndex = -1;
+let qFetchAbort = null;
+let qDebounce = null;
 
-function renderQuartiers(term) {
+function renderQuartiers(matches) {
     qList.innerHTML = '';
     qIndex = -1;
-    if (!term || term.length < 1) { qList.classList.remove('aff'); return; }
-    const t = term.toLowerCase();
-    const matches = quartiers.filter(q => q.nom.toLowerCase().includes(t) || q.commune.toLowerCase().includes(t)).slice(0, 15);
     if (!matches.length) { qList.classList.remove('aff'); return; }
     matches.forEach((q, i) => {
         const div = document.createElement('div');
@@ -395,9 +310,23 @@ function renderQuartiers(term) {
     qList.classList.add('aff');
 }
 
+function fetchQuartiers(term) {
+    if (qFetchAbort) qFetchAbort.abort();
+    qFetchAbort = new AbortController();
+
+    fetch("{{ route('quartiers.search') }}?q=" + encodeURIComponent(term), { signal: qFetchAbort.signal })
+        .then(r => r.ok ? r.json() : [])
+        .then(renderQuartiers)
+        .catch(() => {});
+}
+
 if (qInput) {
-    qInput.addEventListener('input', function() { renderQuartiers(this.value); });
-    qInput.addEventListener('focus', function() { renderQuartiers(this.value); });
+    qInput.addEventListener('input', function() {
+        const term = this.value;
+        clearTimeout(qDebounce);
+        qDebounce = setTimeout(() => fetchQuartiers(term), 200);
+    });
+    qInput.addEventListener('focus', function() { fetchQuartiers(this.value); });
     qInput.addEventListener('blur', function() { setTimeout(() => qList.classList.remove('aff'), 200); });
     qInput.addEventListener('keydown', function(e) {
         const items = qList.querySelectorAll('div');

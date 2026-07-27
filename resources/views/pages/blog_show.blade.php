@@ -10,10 +10,11 @@
 .blog-detail{max-width:760px;margin:0 auto;padding:50px 50px 80px}
 .blog-detail-meta{display:flex;align-items:center;gap:16px;font-size:12px;color:var(--texte2);margin-bottom:24px;flex-wrap:wrap}
 .blog-detail-meta span{display:flex;align-items:center;gap:5px}
-.blog-detail h1{font-family:var(--f-titre);font-size:clamp(28px,4vw,42px);font-weight:300;color:var(--texte);line-height:1.25;margin-bottom:20px}
+.blog-detail h1{font-family:var(--f-titre);font-size:clamp(28px,4vw,42px);font-weight:300;color:var(--texte);line-height:1.25;margin-bottom:20px;overflow-wrap:break-word;word-break:break-word}
 .blog-detail h1 em{color:var(--rose-v);font-style:italic}
 .blog-detail-img{width:100%;border-radius:16px;object-fit:cover;max-height:420px;margin-bottom:30px;box-shadow:var(--ombre)}
-.blog-detail-body{font-size:15px;color:var(--texte);line-height:2.1}
+.blog-detail-body{font-size:15px;color:var(--texte);line-height:2.1;overflow-wrap:break-word;word-break:break-word}
+.blog-detail-body img{max-width:100%;height:auto;border-radius:12px}
 .blog-detail-body p{margin-bottom:18px}
 .blog-detail-body h2,.blog-detail-body h3{font-family:var(--f-titre);font-weight:300;color:var(--texte);margin:24px 0 12px}
 .blog-detail-body h2{font-size:24px}
@@ -26,7 +27,17 @@
 .blog-tags span{background:var(--peche);color:var(--rose-f);padding:5px 14px;border-radius:50px;font-size:11px;letter-spacing:0.5px}
 .back-link{color:var(--rose-v);text-decoration:none;font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:color .3s;margin-top:30px}
 .back-link:hover{color:var(--rose-f)}
-@media(max-width:700px){.blog-detail{padding:24px 16px 50px}.page-hero{padding:36px 20px}}
+@media(max-width:900px){.blog-detail{padding:24px 16px 50px}.page-hero{padding:36px 20px}}
+@media(max-width:500px){
+    .page-hero{padding:28px 16px 24px}
+    .blog-detail{padding:20px 14px 40px}
+    .blog-detail-meta{gap:10px;font-size:11px;margin-bottom:18px}
+    .blog-detail-img{max-height:220px;border-radius:12px;margin-bottom:20px}
+    .blog-detail-body{font-size:14px;line-height:1.85}
+    .blog-detail-body h2{font-size:20px;margin:20px 0 10px}
+    .blog-detail-body h3{font-size:17px;margin:18px 0 8px}
+    .blog-tags{margin-top:22px}
+}
 </style>
 @endpush
 @section('content')

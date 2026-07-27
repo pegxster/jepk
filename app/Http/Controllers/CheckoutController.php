@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Quartier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -21,10 +22,14 @@ class CheckoutController extends Controller
         $request->validate([
             'nom'             => 'required|string|max:100',
             'adresse'         => 'required|string|max:255',
+            'quartier'        => 'nullable|string|max:150',
             'telephone'       => 'required|string|max:30',
             'ville'           => 'nullable|string|max:100',
             'payment_method'  => 'nullable|string|max:100',
         ]);
+
+        // Retrouve le quartier saisi dans notre liste, ou l'y ajoute s'il est nouveau
+        $quartier = Quartier::findOrCreateFromInput($request->input('quartier'));
 
         $cart = session('cart', []);
 
@@ -53,8 +58,10 @@ class CheckoutController extends Controller
             'payment_method'  => $request->input('payment_method', 'Wave / Mobile Money'),
             'payment_status'  => 'pending',
             'shipping_address'=> [
-                'adresse' => $request->input('adresse', 'Abidjan'),
-                'ville'   => $request->input('ville', 'Abidjan'),
+                'adresse'  => $request->input('adresse', 'Abidjan'),
+                'quartier' => $quartier->nom ?? $request->input('quartier'),
+                'commune'  => $quartier->commune ?? null,
+                'ville'    => $request->input('ville', 'Abidjan'),
             ],
         ]);
 

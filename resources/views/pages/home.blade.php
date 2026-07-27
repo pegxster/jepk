@@ -311,9 +311,10 @@
     .stats-in{grid-template-columns:repeat(2,1fr)}
     .temos-grid{grid-template-columns:1fr}
     .qui,.cats,.prods,.mesure,.temos,.blog-mini,.nwsl,.inspi{padding-left:24px;padding-right:24px}
+    .qui,.temos{padding-top:60px;padding-bottom:60px}
     .stats{padding-left:24px;padding-right:24px}
     .prods-ent{flex-direction:column;align-items:flex-start;gap:16px}
-    .carousel{min-height:500px}
+    .carousel{min-height:500px;height:100dvh}
     .car-titre{font-size:clamp(28px,6vw,50px)}
     .car-script{font-size:clamp(24px,4vw,40px)}
     .car-btns{flex-direction:column;align-items:center}
@@ -326,8 +327,11 @@
     .cat-c{height:320px}
     .cat-nom{font-size:28px}
     .mesure{padding:60px 20px}
+    .mesure::before{font-size:280px}
+    .nwsl::before{font-size:260px}
     .form-card{padding:28px 22px}
     .blog-grid{grid-template-columns:1fr}
+    .inspi-card:nth-child(1){min-height:300px;aspect-ratio:4/3}
 }
 @media(max-width:600px){
     .prods-grid{grid-template-columns:1fr 1fr;gap:14px}
@@ -348,6 +352,14 @@
     .nwsl{padding:60px 16px}
     .blog-mini{padding:60px 16px}
     .inspi{padding:0 16px 60px}
+    .qui,.temos{padding:50px 16px}
+    .stats{padding:40px 16px}
+    .qui-vals{grid-template-columns:1fr}
+    .cat-nom{font-size:24px}
+    .p-nom{font-size:15px}
+    .p-prix{font-size:14px}
+    .car-scroll{display:none}
+    .inspi-card:nth-child(1){min-height:220px}
 }
 </style>
 @endpush

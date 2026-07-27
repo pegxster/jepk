@@ -101,11 +101,18 @@
     .cart-layout{grid-template-columns:1fr;padding:24px 16px}
     .cart-header{display:none}
     .cart-item{grid-template-columns:1fr;position:relative;padding:16px 0 16px 92px;min-height:100px}
-    .ci-prod{position:absolute;left:0;top:16px}
+    .ci-prod{position:absolute;left:0;top:16px;right:14px}
+    .ci-prod>div:last-child{flex:1;min-width:0}
+    .ci-nom{overflow-wrap:break-word}
     .ci-img{width:72px;height:82px}
+    .ci-qte button{width:40px;height:40px}
+    .ci-qte span{line-height:40px}
+    .ci-del{width:40px;height:40px}
     .page-hero{padding:36px 20px}
+    .page-hero::before{display:none}
+    .breadcrumb{flex-wrap:wrap;row-gap:4px}
     .cart-items-bloc{padding:16px;border-radius:12px}
-    .cart-recap{padding:20px 16px;border-radius:12px;position:static}
+    .cart-recap{padding:20px 16px;border-radius:12px;position:static;box-shadow:var(--ombre-sm)}
     .recap-titre{font-size:18px}
     .payer-btn{padding:13px;font-size:11px}
     .cart-actions{flex-direction:column;gap:10px}
@@ -113,6 +120,7 @@
 }
 @media(max-width:500px){
     .cart-item{padding:14px 0 14px 80px;min-height:85px}
+    .ci-prod{right:10px}
     .ci-img{width:62px;height:72px}
     .ci-nom{font-size:14px}
     .ci-prix,.ci-total{font-size:13px}

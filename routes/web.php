@@ -11,6 +11,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\QuartierController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ProductController as AdminProduct;
 use App\Http\Controllers\Admin\CategoryController as AdminCategory;
@@ -73,6 +74,9 @@ Route::prefix('pages')->group(function () {
     Route::get('/confidentialite', [PageController::class, 'privacy'])->name('pages.privacy');
     Route::get('/faq',             [PageController::class, 'faq'])->name('pages.faq');
 });
+
+// Quartiers d'Abidjan (autocomplétion checkout)
+Route::get('/quartiers/recherche', [QuartierController::class, 'search'])->name('quartiers.search');
 
 // Newsletter
 Route::post('/newsletter/inscription', [NewsletterController::class, 'subscribe'])

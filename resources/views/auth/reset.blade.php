@@ -17,6 +17,15 @@
 .auth-link{font-size:13px;color:var(--texte2);margin-top:20px}
 .auth-link a{color:var(--rose-v);text-decoration:none;font-weight:500}
 .auth-link a:hover{text-decoration:underline}
+@media(max-width:900px){.auth-wrap{padding:40px 20px 60px}}
+@media(max-width:500px){
+    .auth-wrap{padding:24px 12px 40px}
+    .auth-card{padding:28px 20px;border-radius:16px}
+    .auth-card img{height:60px;margin-bottom:14px}
+    .auth-card h1{font-size:22px}
+    .auth-card p{font-size:12.5px;margin-bottom:20px}
+    .f-g input{font-size:16px}
+}
 </style>
 @endpush
 @section('content')

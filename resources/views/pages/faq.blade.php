@@ -54,7 +54,7 @@
     max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;
     font-size:13.5px;color:var(--texte2);line-height:1.85;
 }
-.faq-item.open .faq-a{max-height:400px;padding:0 22px 20px}
+.faq-item.open .faq-a{max-height:600px;padding:0 22px 20px}
 
 /* ══ BLOC CONTACT ══ */
 .faq-contact{background:linear-gradient(135deg,var(--brun-d),var(--brun-2));
@@ -72,6 +72,18 @@
     .faq-contact{padding:36px 20px}
     .faq-contact h3{font-size:24px}
     .faq-tab{font-size:10px;padding:6px 14px}
+}
+@media(max-width:480px){
+    .page-hero{padding:28px 14px}
+    .faq-wrap{padding:22px 12px}
+    .faq-search input{padding:14px 44px 14px 16px;font-size:13px}
+    .faq-groupe-titre{font-size:19px}
+    .faq-q{padding:14px 16px;font-size:13px;gap:10px}
+    .faq-item.open .faq-a{padding:0 16px 16px;font-size:13px}
+    .faq-contact{padding:28px 16px}
+    .faq-contact h3{font-size:20px}
+    .faq-contact .btns{flex-direction:column}
+    .faq-contact .btns .btn{width:100%;justify-content:center}
 }
 </style>
 @endpush

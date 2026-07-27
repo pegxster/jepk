@@ -25,6 +25,7 @@
 .auth-submit{width:100%;justify-content:center;border-radius:50px;margin-top:4px}
 .auth-lien{text-align:center;font-size:13px;color:var(--texte2);margin-top:18px}
 .auth-lien a{color:var(--rose-v);text-decoration:none;font-weight:500}
+@media(max-width:500px){.auth-page{padding:32px 16px}.auth-card{padding:36px 24px;border-radius:16px}.auth-logo .s-label{font-size:26px}.auth-titre{font-size:20px}.auth-sous{font-size:12.5px}.f-g input{font-size:16px}}
 </style>
 @endpush
 @section('content')

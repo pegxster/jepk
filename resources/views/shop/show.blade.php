@@ -19,7 +19,7 @@
 .galerie-badge{position:absolute;top:14px;left:14px;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:50px;font-weight:600}
 .b-new{background:var(--rose-v);color:#fff}
 .b-promo{background:var(--lavande2);color:#fff}
-.galerie-thumbs{display:flex;gap:8px}
+.galerie-thumbs{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
 .galerie-thumb{width:72px;height:72px;border-radius:10px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:all .3s;flex-shrink:0}
 .galerie-thumb.on,.galerie-thumb:hover{border-color:var(--rose-v)}
 .galerie-thumb img{width:100%;height:100%;object-fit:cover}
@@ -90,8 +90,10 @@
     .similaires{padding:0 16px 50px}
     .similaires-grid{grid-template-columns:repeat(2,1fr)}
     .page-hero{padding:16px 16px}
+    .breadcrumb{flex-wrap:wrap;row-gap:4px}
     .prod-info h1{font-size:28px}
     .prix-actuel{font-size:26px}
+    .prod-prix{flex-wrap:wrap;row-gap:6px}
     .prod-info{padding:0}
     .similaires h2{font-size:22px}
 }
@@ -100,8 +102,12 @@
     .galerie-main{border-radius:12px}
     .galerie-thumbs{gap:6px}
     .galerie-thumb{width:56px;height:56px}
+    .prix-actuel{font-size:22px}
+    .prix-ancien{font-size:14px}
     .add-row{flex-wrap:wrap}
-    .btn-cart{width:100%}
+    .qty-ctrl{order:1}
+    .btn-wish{order:2;margin-left:auto}
+    .btn-cart{order:3;width:100%}
     .similaires-grid{grid-template-columns:1fr 1fr;gap:12px}
     .p-nom{font-size:13px}
     .p-prix{font-size:12px}

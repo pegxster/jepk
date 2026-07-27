@@ -25,7 +25,19 @@
 .cta-block{text-align:center;padding:50px;border-radius:16px;background:linear-gradient(135deg,var(--peche) 0%,var(--lavande) 100%);margin-top:30px}
 .cta-block h2{font-family:var(--f-titre);font-size:28px;font-weight:300;color:var(--texte);margin-bottom:10px}
 .cta-block p{font-size:14px;color:var(--texte2);margin-bottom:24px}
-@media(max-width:800px){.about-wrap{padding:40px 20px}.values-grid{grid-template-columns:1fr}.page-hero{padding:50px 20px}.story-block{padding:24px 20px}.cta-block{padding:36px 20px}}
+@media(max-width:900px){.about-wrap{padding:40px 20px}.values-grid{grid-template-columns:1fr}.page-hero{padding:50px 20px}.story-block{padding:24px 20px}.cta-block{padding:36px 20px}}
+@media(max-width:500px){
+    .page-hero{padding:36px 16px}
+    .about-wrap{padding:28px 14px}
+    .about-intro{margin-bottom:32px}
+    .about-intro p{font-size:14px;line-height:1.9}
+    .story-block{padding:20px 16px;margin-bottom:20px}
+    .story-block h2{font-size:22px}
+    .values-grid{gap:16px;margin:32px 0}
+    .value-card{padding:22px 16px}
+    .cta-block{padding:28px 16px}
+    .cta-block h2{font-size:22px}
+}
 </style>
 @endpush
 @section('content')
