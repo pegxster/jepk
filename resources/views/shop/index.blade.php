@@ -386,9 +386,7 @@
 
         {{-- PAGINATION --}}
         @if(method_exists($products, 'links') && $products->hasPages())
-            <div style="margin-top:40px">
-                {{ $products->links() }}
-            </div>
+            {{ $products->links('partials.pagination') }}
         @else
             <div class="pagination">
                 <a href="#" class="page-btn"><i class="fas fa-chevron-left" style="font-size:11px"></i></a>

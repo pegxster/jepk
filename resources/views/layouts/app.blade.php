@@ -834,9 +834,9 @@
             }
 
             .ann-bar {
-                font-size: 7.5px;
+                font-size: 9.5px;
                 letter-spacing: 1.5px;
-                padding: 6px 10px;
+                padding: 9px 10px;
                 white-space: nowrap;
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -1064,6 +1064,65 @@
                 gap: 12px
             }
         }
+
+        /* ================================================================
+   PAGINATION — partagée entre boutique / catégories / commandes
+   ================================================================ */
+        .pagination {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .page-btn {
+            min-width: 40px;
+            height: 40px;
+            padding: 0 12px;
+            border: 1.5px solid var(--peche);
+            background: var(--blanc);
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--f-corps);
+            font-size: 13px;
+            color: var(--texte2);
+            cursor: pointer;
+            transition: var(--trans);
+            text-decoration: none;
+            box-shadow: var(--ombre-sm);
+        }
+
+        .page-btn.on,
+        .page-btn:hover {
+            background: var(--rose-v);
+            border-color: var(--rose-v);
+            color: var(--blanc);
+            box-shadow: 0 4px 14px rgba(201, 112, 128, .35);
+        }
+
+        .page-btn.dis {
+            opacity: .4;
+            cursor: default;
+            box-shadow: none;
+        }
+
+        .page-btn.dis:hover {
+            background: var(--blanc);
+            border-color: var(--peche);
+            color: var(--texte2);
+        }
+
+        @media(max-width:500px) {
+            .page-btn {
+                min-width: 34px;
+                height: 34px;
+                font-size: 12px;
+            }
+        }
     </style>
     @stack('styles')
 </head>
@@ -1078,7 +1137,7 @@
     </a>
 
     {{-- Barre annonce --}}
-    <div class="ann-bar">✦ L'art du crochet, fait main avec amour &nbsp;·&nbsp; Livraison offerte dès 70 000 F CFA &nbsp;·&nbsp; Sur-mesure disponible ✦</div>
+    <div class="ann-bar">✦ Fait main, avec amour, en Côte d'Ivoire &nbsp;·&nbsp; Livraison offerte dès 70 000 F CFA &nbsp;·&nbsp; Sur-mesure disponible ✦</div>
 
     {{-- Header --}}
     <header id="header">

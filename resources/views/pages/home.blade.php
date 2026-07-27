@@ -467,26 +467,6 @@ $carouselSlides = isset($slides) && count($slides)
     </div>
 </div>
 
-{{-- AVANTAGES --}}
-<div class="avantages">
-    <div class="av-item rev">
-        <div class="av-icone"><i class="fas fa-truck"></i></div>
-        <div><div class="av-titre">Livraison offerte</div><div class="av-sous">Dès 70 000 F CFA d'achat, partout</div></div>
-    </div>
-    <div class="av-item rev d1">
-        <div class="av-icone"><i class="fas fa-undo"></i></div>
-        <div><div class="av-titre">Retours 14 jours</div><div class="av-sous">Satisfaite ou remboursée</div></div>
-    </div>
-    <div class="av-item rev d2">
-        <div class="av-icone"><i class="fas fa-lock"></i></div>
-        <div><div class="av-titre">Paiement sécurisé</div><div class="av-sous">Vos données protégées</div></div>
-    </div>
-    <div class="av-item rev d3">
-        <div class="av-icone"><i class="fas fa-headset"></i></div>
-        <div><div class="av-titre">Support WhatsApp</div><div class="av-sous">Réponse sous 24h</div></div>
-    </div>
-</div>
-
 {{-- ══════ QUI SOMMES-NOUS ══════ --}}
 <section class="qui">
     <div class="qui-grid">
@@ -698,6 +678,28 @@ $carouselSlides = isset($slides) && count($slides)
                     <i class="fas fa-paper-plane"></i> Envoyer ma demande
                 </button>
             </form>
+        </div>
+    </div>
+</section>
+
+{{-- ══════ TÉMOIGNAGES ══════ --}}
+<section class="temos">
+    <div class="temos-in">
+        <div class="ent-c rev">
+            <span class="s-label">Elles nous font confiance</span>
+            <h2 class="s-titre">Ce qu'elles <em>disent de nous</em></h2>
+        </div>
+        <div class="temos-grid">
+            @foreach([['★★★★★','La qualité des fils est absolument exceptionnelle. Les créations au crochet sont d\'une douceur incomparable et les coloris sont magnifiques. Je suis cliente à vie !','Aïcha K.','Cocody · Crocheteuse','47'],['★★★★★','J\'ai commandé une création sur mesure pour ma mère. Le résultat a dépassé toutes mes espérances ! L\'équipe est à l\'écoute et très professionnelle.','Nadège B.','Marcory · Créatrice','32'],['★★★★★','Service client au top, livraison ultra rapide et les produits sont encore plus beaux en vrai. JEKP c\'est une boutique à part entière. Je recommande !','Sarah M.','Yopougon · Artiste','56']] as $i=>$t)
+            <div class="t-carte rev d{{ $i+1 }}">
+                <div class="t-etoiles">{{ $t[0] }}</div>
+                <p class="t-txt">{{ $t[1] }}</p>
+                <div class="t-aut">
+                    <div class="t-av"><img src="{{ asset('assets/images/jepk30.jpg') }}" alt="{{ $t[2] }}" loading="lazy"></div>
+                    <div><div class="t-nom">{{ $t[2] }}</div><div class="t-lieu">{{ $t[3] }}</div></div>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 </section>

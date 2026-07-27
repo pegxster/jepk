@@ -92,11 +92,11 @@
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
                 <div class="form-group">
                     <label class="form-label">Prénom *</label>
-                    <input type="text" name="prenom" value="{{ old('prenom') }}" class="form-control" placeholder="Marie" required>
+                    <input type="text" name="prenom" value="{{ old('prenom') }}" class="form-control" placeholder="Aminata" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Nom *</label>
-                    <input type="text" name="nom" value="{{ old('nom') }}" class="form-control" placeholder="Dupont" required>
+                    <input type="text" name="nom" value="{{ old('nom') }}" class="form-control" placeholder="Kouassi" required>
                 </div>
             </div>
             <div class="form-group" style="margin-bottom:14px">

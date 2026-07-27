@@ -110,12 +110,12 @@
                 <div class="f-row">
                     <div class="f-g">
                         <label>Prénom *</label>
-                        <input type="text" name="prenom" value="{{ old('prenom', auth()->user()->prenom) }}" placeholder="Marie" required>
+                        <input type="text" name="prenom" value="{{ old('prenom', auth()->user()->prenom) }}" placeholder="Aminata" required>
                         @error('prenom')<div class="f-error">{{ $message }}</div>@enderror
                     </div>
                     <div class="f-g">
                         <label>Nom *</label>
-                        <input type="text" name="nom" value="{{ old('nom', auth()->user()->nom) }}" placeholder="Dupont" required>
+                        <input type="text" name="nom" value="{{ old('nom', auth()->user()->nom) }}" placeholder="Kouassi" required>
                         @error('nom')<div class="f-error">{{ $message }}</div>@enderror
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                 <div class="f-row">
                     <div class="f-g">
                         <label>Téléphone</label>
-                        <input type="tel" name="telephone" value="{{ old('telephone', auth()->user()->telephone) }}" placeholder="+33 6 00 00 00 00">
+                        <input type="tel" name="telephone" value="{{ old('telephone', auth()->user()->telephone) }}" placeholder="+225 07 00 00 00 00">
                     </div>
                     <div class="f-g">
                         <label>Date de naissance</label>

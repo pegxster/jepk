@@ -28,11 +28,6 @@
 .s-attente{background:var(--lavande);color:#6a4a9f}.s-annule{background:#fff0f0;color:#c0392b}
 .cmd-link{color:var(--rose-v);text-decoration:none;font-size:12px;transition:color .3s;display:inline-flex;align-items:center;gap:4px}
 .cmd-link:hover{color:var(--rose-f)}
-.pagination{display:flex;gap:6px;align-items:center;margin-top:24px;justify-content:center}
-.pagination a,.pagination span{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;padding:0 10px;border-radius:50px;font-size:13px;text-decoration:none;transition:var(--trans)}
-.pagination a{background:var(--blanc);color:var(--texte);border:1.5px solid var(--peche)}
-.pagination a:hover{border-color:var(--rose-v);color:var(--rose-v)}
-.pagination .active{background:var(--rose-v);color:var(--blanc);border:1.5px solid var(--rose-v)}
 .vide{text-align:center;padding:60px 0;color:var(--texte2)}
 .vide i{font-size:40px;color:var(--peche2);margin-bottom:14px;display:block}
 @media(max-width:700px){
@@ -53,7 +48,6 @@
     .cmd-table th,.cmd-table td{padding:10px 8px;font-size:12px}
     .statut{font-size:9px;padding:3px 8px}
     .vide{padding:40px 0}
-    .pagination{flex-wrap:wrap;gap:4px}
 }
 </style>
 @endpush
@@ -115,7 +109,7 @@
             </div>
         </div>
         @if(method_exists($orders, 'links'))
-            <div class="pagination">{{ $orders->links() }}</div>
+            {{ $orders->links('partials.pagination') }}
         @endif
     </div>
 </div>

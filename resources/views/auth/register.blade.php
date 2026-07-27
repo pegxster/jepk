@@ -56,11 +56,11 @@
             <div class="f-row">
                 <div class="f-g">
                     <label>Prénom</label>
-                    <input type="text" name="prenom" value="{{ old('prenom') }}" placeholder="Marie" required>
+                    <input type="text" name="prenom" value="{{ old('prenom') }}" placeholder="Aminata" required>
                 </div>
                 <div class="f-g">
                     <label>Nom</label>
-                    <input type="text" name="nom" value="{{ old('nom') }}" placeholder="Dupont" required>
+                    <input type="text" name="nom" value="{{ old('nom') }}" placeholder="Kouassi" required>
                 </div>
             </div>
             <div class="f-g">
@@ -69,7 +69,7 @@
             </div>
             <div class="f-g">
                 <label>Téléphone</label>
-                <input type="tel" name="telephone" value="{{ old('telephone') }}" placeholder="+33 6 00 00 00 00">
+                <input type="tel" name="telephone" value="{{ old('telephone') }}" placeholder="+225 07 00 00 00 00">
             </div>
             <div class="f-g">
                 <label>Mot de passe</label>

@@ -177,9 +177,7 @@
 
     {{-- Pagination --}}
     @if($products->hasPages())
-    <div style="display:flex;justify-content:center;margin-top:48px">
-        {{ $products->links() }}
-    </div>
+        {{ $products->links('partials.pagination') }}
     @endif
 
     @else
