@@ -71,7 +71,7 @@ class ProductController extends Controller
         $images = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
-                $images[] = save_uploaded_file($image, 'products');
+                $images[] = store_image_in_db($image, 'products');
             }
         }
         $data['images'] = $images;
@@ -123,7 +123,9 @@ class ProductController extends Controller
 
         if (!empty($request->remove_images)) {
             foreach ($request->remove_images as $path) {
-                if (str_starts_with($path, 'products/') || str_starts_with($path, 'categories/')) {
+                if (str_starts_with($path, 'media/')) {
+                    delete_image_from_db($path);
+                } elseif (str_starts_with($path, 'products/') || str_starts_with($path, 'categories/')) {
                     delete_uploaded_file($path);
                 } else {
                     $fullPath = public_path($path);
@@ -135,7 +137,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $idx => $image) {
-                $existingImages[] = save_uploaded_file($image, 'products');
+                $existingImages[] = store_image_in_db($image, 'products');
             }
         }
         $data['images'] = array_values($existingImages);
@@ -148,7 +150,9 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         foreach ($product->images ?? [] as $image) {
-            if (str_starts_with($image, 'products/') || str_starts_with($image, 'categories/')) {
+            if (str_starts_with($image, 'media/')) {
+                delete_image_from_db($image);
+            } elseif (str_starts_with($image, 'products/') || str_starts_with($image, 'categories/')) {
                 delete_uploaded_file($image);
             } else {
                 $path = public_path($image);

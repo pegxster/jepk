@@ -87,11 +87,6 @@
             </button>
         </form>
 
-        <div class="auth-sep">ou continuer avec</div>
-        <div class="auth-social">
-            <a href="#" class="social-btn"><i class="fab fa-google" style="color:#ea4335"></i> Google</a>
-            <a href="#" class="social-btn"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</a>
-        </div>
         <p class="auth-lien">Pas encore de compte ? <a href="{{ route('auth.register') }}">Créer un compte</a></p>
     </div>
 </div>

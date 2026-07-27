@@ -32,8 +32,8 @@ class CategoryController extends Controller
 
         $catName = $category ? $category->name : self::$defaults[$slug]['nom'];
         $catDesc = $category ? ($category->description ?? '') : self::$defaults[$slug]['desc'];
-        $catImg  = $category && $category->image
-            ? (str_starts_with($category->image, 'http') ? $category->image : asset($category->image))
+        $catImg = $category && $category->image
+            ? product_image_url($category->image)
             : asset(self::$defaults[$slug]['img'] ?? 'assets/images/jepk42.jpg');
 
         // Produits de la catégorie

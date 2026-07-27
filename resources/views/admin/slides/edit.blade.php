@@ -20,7 +20,7 @@
             <div class="card-body">
                 {{-- Aperçu actuel --}}
                 <div id="previewWrap" style="position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/7;background:#2A1D14;margin-bottom:16px">
-                    <img id="previewImg" src="{{ asset('storage/'.$slide->image) }}"
+                    <img id="previewImg" src="{{ product_image_url($slide->image ?? null) }}"
                          style="width:100%;height:100%;object-fit:cover;opacity:.7">
                     <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;pointer-events:none" id="previewOverlay">
                         <div id="pvBadge" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,137,106,.9);margin-bottom:8px">{{ $slide->badge }}</div>

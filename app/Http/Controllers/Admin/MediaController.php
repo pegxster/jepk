@@ -3,31 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
     public function index()
     {
-        $files  = [];
-        $paths  = Storage::disk('public')->allFiles('images');
-
-        foreach ($paths as $path) {
-            $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-            if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'])) {
-                continue;
-            }
-            $files[] = [
-                'path'     => $path,
-                'url'      => asset('storage/' . $path),
-                'name'     => basename($path),
-                'size'     => Storage::disk('public')->size($path),
-                'modified' => Storage::disk('public')->lastModified($path),
-            ];
-        }
-
-        usort($files, fn($a, $b) => $b['modified'] - $a['modified']);
+        $files = Media::orderBy('created_at', 'desc')->get()->map(fn ($media) => [
+            'path'     => 'media/' . $media->_id,
+            'url'      => route('media.show', $media->_id),
+            'name'     => $media->filename,
+            'size'     => $media->size,
+            'modified' => $media->created_at?->timestamp,
+        ])->toArray();
 
         return view('admin.media.index', compact('files'));
     }
@@ -40,14 +29,15 @@ class MediaController extends Controller
         ]);
 
         $uploaded = [];
-        $folder   = $request->input('folder', 'images/uploads');
 
         foreach ($request->file('files') as $file) {
-            $path      = $file->store($folder, 'public');
+            $ref = store_image_in_db($file, 'uploads');
+            $id  = substr($ref, strlen('media/'));
+
             $uploaded[] = [
-                'path' => $path,
-                'url'  => asset('storage/' . $path),
-                'name' => basename($path),
+                'path' => $ref,
+                'url'  => route('media.show', $id),
+                'name' => $file->getClientOriginalName(),
             ];
         }
 
@@ -58,11 +48,11 @@ class MediaController extends Controller
     {
         $path = $request->input('path');
 
-        if (!$path || !Storage::disk('public')->exists($path)) {
+        if (!$path || !str_starts_with($path, 'media/')) {
             return response()->json(['success' => false, 'message' => 'Fichier introuvable.'], 404);
         }
 
-        Storage::disk('public')->delete($path);
+        delete_image_from_db($path);
 
         return response()->json(['success' => true]);
     }

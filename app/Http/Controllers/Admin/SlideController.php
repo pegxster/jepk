@@ -39,7 +39,7 @@ class SlideController extends Controller
         $data['sort_order'] = (int) ($data['sort_order'] ?? 0);
 
         if ($request->hasFile('image')) {
-            $data['image'] = save_uploaded_file($request->file('image'), 'slides');
+            $data['image'] = store_image_in_db($request->file('image'), 'slides');
         }
 
         Slide::create($data);
@@ -73,9 +73,9 @@ class SlideController extends Controller
 
         if ($request->hasFile('image')) {
             if ($slide->image) {
-                delete_uploaded_file($slide->image);
+                delete_image_from_db($slide->image);
             }
-            $data['image'] = save_uploaded_file($request->file('image'), 'slides');
+            $data['image'] = store_image_in_db($request->file('image'), 'slides');
         }
 
         $slide->update($data);
@@ -86,7 +86,7 @@ class SlideController extends Controller
     public function destroy(Slide $slide)
     {
         if ($slide->image) {
-            delete_uploaded_file($slide->image);
+            delete_image_from_db($slide->image);
         }
         $slide->delete();
 

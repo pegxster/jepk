@@ -12,6 +12,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\QuartierController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ProductController as AdminProduct;
 use App\Http\Controllers\Admin\CategoryController as AdminCategory;
@@ -40,6 +41,12 @@ Route::get('/uploads/{path}', function (string $path) {
         'Cache-Control' => 'public, max-age=604800, immutable',
     ]);
 })->where('path', '.+')->name('uploads.show');
+
+/* ═══════════════════════════════════════════════════════
+   MÉDIAS — images uploadées, stockées dans MongoDB
+   (persiste entre les déploiements, contrairement au disque)
+═══════════════════════════════════════════════════════ */
+Route::get('/media/{id}', [MediaController::class, 'show'])->name('media.show');
 
 /* ═══════════════════════════════════════════════════════
    PAGES PUBLIQUES

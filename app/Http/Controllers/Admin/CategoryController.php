@@ -39,7 +39,7 @@ class CategoryController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
-            $data['image'] = save_uploaded_file($request->file('image'), 'categories');
+            $data['image'] = store_image_in_db($request->file('image'), 'categories');
         }
 
         Category::create($data);
@@ -65,10 +65,10 @@ class CategoryController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
-            if ($category->image && str_starts_with($category->image, 'categories/')) {
-                delete_uploaded_file($category->image);
+            if ($category->image) {
+                delete_image_from_db($category->image);
             }
-            $data['image'] = save_uploaded_file($request->file('image'), 'categories');
+            $data['image'] = store_image_in_db($request->file('image'), 'categories');
         }
 
         $category->update($data);
@@ -78,8 +78,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        if ($category->image && str_starts_with($category->image, 'categories/')) {
-            delete_uploaded_file($category->image);
+        if ($category->image) {
+            delete_image_from_db($category->image);
         }
         $category->delete();
 

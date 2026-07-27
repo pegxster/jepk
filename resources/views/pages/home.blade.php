@@ -591,7 +591,7 @@ $carouselSlides = isset($slides) && count($slides)
                 <li><i class="fas fa-check-circle"></i> Suivi par WhatsApp à chaque étape</li>
                 <li><i class="fas fa-check-circle"></i> Satisfaction garantie ou remboursée</li>
             </ul>
-            <a href="https://wa.me/0153928572" target="0153928572" class="btn btn-rose">
+            <a href="https://wa.me/225153928572" target="_blank" class="btn btn-rose">
                 <i class="fab fa-whatsapp"></i> Discuter sur WhatsApp
             </a>
         </div>

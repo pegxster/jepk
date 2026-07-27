@@ -49,8 +49,41 @@ function delete_uploaded_file(string $relativePath): void
 }
 
 /**
+ * Enregistre un fichier uploadé directement dans MongoDB (collection "media").
+ * Contrairement au disque local, ceci survit aux redéploiements sur un plan
+ * Render gratuit (pas de disque persistant disponible).
+ * Retourne une référence du type "media/{id}" à stocker sur le modèle.
+ */
+function store_image_in_db($file, string $folder = 'uploads'): string
+{
+    $filename = $folder . '-' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . time() . '.' . $file->getClientOriginalExtension();
+
+    $media = \App\Models\Media::create([
+        'filename'  => $filename,
+        'mime_type' => $file->getMimeType(),
+        'size'      => $file->getSize(),
+        'data'      => base64_encode(file_get_contents($file->getRealPath())),
+    ]);
+
+    return 'media/' . $media->_id;
+}
+
+/**
+ * Supprime une image stockée en base ("media/{id}"). Ignore silencieusement
+ * les références qui ne pointent pas vers la médiathèque Mongo.
+ */
+function delete_image_from_db(string $ref): void
+{
+    if (!str_starts_with($ref, 'media/')) {
+        return;
+    }
+
+    \App\Models\Media::where('_id', substr($ref, strlen('media/')))->delete();
+}
+
+/**
  * Resolve a product image path/URL to a full displayable URL.
- * Handles: relative paths (assets/, uploads/), full URLs, null/empty values.
+ * Handles: relative paths (assets/, uploads/, media/), full URLs, null/empty values.
  */
 function product_image_url(?string $image, string $fallback = ''): string
 {
@@ -61,6 +94,11 @@ function product_image_url(?string $image, string $fallback = ''): string
     // Already a full URL
     if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {
         return $image;
+    }
+
+    // Image stockée dans MongoDB (persiste entre les déploiements)
+    if (str_starts_with($image, 'media/')) {
+        return route('media.show', substr($image, strlen('media/')));
     }
 
     // Uploaded file via persistent disk (uploads/categories/... or uploads/products/...)

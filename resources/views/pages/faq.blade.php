@@ -269,7 +269,7 @@
         <h3>Vous n'avez pas trouvé votre <em style="color:var(--peche);font-style:italic">réponse ?</em></h3>
         <p>Notre équipe est disponible pour répondre à toutes vos questions.<br>Réponse garantie sous 24h.</p>
         <div class="btns">
-            <a href="https://wa.me/0153928572" class="btn btn-peche" target="_blank">
+            <a href="https://wa.me/225153928572" class="btn btn-peche" target="_blank">
                 <i class="fab fa-whatsapp"></i> Écrire sur WhatsApp
             </a>
             <a href="mailto:contact@jekpstore.com" class="btn btn-outline">
