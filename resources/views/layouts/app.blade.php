@@ -388,16 +388,22 @@
     border: none;
     cursor: pointer;
     flex-direction: column;
-    gap: 4px;
-    padding: 2px
+    gap: 5px;
+    padding: 8px;
+    border-radius: 10px;
+    transition: background .3s;
+}
+.hamburger:hover {
+    background: var(--peche);
 }
 
 .hamburger span {
-    width: 18px;
-    height: 1.5px;
+    width: 22px;
+    height: 2px;
     background: var(--texte);
     display: block;
-    transition: 0.3s
+    transition: 0.3s;
+    border-radius: 2px;
 }
 
         /* Barre recherche */
@@ -440,15 +446,22 @@
             display: none;
             position: fixed;
             inset: 0;
-            z-index: 800;
+            z-index: 950;
             background: var(--creme);
             flex-direction: column;
             padding: 100px 40px 40px;
-            gap: 4px
+            gap: 4px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .m-menu.oui {
-            display: flex
+            display: flex;
+            animation: menuSlideIn .3s ease;
+        }
+        @keyframes menuSlideIn {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .m-menu a {
@@ -462,7 +475,8 @@
             transition: color 0.3s
         }
 
-        .m-menu a:hover {
+        .m-menu a:hover,
+        .m-menu a:active {
             color: var(--rose-v)
         }
 
@@ -470,11 +484,25 @@
     position: absolute;
     top: 28px;
     right: 36px;
-    background: none;
-    border: none;
+    background: var(--blanc);
+    border: 2px solid var(--peche2);
     font-size: 22px;
-    color: var(--texte2);
-    cursor: pointer
+    color: var(--texte);
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 960;
+    box-shadow: 0 2px 12px rgba(90,48,64,.12);
+    transition: var(--trans);
+}
+.m-close:hover {
+    background: var(--rose-v);
+    color: var(--blanc);
+    border-color: var(--rose-v);
 }
 
         /* ================================================================
@@ -854,15 +882,9 @@
             .m-close {
                 top: 22px;
                 right: 20px;
-                font-size: 26px;
-                background: var(--creme2);
-                width: 46px;
-                height: 46px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid var(--peche);
+                font-size: 20px;
+                width: 44px;
+                height: 44px;
             }
         }
 

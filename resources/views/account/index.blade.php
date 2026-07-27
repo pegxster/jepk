@@ -84,11 +84,40 @@
 .acc-cta-txt h3{font-family:var(--f-titre);font-size:20px;font-weight:300;color:var(--texte);margin-bottom:4px}
 .acc-cta-txt p{font-size:13px;color:var(--texte2)}
 
-@media(max-width:900px){.account-layout{grid-template-columns:1fr;padding:24px 16px}.account-sidebar{position:static}.acc-stats{grid-template-columns:1fr 1fr}.page-hero{padding:36px 20px}.page-hero h1{font-size:28px}}
-@media(max-width:600px){
-    .acc-stats{grid-template-columns:1fr 1fr}
-    .acc-cta{flex-direction:column;text-align:center}
-    .acc-cta-txt h3{font-size:17px}
+/* ── Mobile sidebar nav (horizontal scroll) ── */
+.acc-sidebar-nav{display:none}
+
+@media(max-width:900px){
+    .account-layout{grid-template-columns:1fr;padding:24px 16px;gap:20px}
+    .account-sidebar{
+        position:static;
+        display:grid;
+        grid-template-columns:auto 1fr;
+        gap:0;
+        align-items:center;
+        padding:16px;
+        border-radius:14px;
+    }
+    .acc-avatar{margin-bottom:0;padding-bottom:0;border-bottom:none;padding-right:16px;border-right:1px solid var(--peche);text-align:left}
+    .acc-avatar .acc-initiale,.acc-avatar img{margin:0 0 0 0}
+    .acc-nav{
+        display:flex;
+        gap:4px;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+        padding:0 0 0 12px;
+        scrollbar-width:none;
+    }
+    .acc-nav::-webkit-scrollbar{display:none}
+    .acc-nav li{margin-bottom:0;flex-shrink:0}
+    .acc-nav a{padding:8px 12px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
+    .acc-nav i{font-size:12px}
+    .acc-stats{grid-template-columns:repeat(3,1fr);gap:10px}
+    .acc-stat{padding:16px 12px}
+    .acc-stat-n{font-size:26px}
+    .acc-stat-icone{font-size:17px;margin-bottom:6px}
+    .page-hero{padding:36px 20px}
+    .page-hero h1{font-size:28px}
     .acc-titre{font-size:22px}
     .acc-bloc{padding:18px 14px}
     .acc-bloc-header{flex-direction:column;align-items:flex-start;gap:8px}
@@ -96,11 +125,18 @@
     .cmd-table{min-width:520px}
     .cmd-table th,.cmd-table td{padding:10px 8px;font-size:12px}
     .statut{font-size:9px;padding:3px 8px}
+    .acc-cta{flex-direction:column;text-align:center;padding:20px 16px}
+    .acc-cta-txt h3{font-size:17px}
+    .acc-cta .btn{width:100%;justify-content:center}
+}
+@media(max-width:400px){
+    .account-sidebar{grid-template-columns:1fr;gap:12px}
+    .acc-avatar{border-right:none;border-bottom:1px solid var(--peche);padding-bottom:12px;padding-right:0;text-align:center}
+    .acc-nav{padding:0;justify-content:center;flex-wrap:wrap}
+    .acc-stats{grid-template-columns:1fr 1fr}
 }
 @media(max-width:400px){
     .acc-stats{grid-template-columns:1fr}
-    .acc-cta .btn{width:100%}
-    .cmd-table{min-width:480px}
 }
 </style>
 @endpush

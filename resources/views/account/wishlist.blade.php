@@ -37,7 +37,14 @@
 .wish-vide p{font-size:14px;color:var(--texte2);margin-bottom:28px}
 @media(max-width:1000px){.wish-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){.page-hero{padding:36px 20px}.wish-layout{padding:40px 16px}.wish-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.page-hero h1{font-size:28px}.wish-layout>div:first-child{flex-direction:column;align-items:flex-start;gap:14px}.wish-card .wish-body{padding:14px}.wish-nom{font-size:15px}}
+@media(max-width:600px){
+    .page-hero h1{font-size:28px}
+    .wish-layout{padding:24px 16px}
+    .wish-layout>div:first-child{flex-direction:column;align-items:flex-start;gap:14px}
+    .wish-layout>div:first-child .btn{width:100%;justify-content:center}
+    .wish-card .wish-body{padding:14px}
+    .wish-nom{font-size:15px}
+}
 @media(max-width:500px){.wish-grid{grid-template-columns:1fr}}
 </style>
 @endpush

@@ -35,7 +35,20 @@
 .pagination .active{background:var(--rose-v);color:var(--blanc);border:1.5px solid var(--rose-v)}
 .vide{text-align:center;padding:60px 0;color:var(--texte2)}
 .vide i{font-size:40px;color:var(--peche2);margin-bottom:14px;display:block}
-@media(max-width:900px){.page-hero{padding:36px 20px}.account-layout{grid-template-columns:1fr;padding:30px 16px}.account-sidebar{position:static}}
+@media(max-width:900px){
+    .page-hero{padding:36px 20px}
+    .account-layout{grid-template-columns:1fr;padding:24px 16px;gap:20px}
+    .account-sidebar{
+        position:static;
+        display:grid;grid-template-columns:auto 1fr;gap:0;align-items:center;
+        padding:16px;border-radius:14px;
+    }
+    .account-sidebar .acc-nav{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 0 0 12px;scrollbar-width:none}
+    .account-sidebar .acc-nav::-webkit-scrollbar{display:none}
+    .account-sidebar .acc-nav li{margin-bottom:0;flex-shrink:0}
+    .account-sidebar .acc-nav a{padding:8px 12px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
+    .account-sidebar .acc-nav i{font-size:12px}
+}
 @media(max-width:600px){
     .page-hero h1{font-size:28px}
     .acc-titre{font-size:22px}
@@ -44,6 +57,11 @@
     .cmd-table th,.cmd-table td{padding:10px 8px;font-size:12px}
     .statut{font-size:9px;padding:3px 8px}
     .vide{padding:40px 0}
+    .pagination{flex-wrap:wrap;gap:4px}
+}
+@media(max-width:400px){
+    .account-sidebar{grid-template-columns:1fr}
+    .account-sidebar .acc-nav{justify-content:center;flex-wrap:wrap;padding:8px 0 0}
 }
 </style>
 @endpush
