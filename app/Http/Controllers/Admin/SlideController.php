@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Slide;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class SlideController extends Controller
 {
@@ -40,7 +39,7 @@ class SlideController extends Controller
         $data['sort_order'] = (int) ($data['sort_order'] ?? 0);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images/slides', 'public');
+            $data['image'] = save_uploaded_file($request->file('image'), 'slides');
         }
 
         Slide::create($data);
@@ -74,9 +73,9 @@ class SlideController extends Controller
 
         if ($request->hasFile('image')) {
             if ($slide->image) {
-                Storage::disk('public')->delete($slide->image);
+                delete_uploaded_file($slide->image);
             }
-            $data['image'] = $request->file('image')->store('images/slides', 'public');
+            $data['image'] = save_uploaded_file($request->file('image'), 'slides');
         }
 
         $slide->update($data);
@@ -87,7 +86,7 @@ class SlideController extends Controller
     public function destroy(Slide $slide)
     {
         if ($slide->image) {
-            Storage::disk('public')->delete($slide->image);
+            delete_uploaded_file($slide->image);
         }
         $slide->delete();
 

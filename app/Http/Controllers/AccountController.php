@@ -67,10 +67,10 @@ class AccountController extends Controller
         $data['name'] = $data['prenom'] . ' ' . $data['nom'];
 
         if ($request->hasFile('avatar')) {
-            if ($user->avatar && !str_starts_with($user->avatar, 'http')) {
-                Storage::disk('public')->delete($user->avatar);
+            if ($user->avatar && !str_starts_with($user->avatar, 'http') && !str_starts_with($user->avatar, 'assets/')) {
+                delete_uploaded_file($user->avatar);
             }
-            $data['avatar'] = $request->file('avatar')->store('images/avatars', 'public');
+            $data['avatar'] = save_uploaded_file($request->file('avatar'), 'avatars');
         }
 
         $user->update($data);

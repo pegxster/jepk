@@ -15,7 +15,7 @@
 .breadcrumb a{color:var(--texte2);text-decoration:none;transition:color .3s}.breadcrumb a:hover{color:var(--rose-v)}
 .breadcrumb span{color:var(--rose-p)}
 
-/* ── Layout ── */
+/* ── Layout desktop ── */
 .account-layout{max-width:1200px;margin:0 auto;padding:60px 50px;
     display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:start}
 
@@ -37,6 +37,12 @@
 .acc-nav a:hover,.acc-nav a.on{background:var(--peche);color:var(--rose-v)}
 .acc-nav a.on{font-weight:500}
 .acc-nav i{width:16px;text-align:center;font-size:13px;flex-shrink:0}
+.acc-nav-btn{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;
+    text-decoration:none;color:var(--rose-v);font-size:13px;transition:var(--trans);
+    background:none;border:none;cursor:pointer;font-family:var(--f-corps);
+    width:100%;text-align:left}
+.acc-nav-btn:hover{background:var(--peche)}
+.acc-nav-btn i{width:16px;text-align:center;font-size:13px;flex-shrink:0}
 
 /* ── Stats ── */
 .acc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
@@ -84,59 +90,86 @@
 .acc-cta-txt h3{font-family:var(--f-titre);font-size:20px;font-weight:300;color:var(--texte);margin-bottom:4px}
 .acc-cta-txt p{font-size:13px;color:var(--texte2)}
 
-/* ── Mobile sidebar nav (horizontal scroll) ── */
-.acc-sidebar-nav{display:none}
+/* ══════ TABLETTE ══════ */
+@media(max-width:1000px){
+    .account-layout{padding:40px 24px}
+    .acc-stats{gap:10px}
+    .acc-stat{padding:18px 12px}
+    .acc-stat-n{font-size:26px}
+}
 
-@media(max-width:900px){
-    .account-layout{grid-template-columns:1fr;padding:24px 16px;gap:20px}
-    .account-sidebar{
-        position:static;
-        display:grid;
-        grid-template-columns:auto 1fr;
-        gap:0;
-        align-items:center;
-        padding:16px;
-        border-radius:14px;
+/* ══════ MOBILE ══════ */
+@media(max-width:700px){
+    .page-hero{padding:32px 16px}
+    .page-hero h1{font-size:24px}
+
+    .account-layout{
+        display:flex;flex-direction:column;gap:20px;
+        padding:20px 14px;
     }
-    .acc-avatar{margin-bottom:0;padding-bottom:0;border-bottom:none;padding-right:16px;border-right:1px solid var(--peche);text-align:left}
-    .acc-avatar .acc-initiale,.acc-avatar img{margin:0 0 0 0}
+
+    /* Sidebar : colonne verticale simple, pas de grid compliqué */
+    .account-sidebar{
+        position:static;border-radius:14px;padding:20px 16px;
+    }
+
+    .acc-avatar{display:flex;align-items:center;gap:14px;text-align:left;
+        margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--peche)}
+    .acc-initiale{margin:0;width:52px;height:52px;font-size:22px}
+    .acc-avatar img{width:52px!important;height:52px!important}
+    .acc-nom{font-size:16px}
+    .acc-email{font-size:10px}
+
+    /* Nav = scroll horizontal, pas de wrap */
     .acc-nav{
-        display:flex;
-        gap:4px;
-        overflow-x:auto;
-        -webkit-overflow-scrolling:touch;
-        padding:0 0 0 12px;
-        scrollbar-width:none;
+        display:flex;gap:6px;overflow-x:auto;
+        -webkit-overflow-scrolling:touch;scrollbar-width:none;
+        padding:2px 0 4px;
     }
     .acc-nav::-webkit-scrollbar{display:none}
-    .acc-nav li{margin-bottom:0;flex-shrink:0}
-    .acc-nav a{padding:8px 12px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
-    .acc-nav i{font-size:12px}
-    .acc-stats{grid-template-columns:repeat(3,1fr);gap:10px}
-    .acc-stat{padding:16px 12px}
-    .acc-stat-n{font-size:26px}
-    .acc-stat-icone{font-size:17px;margin-bottom:6px}
-    .page-hero{padding:36px 20px}
-    .page-hero h1{font-size:28px}
-    .acc-titre{font-size:22px}
-    .acc-bloc{padding:18px 14px}
-    .acc-bloc-header{flex-direction:column;align-items:flex-start;gap:8px}
-    .cmd-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -14px;padding:0 14px 8px}
-    .cmd-table{min-width:520px}
-    .cmd-table th,.cmd-table td{padding:10px 8px;font-size:12px}
+    .acc-nav li{margin:0;flex-shrink:0}
+    .acc-nav a{
+        padding:8px 14px;font-size:11px;white-space:nowrap;
+        border-radius:8px;gap:6px;
+    }
+    .acc-nav a i{font-size:11px}
+    .acc-nav-btn{
+        padding:8px 14px;font-size:11px;white-space:nowrap;
+        border-radius:8px;gap:6px;margin-top:0;
+        border-top:none;padding-top:8px;
+    }
+
+    /* Stats : 3 colonnes compactes */
+    .acc-stats{grid-template-columns:repeat(3,1fr);gap:8px}
+    .acc-stat{padding:14px 8px;border-radius:12px}
+    .acc-stat-icone{font-size:16px;margin-bottom:6px}
+    .acc-stat-n{font-size:22px}
+    .acc-stat-l{font-size:9px}
+
+    .acc-titre{font-size:20px}
+    .acc-sous{font-size:12px;margin-bottom:16px}
+
+    /* Commandes */
+    .acc-bloc{padding:16px 12px;border-radius:12px}
+    .acc-bloc-header{margin-bottom:12px;padding-bottom:10px}
+    .acc-bloc-titre{font-size:16px}
+    .cmd-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -12px;padding:0 12px 6px}
+    .cmd-table{min-width:440px}
+    .cmd-table th{font-size:9px;padding:6px 8px}
+    .cmd-table td{padding:10px 8px;font-size:12px}
     .statut{font-size:9px;padding:3px 8px}
-    .acc-cta{flex-direction:column;text-align:center;padding:20px 16px}
+
+    /* CTA */
+    .acc-cta{flex-direction:column;text-align:center;padding:20px 16px;border-radius:12px}
     .acc-cta-txt h3{font-size:17px}
     .acc-cta .btn{width:100%;justify-content:center}
+
+    .cmd-link{font-size:11px}
 }
-@media(max-width:400px){
-    .account-sidebar{grid-template-columns:1fr;gap:12px}
-    .acc-avatar{border-right:none;border-bottom:1px solid var(--peche);padding-bottom:12px;padding-right:0;text-align:center}
-    .acc-nav{padding:0;justify-content:center;flex-wrap:wrap}
+
+@media(max-width:380px){
     .acc-stats{grid-template-columns:1fr 1fr}
-}
-@media(max-width:400px){
-    .acc-stats{grid-template-columns:1fr}
+    .acc-stat:last-child{grid-column:1/-1}
 }
 </style>
 @endpush
@@ -151,29 +184,29 @@
     <aside class="account-sidebar">
         <div class="acc-avatar">
             @if(auth()->user()->avatar)
-                <img src="{{ auth()->user()->avatar_url }}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--peche2);margin:0 auto 12px;display:block" alt="">
+                <img src="{{ auth()->user()->avatar_url }}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--peche2)" alt="">
             @else
                 <div class="acc-initiale">{{ strtoupper(substr(auth()->user()->prenom ?? auth()->user()->name ?? 'C', 0, 1)) }}</div>
             @endif
-            <div class="acc-nom">{{ auth()->user()->full_name }}</div>
-            <div class="acc-email">{{ auth()->user()->email }}</div>
+            <div>
+                <div class="acc-nom">{{ auth()->user()->full_name }}</div>
+                <div class="acc-email">{{ auth()->user()->email }}</div>
+            </div>
         </div>
         <ul class="acc-nav">
             <li><a href="{{ route('account.index') }}" class="on"><i class="fas fa-home"></i> Tableau de bord</a></li>
-            <li><a href="{{ route('account.orders') }}"><i class="fas fa-box"></i> Mes commandes</a></li>
-            <li><a href="{{ route('wishlist.index') }}"><i class="far fa-heart"></i> Ma wishlist</a></li>
-            <li><a href="{{ route('account.addresses') }}"><i class="fas fa-map-marker-alt"></i> Mes adresses</a></li>
-            <li><a href="{{ route('account.profile') }}"><i class="far fa-user"></i> Mon profil</a></li>
+            <li><a href="{{ route('account.orders') }}"><i class="fas fa-box"></i> Commandes</a></li>
+            <li><a href="{{ route('wishlist.index') }}"><i class="far fa-heart"></i> Wishlist</a></li>
+            <li><a href="{{ route('account.addresses') }}"><i class="fas fa-map-marker-alt"></i> Adresses</a></li>
+            <li><a href="{{ route('account.profile') }}"><i class="far fa-user"></i> Profil</a></li>
             <li><a href="{{ route('account.notifications') }}"><i class="fas fa-bell"></i> Notifications</a></li>
-            <li>
-                <form action="{{ route('auth.logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="acc-nav-btn deconnecter" style="width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:9px;color:var(--rose-v);font-size:13px;font-family:var(--f-corps);margin-top:16px;padding-top:14px;border-top:1px solid var(--peche)">
-                        <i class="fas fa-sign-out-alt" style="width:16px;text-align:center"></i> Déconnexion
-                    </button>
-                </form>
-            </li>
         </ul>
+        <form action="{{ route('auth.logout') }}" method="POST" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--peche)">
+            @csrf
+            <button type="submit" class="acc-nav-btn">
+                <i class="fas fa-sign-out-alt"></i> Déconnexion
+            </button>
+        </form>
     </aside>
 
     <div class="account-content">

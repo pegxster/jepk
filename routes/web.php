@@ -20,6 +20,25 @@ use App\Http\Controllers\Admin\MediaController as AdminMedia;
 use App\Http\Controllers\Admin\UserController as AdminUser;
 use App\Http\Controllers\Admin\AuthController as AdminAuth;
 use App\Http\Controllers\Admin\SlideController as AdminSlide;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+/* ═══════════════════════════════════════════════════════
+   UPLOADS — servir images depuis disque persistant
+═══════════════════════════════════════════════════════ */
+Route::get('/uploads/{path}', function (string $path) {
+    $fullPath = uploads_disk_path($path);
+
+    if (!file_exists($fullPath) || !is_file($fullPath)) {
+        abort(404);
+    }
+
+    $mime = mime_content_type($fullPath) ?: 'application/octet-stream';
+
+    return response()->file($fullPath, [
+        'Content-Type'  => $mime,
+        'Cache-Control' => 'public, max-age=604800, immutable',
+    ]);
+})->where('path', '.+')->name('uploads.show');
 
 /* ═══════════════════════════════════════════════════════
    PAGES PUBLIQUES

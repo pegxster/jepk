@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -72,9 +71,7 @@ class ProductController extends Controller
         $images = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
-                $filename = 'prod-' . Str::slug($data['name']) . '-' . time() . '-' . $index . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('assets/images/products'), $filename);
-                $images[] = 'assets/images/products/' . $filename;
+                $images[] = save_uploaded_file($image, 'products');
             }
         }
         $data['images'] = $images;
@@ -126,17 +123,19 @@ class ProductController extends Controller
 
         if (!empty($request->remove_images)) {
             foreach ($request->remove_images as $path) {
-                $fullPath = public_path($path);
-                if (file_exists($fullPath)) @unlink($fullPath);
+                if (str_starts_with($path, 'products/') || str_starts_with($path, 'categories/')) {
+                    delete_uploaded_file($path);
+                } else {
+                    $fullPath = public_path($path);
+                    if (file_exists($fullPath)) @unlink($fullPath);
+                }
                 $existingImages = array_filter($existingImages, fn($img) => $img !== $path);
             }
         }
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $idx => $image) {
-                $filename = 'prod-' . Str::slug($data['name']) . '-' . time() . '-' . $idx . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('assets/images/products'), $filename);
-                $existingImages[] = 'assets/images/products/' . $filename;
+                $existingImages[] = save_uploaded_file($image, 'products');
             }
         }
         $data['images'] = array_values($existingImages);
@@ -149,7 +148,9 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         foreach ($product->images ?? [] as $image) {
-            if (str_starts_with($image, 'assets/images/products/')) {
+            if (str_starts_with($image, 'products/') || str_starts_with($image, 'categories/')) {
+                delete_uploaded_file($image);
+            } else {
                 $path = public_path($image);
                 if (file_exists($path)) @unlink($path);
             }

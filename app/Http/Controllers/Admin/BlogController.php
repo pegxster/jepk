@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
@@ -56,7 +55,7 @@ class BlogController extends Controller
         $data['reading_time'] = max(1, (int) ceil($wordCount / 200));
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images/blog', 'public');
+            $data['image'] = save_uploaded_file($request->file('image'), 'blog');
         }
 
         BlogPost::create($data);
@@ -94,9 +93,9 @@ class BlogController extends Controller
 
         if ($request->hasFile('image')) {
             if ($post->image) {
-                Storage::disk('public')->delete($post->image);
+                delete_uploaded_file($post->image);
             }
-            $data['image'] = $request->file('image')->store('images/blog', 'public');
+            $data['image'] = save_uploaded_file($request->file('image'), 'blog');
         }
 
         $post->update($data);
@@ -107,7 +106,7 @@ class BlogController extends Controller
     public function destroy(BlogPost $post)
     {
         if ($post->image) {
-            Storage::disk('public')->delete($post->image);
+            delete_uploaded_file($post->image);
         }
         $post->delete();
 

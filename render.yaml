@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: jepk-store
+    runtime: php
+    buildCommand: composer install --no-dev && php artisan view:clear && npm ci && npm run build
+    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: IMAGES_DISK_PATH
+        value: /var/data/uploads
+    disk:
+      name: uploads
+      mountPath: /var/data
+      sizeGB: 1

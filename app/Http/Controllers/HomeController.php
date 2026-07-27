@@ -40,8 +40,7 @@ class HomeController extends Controller
         ]);
 
         if ($request->hasFile('photo_inspiration')) {
-            $filename = 'inspiration-' . Str::slug($data['type_creation']) . '-' . time() . '.' . $request->file('photo_inspiration')->getClientOriginalExtension();
-            $request->file('photo_inspiration')->move(public_path('assets/images/sur-mesure'), $filename);
+            save_uploaded_file($request->file('photo_inspiration'), 'sur-mesure');
         }
 
         return back()->with('success', 'Demande envoyée ! Nous vous recontactons sous 24h. ✨');

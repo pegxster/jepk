@@ -19,28 +19,19 @@
 .notif-vide i{font-size:48px;color:var(--peche2);margin-bottom:16px;display:block}
 .notif-vide h3{font-family:var(--f-titre);font-size:22px;font-weight:300;color:var(--texte);margin-bottom:8px}
 .notif-vide p{font-size:13px;color:var(--texte2);max-width:360px;margin:0 auto}
-@media(max-width:900px){
-    .page-hero{padding:36px 20px}
-    .account-layout{grid-template-columns:1fr;padding:24px 16px;gap:20px}
-    .account-sidebar{
-        position:static;
-        display:grid;grid-template-columns:auto 1fr;gap:0;align-items:center;
-        padding:16px;border-radius:14px;
-    }
-    .account-sidebar .acc-nav{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 0 0 12px;scrollbar-width:none}
+@media(max-width:700px){
+    .page-hero{padding:32px 16px}
+    .page-hero h1{font-size:24px}
+    .account-layout{display:flex;flex-direction:column;gap:20px;padding:20px 14px}
+    .account-sidebar{position:static;border-radius:14px;padding:20px 16px}
+    .account-sidebar .acc-nav{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 4px}
     .account-sidebar .acc-nav::-webkit-scrollbar{display:none}
-    .account-sidebar .acc-nav li{margin-bottom:0;flex-shrink:0}
-    .account-sidebar .acc-nav a{padding:8px 12px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
-    .account-sidebar .acc-nav i{font-size:12px}
-}
-@media(max-width:600px){
-    .page-hero h1{font-size:28px}
-    .acc-titre{font-size:22px}
+    .account-sidebar .acc-nav li{margin:0;flex-shrink:0}
+    .account-sidebar .acc-nav a{padding:8px 14px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
+    .account-sidebar .acc-nav a i{font-size:11px}
+    .account-sidebar .acc-nav a.on{font-weight:500}
+    .acc-titre{font-size:20px}
     .notif-vide{padding:40px 16px}
-}
-@media(max-width:400px){
-    .account-sidebar{grid-template-columns:1fr}
-    .account-sidebar .acc-nav{justify-content:center;flex-wrap:wrap;padding:8px 0 0}
 }
 </style>
 @endpush

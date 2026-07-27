@@ -35,29 +35,21 @@
 .f-g .f-error{color:#e74c3c;font-size:11px;margin-top:4px}
 .alert-ok{background:#f0faf5;border:1px solid #a8d5be;color:#2d6a4f;padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:13px}
 .alert-err{background:#fff0f0;border:1px solid #f5baba;color:#c0392b;padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:13px}
-@media(max-width:900px){
-    .page-hero{padding:36px 20px}
-    .account-layout{grid-template-columns:1fr;padding:24px 16px;gap:20px}
-    .account-sidebar{
-        position:static;
-        display:grid;grid-template-columns:auto 1fr;gap:0;align-items:center;
-        padding:16px;border-radius:14px;
-    }
-    .account-sidebar .acc-nav{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 0 0 12px;scrollbar-width:none}
+@media(max-width:700px){
+    .page-hero{padding:32px 16px}
+    .page-hero h1{font-size:24px}
+    .account-layout{display:flex;flex-direction:column;gap:20px;padding:20px 14px}
+    .account-sidebar{position:static;border-radius:14px;padding:20px 16px}
+    .account-sidebar .acc-nav{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 4px}
     .account-sidebar .acc-nav::-webkit-scrollbar{display:none}
-    .account-sidebar .acc-nav li{margin-bottom:0;flex-shrink:0}
-    .account-sidebar .acc-nav a{padding:8px 12px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
-    .account-sidebar .acc-nav i{font-size:12px}
+    .account-sidebar .acc-nav li{margin:0;flex-shrink:0}
+    .account-sidebar .acc-nav a{padding:8px 14px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
+    .account-sidebar .acc-nav a i{font-size:11px}
+    .account-sidebar .acc-nav a.on{font-weight:500}
+    .acc-titre{font-size:20px}
     .f-row{grid-template-columns:1fr}
-}
-@media(max-width:600px){
-    .page-hero h1{font-size:28px}
     .profil-card{padding:20px 16px}
     .profil-avatar-zone{flex-direction:column;text-align:center}
-}
-@media(max-width:400px){
-    .account-sidebar{grid-template-columns:1fr}
-    .account-sidebar .acc-nav{justify-content:center;flex-wrap:wrap;padding:8px 0 0}
 }
 </style>
 @endpush

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -40,9 +39,7 @@ class CategoryController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
-            $filename = 'cat-' . Str::slug($data['name']) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path('assets/images/categories'), $filename);
-            $data['image'] = 'assets/images/categories/' . $filename;
+            $data['image'] = save_uploaded_file($request->file('image'), 'categories');
         }
 
         Category::create($data);
@@ -68,13 +65,10 @@ class CategoryController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
-            if ($category->image && str_starts_with($category->image, 'assets/images/categories/')) {
-                $oldPath = public_path($category->image);
-                if (file_exists($oldPath)) @unlink($oldPath);
+            if ($category->image && str_starts_with($category->image, 'categories/')) {
+                delete_uploaded_file($category->image);
             }
-            $filename = 'cat-' . Str::slug($data['name']) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path('assets/images/categories'), $filename);
-            $data['image'] = 'assets/images/categories/' . $filename;
+            $data['image'] = save_uploaded_file($request->file('image'), 'categories');
         }
 
         $category->update($data);
@@ -84,9 +78,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        if ($category->image && str_starts_with($category->image, 'assets/images/categories/')) {
-            $path = public_path($category->image);
-            if (file_exists($path)) @unlink($path);
+        if ($category->image && str_starts_with($category->image, 'categories/')) {
+            delete_uploaded_file($category->image);
         }
         $category->delete();
 

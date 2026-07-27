@@ -40,31 +40,22 @@
 .f-g input,.f-g select{width:100%;padding:12px 15px;border:1.5px solid var(--peche);border-radius:10px;font-family:var(--f-corps);font-size:13.5px;color:var(--texte);outline:none;background:var(--creme2);transition:border-color .3s}
 .f-g input:focus,.f-g select:focus{border-color:var(--rose-v);background:var(--blanc)}
 .f-g .f-error{color:#e74c3c;font-size:11px;margin-top:4px}
-@media(max-width:900px){
-    .page-hero{padding:36px 20px}
-    .account-layout{grid-template-columns:1fr;padding:24px 16px;gap:20px}
-    .account-sidebar{
-        position:static;
-        display:grid;grid-template-columns:auto 1fr;gap:0;align-items:center;
-        padding:16px;border-radius:14px;
-    }
-    .account-sidebar .acc-nav{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 0 0 12px;scrollbar-width:none}
+@media(max-width:700px){
+    .page-hero{padding:32px 16px}
+    .page-hero h1{font-size:24px}
+    .account-layout{display:flex;flex-direction:column;gap:20px;padding:20px 14px}
+    .account-sidebar{position:static;border-radius:14px;padding:20px 16px}
+    .account-sidebar .acc-nav{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 4px}
     .account-sidebar .acc-nav::-webkit-scrollbar{display:none}
-    .account-sidebar .acc-nav li{margin-bottom:0;flex-shrink:0}
-    .account-sidebar .acc-nav a{padding:8px 12px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
-    .account-sidebar .acc-nav i{font-size:12px}
+    .account-sidebar .acc-nav li{margin:0;flex-shrink:0}
+    .account-sidebar .acc-nav a{padding:8px 14px;font-size:11px;white-space:nowrap;border-radius:8px;gap:6px}
+    .account-sidebar .acc-nav a i{font-size:11px}
+    .account-sidebar .acc-nav a.on{font-weight:500}
+    .acc-titre{font-size:20px}
     .f-row{grid-template-columns:1fr}
-}
-@media(max-width:600px){
-    .page-hero h1{font-size:28px}
-    .acc-titre{font-size:22px}
     .form-card{padding:20px 16px}
     .addr-card{padding:18px}
     .addr-grid{grid-template-columns:1fr}
-}
-@media(max-width:400px){
-    .account-sidebar{grid-template-columns:1fr}
-    .account-sidebar .acc-nav{justify-content:center;flex-wrap:wrap;padding:8px 0 0}
 }
 </style>
 @endpush
