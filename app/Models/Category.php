@@ -11,7 +11,7 @@ class Category extends Model
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $collection = 'categories';
+    protected $table = 'categories';
 
     protected $fillable = [
         'name',

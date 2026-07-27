@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $connection = 'mongodb';
-    protected $collection = 'users';
+    protected $table = 'users';
 
     protected $fillable = [
         'name',

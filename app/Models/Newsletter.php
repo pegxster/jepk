@@ -7,7 +7,7 @@ use MongoDB\Laravel\Eloquent\Model;
 class Newsletter extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'newsletters';
+    protected $table = 'newsletters';
 
     protected $fillable = ['email', 'is_active', 'subscribed_at'];
     protected $casts = [

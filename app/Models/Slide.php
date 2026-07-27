@@ -10,7 +10,7 @@ class Slide extends Model
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $collection = 'slides';
+    protected $table = 'slides';
 
     protected $fillable = [
         'badge',

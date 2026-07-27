@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class Quartier extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'quartiers';
+    protected $table = 'quartiers';
 
     protected $fillable = [
         'nom',

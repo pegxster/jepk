@@ -10,7 +10,7 @@ class Order extends Model
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $collection = 'orders';
+    protected $table = 'orders';
 
     const STATUS_PENDING    = 'pending';
     const STATUS_CONFIRMED  = 'confirmed';
