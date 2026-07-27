@@ -43,7 +43,8 @@
 @media(max-width:700px){
     .page-hero{padding:32px 16px}
     .page-hero h1{font-size:24px}
-    .account-layout{display:flex;flex-direction:column;gap:20px;padding:20px 14px}
+    .account-layout{display:flex;flex-direction:column;align-items:stretch;gap:20px;padding:20px 14px}
+    .account-layout>*{min-width:0}
     .account-sidebar{position:static;border-radius:14px;padding:20px 16px}
     .account-sidebar .acc-nav{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 4px}
     .account-sidebar .acc-nav::-webkit-scrollbar{display:none}

@@ -104,9 +104,10 @@
     .page-hero h1{font-size:24px}
 
     .account-layout{
-        display:flex;flex-direction:column;gap:20px;
+        display:flex;flex-direction:column;align-items:stretch;gap:20px;
         padding:20px 14px;
     }
+    .account-layout>*{min-width:0}
 
     /* Sidebar : colonne verticale simple, pas de grid compliqué */
     .account-sidebar{

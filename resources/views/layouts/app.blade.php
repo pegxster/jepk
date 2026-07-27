@@ -766,8 +766,13 @@
             }
 
             .h-inner {
+                grid-template-columns: auto 1fr;
                 padding: 0 20px;
                 height: 100px;
+            }
+
+            .logo {
+                grid-column: 1;
             }
 
             .logo-img {
@@ -787,7 +792,9 @@
 
             .h-icons a {
                 font-size: 24px;
-                width: 50px;
+                flex: 1 1 0;
+                min-width: 0;
+                max-width: 50px;
                 height: 50px;
                 display: flex;
                 align-items: center;
@@ -803,7 +810,9 @@
             }
 
             .hamburger {
-                width: 50px;
+                flex: 1 1 0;
+                min-width: 0;
+                max-width: 50px;
                 height: 50px;
                 align-items: center;
                 justify-content: center;
