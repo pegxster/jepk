@@ -1130,7 +1130,7 @@
 <body>
 
     {{-- WhatsApp flottant --}}
-    <a href="https://wa.me/225153928572" target="_blank" class="wa-float" title="Nous écrire">
+    <a href="https://wa.me/2250153928572" target="_blank" class="wa-float" title="Nous écrire">
         <i class="fab fa-whatsapp"></i>
         <span class="wa-dot"></span>
         <span class="wa-tip">Nous écrire sur WhatsApp</span>
@@ -1220,7 +1220,7 @@
                     <a href="#"><i class="fab fa-pinterest"></i></a>
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://wa.me/225153928572"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/2250153928572"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div>
@@ -1240,7 +1240,7 @@
                     <li><a href="#">Retours</a></li>
                     <li><a href="{{ route('pages.faq') }}">FAQ</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="https://wa.me/225153928572">WhatsApp</a></li>
+                    <li><a href="https://wa.me/2250153928572">WhatsApp</a></li>
                 </ul>
             </div>
             <div>

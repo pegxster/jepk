@@ -591,7 +591,7 @@ $carouselSlides = isset($slides) && count($slides)
                 <li><i class="fas fa-check-circle"></i> Suivi par WhatsApp à chaque étape</li>
                 <li><i class="fas fa-check-circle"></i> Satisfaction garantie ou remboursée</li>
             </ul>
-            <a href="https://wa.me/225153928572" target="_blank" class="btn btn-rose">
+            <a href="https://wa.me/2250153928572" target="_blank" class="btn btn-rose">
                 <i class="fab fa-whatsapp"></i> Discuter sur WhatsApp
             </a>
         </div>
@@ -601,16 +601,23 @@ $carouselSlides = isset($slides) && count($slides)
             <form action="{{ route('home') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="type" value="sur_mesure">
+                @php $suMUser = auth()->user(); @endphp
+                @if($suMUser && $suMUser->full_name && $suMUser->telephone)
+                    {{-- Déjà cliente connue : pas besoin de redemander --}}
+                    <input type="hidden" name="nom" value="{{ $suMUser->full_name }}">
+                    <input type="hidden" name="telephone" value="{{ $suMUser->telephone }}">
+                @else
                 <div class="f-row">
                     <div class="f-g">
                         <label>Votre nom</label>
-                        <input type="text" name="nom" value="{{ old('nom', auth()->user()->full_name ?? '') }}" placeholder="Ex: Aminata Kouassi" required>
+                        <input type="text" name="nom" value="{{ old('nom', $suMUser->full_name ?? '') }}" placeholder="Ex: Aminata Kouassi" required>
                     </div>
                     <div class="f-g">
                         <label>Téléphone (WhatsApp)</label>
-                        <input type="tel" name="telephone" value="{{ old('telephone', auth()->user()->telephone ?? '') }}" placeholder="+225 07 00 00 00 00" required>
+                        <input type="tel" name="telephone" value="{{ old('telephone', $suMUser->telephone ?? '') }}" placeholder="+225 07 00 00 00 00" required>
                     </div>
                 </div>
+                @endif
                 <div class="f-row">
                     <div class="f-g">
                         <label>Type de création</label>
