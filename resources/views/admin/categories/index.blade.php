@@ -69,7 +69,7 @@
                     <td>{{ $cat->sort_order ?? 0 }}</td>
                     <td>
                         <div style="display:flex;gap:6px">
-                            <button onclick="editModal({{ $cat->toJson() }})" class="btn-act edit" title="Modifier">
+                            <button onclick="editModal({{ $cat->toJson() }}, {!! json_encode($cat->image ? product_image_url($cat->image) : '') !!})" class="btn-act edit" title="Modifier">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                             <form method="POST" action="{{ route('admin.categories.destroy', $cat) }}"
@@ -165,7 +165,7 @@ function openModal() {
     document.getElementById('catImagePreview').style.display = 'none';
     document.getElementById('modalOverlay').classList.add('show');
 }
-function editModal(cat) {
+function editModal(cat, imageUrl) {
     document.getElementById('categoryForm').action = `/admin/categories/${cat._id}`;
     document.getElementById('methodField').innerHTML = '<input type="hidden" name="_method" value="PUT">';
     document.getElementById('modalTitle').textContent = 'Modifier : ' + cat.name;
@@ -173,9 +173,9 @@ function editModal(cat) {
     document.getElementById('catDesc').value = cat.description || '';
     document.getElementById('catOrder').value = cat.sort_order || 0;
     document.getElementById('catActive').checked = cat.is_active;
-    if (cat.image) {
+    if (imageUrl) {
         const img = document.getElementById('catImagePreview');
-        img.src = '/storage/' + cat.image;
+        img.src = imageUrl;
         img.style.display = 'block';
     }
     document.getElementById('modalOverlay').classList.add('show');
