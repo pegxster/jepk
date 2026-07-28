@@ -603,6 +603,16 @@ $carouselSlides = isset($slides) && count($slides)
                 <input type="hidden" name="type" value="sur_mesure">
                 <div class="f-row">
                     <div class="f-g">
+                        <label>Votre nom</label>
+                        <input type="text" name="nom" value="{{ old('nom', auth()->user()->full_name ?? '') }}" placeholder="Ex: Aminata Kouassi" required>
+                    </div>
+                    <div class="f-g">
+                        <label>Téléphone (WhatsApp)</label>
+                        <input type="tel" name="telephone" value="{{ old('telephone', auth()->user()->telephone ?? '') }}" placeholder="+225 07 00 00 00 00" required>
+                    </div>
+                </div>
+                <div class="f-row">
+                    <div class="f-g">
                         <label>Type de création</label>
                         <select name="type_creation">
                             <option value="">Choisir…</option>

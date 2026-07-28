@@ -616,6 +616,13 @@
         <a href="{{ route('admin.orders.index') }}" class="nav-item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
             <i class="fa-solid fa-shopping-bag icon"></i> Commandes
         </a>
+        <a href="{{ route('admin.custom-orders.index') }}" class="nav-item {{ request()->routeIs('admin.custom-orders.*') ? 'active' : '' }}">
+            <i class="fa-solid fa-wand-magic-sparkles icon"></i> Demandes sur mesure
+            @php $nbNouvelles = \App\Models\CustomOrder::where('status', 'nouveau')->count(); @endphp
+            @if($nbNouvelles > 0)
+                <span style="margin-left:auto;background:#E8896A;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px">{{ $nbNouvelles }}</span>
+            @endif
+        </a>
 
         <span class="nav-section">Contenu</span>
         <a href="{{ route('admin.carrousel.index') }}" class="nav-item {{ request()->routeIs('admin.carrousel.*') ? 'active' : '' }}">

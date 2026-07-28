@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ProductController as AdminProduct;
 use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 use App\Http\Controllers\Admin\OrderController as AdminOrder;
+use App\Http\Controllers\Admin\CustomOrderController as AdminCustomOrder;
 use App\Http\Controllers\Admin\BlogController as AdminBlog;
 use App\Http\Controllers\Admin\MediaController as AdminMedia;
 use App\Http\Controllers\Admin\UserController as AdminUser;
@@ -226,6 +227,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('commandes',              [AdminOrder::class, 'index'])->name('orders.index');
     Route::get('commandes/{order}',      [AdminOrder::class, 'show'])->name('orders.show');
     Route::put('commandes/{order}/statut', [AdminOrder::class, 'updateStatus'])->name('orders.status');
+
+    // Demandes sur mesure
+    Route::get('sur-mesure',                    [AdminCustomOrder::class, 'index'])->name('custom-orders.index');
+    Route::get('sur-mesure/{customOrder}',      [AdminCustomOrder::class, 'show'])->name('custom-orders.show');
+    Route::put('sur-mesure/{customOrder}/statut', [AdminCustomOrder::class, 'updateStatus'])->name('custom-orders.status');
+    Route::delete('sur-mesure/{customOrder}',   [AdminCustomOrder::class, 'destroy'])->name('custom-orders.destroy');
 
     // Blog
     Route::resource('blog', AdminBlog::class)->parameters(['blog' => 'post']);
