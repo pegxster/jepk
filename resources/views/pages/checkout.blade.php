@@ -100,7 +100,7 @@
                 </div>
                 <div class="f-g"><label>Adresse de livraison</label><input type="text" name="adresse" placeholder="Ex: Rue L12, près du..." required></div>
                 <div class="f-row">
-                    <div class="f-g">
+                    <div class="f-g quartier-wrap">
                         <label>Quartier / Commune</label>
                         <input type="text" name="quartier" id="quartierInput" placeholder="Rechercher votre quartier..." autocomplete="off" required>
                         <div class="quartier-list" id="quartierList"></div>
