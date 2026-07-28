@@ -85,17 +85,6 @@
 .recap-info i{color:var(--rose-v);font-size:14px;flex-shrink:0}
 .payer-btn{width:100%;justify-content:center;margin-top:16px;border-radius:50px;
     padding:15px;font-size:11px;box-shadow:0 6px 24px rgba(201,112,128,.4)}
-/* ── Choix paiement ── */
-.pay-titre{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--texte2);margin:20px 0 10px}
-.pay-options{display:flex;flex-direction:column;gap:9px}
-.pay-opt{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1.5px solid var(--peche);
-    border-radius:12px;cursor:pointer;transition:var(--trans);background:var(--creme2)}
-.pay-opt.active{border-color:var(--rose-v);background:rgba(201,112,128,.06)}
-.pay-opt input[type=radio]{accent-color:var(--rose-v);width:15px;height:15px;flex-shrink:0}
-.pay-opt-logo{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;
-    justify-content:center;flex-shrink:0;overflow:hidden}
-.pay-opt-info strong{font-size:13px;font-weight:500;color:var(--texte);display:block}
-.pay-opt-info span{font-size:11px;color:var(--texte2)}
 
 @media(max-width:900px){
     .cart-layout{grid-template-columns:1fr;padding:24px 16px}
@@ -202,55 +191,14 @@
         <div class="recap-ligne"><span>Livraison</span><span>{{ $livraison == 0 ? 'Offerte ✓' : number_format($livraison,0,',',' ').' CFA' }}</span></div>
         <div class="recap-ligne total"><span>Total</span><span>{{ number_format($total+$livraison,0,',',' ') }} CFA</span></div>
 
-        {{-- Choix du moyen de paiement --}}
-        <p class="pay-titre">Moyen de paiement</p>
-        <div class="pay-options" id="pay-options">
-
-            {{-- Wave --}}
-            <label class="pay-opt active" for="pay-wave">
-                <input type="radio" name="payment_method" id="pay-wave" value="wave" checked>
-                <div class="pay-opt-logo" style="background:#1dc8f0">
-                    <svg viewBox="0 0 100 100" width="38" height="38" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="50" fill="#1dc8f0"/>
-                        <ellipse cx="50" cy="60" rx="22" ry="26" fill="#0b1b28"/>
-                        <ellipse cx="50" cy="64" rx="14" ry="18" fill="#ffffff"/>
-                        <circle cx="43" cy="46" r="4.5" fill="#ffffff"/>
-                        <circle cx="57" cy="46" r="4.5" fill="#ffffff"/>
-                        <circle cx="44" cy="46" r="2.2" fill="#0b1b28"/>
-                        <circle cx="58" cy="46" r="2.2" fill="#0b1b28"/>
-                        <polygon points="45,53 50,60 55,53" fill="#f39c12"/>
-                    </svg>
-                </div>
-                <div class="pay-opt-info">
-                    <strong>Wave Côte d'Ivoire (+225)</strong>
-                    <span>Paiement Mobile Money instantané</span>
-                </div>
-            </label>
-
-            {{-- À la livraison --}}
-            <label class="pay-opt" for="pay-livraison">
-                <input type="radio" name="payment_method" id="pay-livraison" value="livraison">
-                <div class="pay-opt-logo" style="background:var(--brun-d);display:flex;align-items:center;justify-content:center">
-                    <i class="fas fa-money-bill-wave" style="color:#fff;font-size:18px"></i>
-                </div>
-                <div class="pay-opt-info">
-                    <strong>Paiement à la livraison</strong>
-                    <span>Payez en espèces à la réception</span>
-                </div>
-            </label>
-
-        </div>
-
         <div class="recap-info" style="margin-top:14px"><i class="fas fa-shield-alt"></i> Transactions sécurisées</div>
         <div class="recap-info"><i class="fas fa-headset"></i> Support WhatsApp disponible</div>
+        <div class="recap-info"><i class="fas fa-lock"></i> Le moyen de paiement se choisit à l'étape suivante</div>
 
         @if($total > 0)
-            <form action="{{ route('checkout.index') }}" method="GET">
-                <input type="hidden" name="payment" id="selected-payment" value="wave">
-                <button type="submit" class="btn btn-rose payer-btn">
-                    <i class="fas fa-lock"></i> Passer commande
-                </button>
-            </form>
+            <a href="{{ route('checkout.index') }}" class="btn btn-rose payer-btn">
+                <i class="fas fa-lock"></i> Passer commande
+            </a>
         @else
             <a href="{{ route('shop.index') }}" class="btn btn-rose payer-btn">Voir la boutique</a>
         @endif
@@ -262,20 +210,6 @@
     // Barre de progression livraison
     document.querySelectorAll('.lp-fill').forEach(function(el) {
         el.style.width = (el.dataset.pct || 0) + '%';
-    });
-
-    // Sélection du moyen de paiement
-    var opts = document.querySelectorAll('.pay-opt');
-    var hiddenInput = document.getElementById('selected-payment');
-    opts.forEach(function(label) {
-        var radio = label.querySelector('input[type=radio]');
-        if (radio) {
-            radio.addEventListener('change', function() {
-                opts.forEach(function(l) { l.classList.remove('active'); });
-                label.classList.add('active');
-                if (hiddenInput) hiddenInput.value = radio.value;
-            });
-        }
     });
 </script>
 @endpush

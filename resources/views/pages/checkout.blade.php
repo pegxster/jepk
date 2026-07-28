@@ -118,7 +118,7 @@
                             <option>Autre (Zone UEMOA)</option>
                         </select>
                     </div>
-                    <div class="f-g"><label>Téléphone (+225)</label><input type="tel" name="telephone" placeholder="+225 07 00 00 00 00" required></div>
+                    <div class="f-g"><label>Téléphone (+225)</label><input type="tel" name="telephone" value="{{ auth()->user()->telephone ?? '' }}" placeholder="+225 07 00 00 00 00" required></div>
                 </div>
                 <div class="f-g"><label>Note pour le livreur (optionnel)</label><input type="text" name="note" placeholder="Précisions de repère, heure de passage…"></div>
             </div>
@@ -185,7 +185,7 @@
                     <label style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--texte2);display:block;margin-bottom:6px;font-weight:500">
                         <i class="fas fa-phone" style="color:var(--rose-v);margin-right:4px"></i> Numéro pour le paiement Wave (+225)
                     </label>
-                    <input type="tel" name="num_wave" placeholder="+225 07 00 00 00 00" style="width:100%;padding:10px 14px;border:1.5px solid var(--peche);border-radius:8px;font-family:var(--f-corps);font-size:13.5px;outline:none;background:var(--blanc)">
+                    <input type="tel" name="num_wave" value="{{ auth()->user()->telephone ?? '' }}" placeholder="+225 07 00 00 00 00" style="width:100%;padding:10px 14px;border:1.5px solid var(--peche);border-radius:8px;font-family:var(--f-corps);font-size:13.5px;outline:none;background:var(--blanc)">
                     <small style="display:block;font-size:11px;color:var(--texte2);margin-top:6px">
                         Un lien de paiement ou une demande Wave vous sera envoyée sur ce numéro.
                     </small>
