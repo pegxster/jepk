@@ -69,7 +69,7 @@
                     <td>{{ $cat->sort_order ?? 0 }}</td>
                     <td>
                         <div style="display:flex;gap:6px">
-                            <button onclick="editModal({{ $cat->toJson() }}, {!! json_encode($cat->image ? product_image_url($cat->image) : '') !!})" class="btn-act edit" title="Modifier">
+                            <button onclick="editModal({{ $cat->toJson() }}, {{ json_encode($cat->image ? product_image_url($cat->image) : '') }})" class="btn-act edit" title="Modifier">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                             <form method="POST" action="{{ route('admin.categories.destroy', $cat) }}"
