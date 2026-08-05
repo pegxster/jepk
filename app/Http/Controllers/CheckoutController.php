@@ -73,6 +73,11 @@ class CheckoutController extends Controller
             'payment_method'  => $request->input('payment_method', 'Wave / Mobile Money'),
             'payment_status'  => 'pending',
             'notes'           => $note,
+            'adresse'         => $adresse,
+            'quartier'        => $quartierNom,
+            'commune'         => $communeNom,
+            'ville'           => $villeNom,
+            'pays'            => $paysNom,
             'shipping_address'=> [
                 'name'        => $customerName,
                 'phone'       => $telephone,
