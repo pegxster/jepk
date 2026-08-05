@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start">
+<div class="admin-detail-layout">
 
     {{-- Détails --}}
     <div style="display:flex;flex-direction:column;gap:20px">
@@ -65,23 +65,32 @@
         </div>
 
         <div class="card">
-            <div class="card-header"><h2 class="card-title">Adresse de livraison</h2></div>
+            <div class="card-header"><h2 class="card-title">Lieu de livraison</h2></div>
             <div class="card-body" style="font-size:14px;line-height:1.8">
                 @if($addr = $order->shipping_address)
-                    <div>{{ $addr['name'] ?? '' }}</div>
-                    <div>{{ $addr['address'] ?? '' }}</div>
-                    <div>{{ $addr['city'] ?? '' }} {{ $addr['postal_code'] ?? '' }}</div>
-                    <div>{{ $addr['country'] ?? '' }}</div>
-                    @if(!empty($addr['phone']))<div>Tel: {{ $addr['phone'] }}</div>@endif
+                    <div style="font-weight:600;color:#3D2030">{{ $addr['name'] ?? $order->customer_name ?? '—' }}</div>
+                    <div><i class="fa-solid fa-location-dot" style="color:#C96880;margin-right:6px"></i> {{ $addr['adresse'] ?? $addr['address'] ?? '—' }}</div>
+                    @if(!empty($addr['quartier']))
+                        <div>Quartier : <strong>{{ $addr['quartier'] }}</strong> @if(!empty($addr['commune']) && $addr['commune'] !== $addr['quartier']) (Commune: {{ $addr['commune'] }}) @endif</div>
+                    @endif
+                    <div>Ville/Pays : {{ $addr['ville'] ?? $addr['city'] ?? 'Abidjan' }} @if(!empty($addr['pays']) || !empty($addr['country'])) ({{ $addr['pays'] ?? $addr['country'] }}) @endif</div>
+                    @if(!empty($addr['phone']) || !empty($order->customer_phone))
+                        <div style="margin-top:6px;font-size:13px"><i class="fa-solid fa-phone" style="color:#C96880;margin-right:6px"></i> Tel: <strong>{{ $addr['phone'] ?? $order->customer_phone }}</strong></div>
+                    @endif
+                    @if(!empty($addr['note']) || !empty($order->notes))
+                        <div style="margin-top:8px;padding:8px 12px;background:#F9F5F0;border-left:3px solid #C96880;border-radius:4px;font-size:12.5px;color:#5A4030">
+                            <i class="fa-solid fa-note-sticky" style="margin-right:4px"></i> Note livreur: {{ $addr['note'] ?? $order->notes }}
+                        </div>
+                    @endif
                 @else
                     <span style="color:#9A8070">Aucune adresse enregistrée</span>
                 @endif
             </div>
         </div>
 
-        @if($order->notes)
+        @if($order->notes && empty($addr['note']))
         <div class="card">
-            <div class="card-header"><h2 class="card-title">Notes</h2></div>
+            <div class="card-header"><h2 class="card-title">Notes client</h2></div>
             <div class="card-body" style="font-size:14px;color:#5A4030">{{ $order->notes }}</div>
         </div>
         @endif

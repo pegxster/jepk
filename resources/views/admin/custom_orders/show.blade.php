@@ -7,8 +7,17 @@
     </a>
 @endsection
 
+@push('styles')
+<style>
+.projet-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+@media(max-width: 600px) {
+    .projet-grid { grid-template-columns: 1fr; gap: 12px; }
+}
+</style>
+@endpush
+
 @section('content')
-<div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start">
+<div class="admin-detail-layout">
 
     {{-- Détails --}}
     <div style="display:flex;flex-direction:column;gap:20px">
@@ -16,7 +25,7 @@
         <div class="card">
             <div class="card-header"><h2 class="card-title">Le projet</h2></div>
             <div class="card-body" style="font-size:14px;line-height:1.8">
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+                <div class="projet-grid">
                     <div>
                         <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#9A8070;margin-bottom:4px">Type de création</div>
                         <div style="font-weight:600">{{ $customOrder->type_creation ?? '—' }}</div>

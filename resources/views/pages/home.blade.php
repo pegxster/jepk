@@ -197,28 +197,30 @@
 .mesure::before{
     content:'✦';position:absolute;font-size:500px;color:rgba(255,255,255,.18);
     top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;font-family:serif;
+    max-width:100%;
 }
 .mesure-in{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
 .mesure-txt .s-sous{text-align:left;max-width:none;margin:14px 0 26px}
 .mesure-liste{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:30px}
 .mesure-liste li{display:flex;align-items:center;gap:11px;font-size:13.5px;color:var(--brun-2)}
-.mesure-liste li i{color:var(--rose-v);width:15px}
+.mesure-liste li i{color:var(--rose-v);width:15px;flex-shrink:0}
 
 /* Formulaire */
 .form-card{
     background:var(--blanc);border-radius:18px;padding:42px 38px;
     box-shadow:var(--ombre);position:relative;overflow:hidden;
+    box-sizing:border-box;width:100%;
 }
 .form-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--peche),var(--rose-v),var(--lavande2))}
 .fc-titre{font-family:var(--f-titre);font-size:24px;font-weight:300;color:var(--texte);margin-bottom:4px}
 .fc-sous{font-size:13px;color:var(--texte2);margin-bottom:24px;line-height:1.7}
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.f-g{margin-bottom:14px}
+.f-g{margin-bottom:14px;box-sizing:border-box}
 .f-g label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--texte2);display:block;margin-bottom:6px;font-weight:500}
 .f-g input,.f-g select,.f-g textarea{
     width:100%;padding:12px 15px;border:1.5px solid var(--peche);border-radius:9px;
     font-family:var(--f-corps);font-size:13.5px;color:var(--texte);outline:none;
-    background:var(--creme2);transition:border-color .3s;resize:none;
+    background:var(--creme2);transition:border-color .3s;resize:none;box-sizing:border-box;
 }
 .f-g input:focus,.f-g select:focus,.f-g textarea:focus{border-color:var(--rose-v);background:var(--blanc)}
 .f-sub{width:100%;justify-content:center;margin-top:6px;border-radius:50px}
@@ -226,7 +228,7 @@
 .f-upload-zone{
     border:2px dashed var(--peche2);border-radius:12px;padding:22px 16px;
     text-align:center;cursor:pointer;transition:border-color .3s,background .3s;
-    background:var(--creme2);position:relative;
+    background:var(--creme2);position:relative;box-sizing:border-box;overflow:hidden;
 }
 .f-upload-zone:hover,.f-upload-zone.dragover{border-color:var(--rose-v);background:#fdf0f3}
 .f-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
@@ -307,7 +309,7 @@
 @media(max-width:900px){
     .qui-grid{grid-template-columns:1fr}
     .qui-imgs{display:none}
-    .mesure-in{grid-template-columns:1fr}
+    .mesure-in{grid-template-columns:1fr;gap:40px}
     .stats-in{grid-template-columns:repeat(2,1fr)}
     .temos-grid{grid-template-columns:1fr}
     .qui,.cats,.prods,.mesure,.temos,.blog-mini,.nwsl,.inspi{padding-left:24px;padding-right:24px}
@@ -327,11 +329,14 @@
     .cat-c{height:320px}
     .cat-nom{font-size:28px}
     .mesure{padding:60px 20px}
-    .mesure::before{font-size:280px}
+    .mesure::before{font-size:240px}
     .nwsl::before{font-size:260px}
-    .form-card{padding:28px 22px}
+    .form-card{padding:32px 24px}
     .blog-grid{grid-template-columns:1fr}
     .inspi-card:nth-child(1){min-height:300px;aspect-ratio:4/3}
+}
+@media(max-width:768px){
+    .f-row{grid-template-columns:1fr;gap:10px}
 }
 @media(max-width:600px){
     .prods-grid{grid-template-columns:1fr 1fr;gap:14px}
@@ -343,7 +348,6 @@
     .nwsl-form input{border-right:1.5px solid var(--peche);border-bottom:none;border-radius:12px 12px 0 0}
     .nwsl-form .btn{border-radius:0 0 12px 12px}
     .blog-grid,.inspi-grid{grid-template-columns:1fr}
-    .f-row{grid-template-columns:1fr}
     .carousel{min-height:420px}
     .stats-in{grid-template-columns:1fr 1fr}
     .stat-n{font-size:clamp(28px,4vw,40px)}
@@ -360,6 +364,11 @@
     .p-prix{font-size:14px}
     .car-scroll{display:none}
     .inspi-card:nth-child(1){min-height:220px}
+    .mesure{padding:40px 16px}
+    .mesure-txt .btn{width:100%;justify-content:center}
+    .form-card{padding:24px 18px;border-radius:14px}
+    .fc-titre{font-size:20px}
+    .fc-sous{font-size:12px;margin-bottom:18px}
 }
 </style>
 @endpush

@@ -1,6 +1,17 @@
 @extends('admin.layouts.app')
 @section('title', 'Demandes sur mesure')
 
+@push('styles')
+<style>
+@media(max-width: 600px) {
+    .search-bar { width: 100%; flex-direction: column; align-items: stretch; gap: 8px; }
+    .search-input-wrap { min-width: 100%; width: 100%; }
+    .search-bar select, .search-bar button, .search-bar a { width: 100%; justify-content: center; text-align: center; }
+    .table-wrap table { min-width: 650px; }
+}
+</style>
+@endpush
+
 @section('content')
 <div class="card">
     <div class="card-header">

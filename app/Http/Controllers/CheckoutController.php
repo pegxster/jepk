@@ -43,12 +43,27 @@ class CheckoutController extends Controller
 
         $user = auth()->user();
 
+        $prenom = $request->input('prenom', '');
+        $nom = $request->input('nom', '');
+        $customerName = trim($prenom . ' ' . $nom);
+        if (empty($customerName)) {
+            $customerName = $user?->full_name ?? $user?->name ?? 'Cliente JEKP';
+        }
+
+        $telephone = $request->input('telephone', $user?->telephone ?? '0700000000');
+        $adresse   = $request->input('adresse', 'Abidjan');
+        $quartierNom = $quartier->nom ?? $request->input('quartier');
+        $communeNom  = $quartier->commune ?? null;
+        $villeNom    = $request->input('ville', 'Abidjan');
+        $paysNom     = $request->input('pays', 'Côte d\'Ivoire');
+        $note        = $request->input('note');
+
         $order = Order::create([
             'order_number'    => 'JKP-' . strtoupper(Str::random(6)),
             'user_id'         => $user?->_id ?? null,
-            'customer_name'   => $request->input('nom', $user?->name ?? 'Cliente JEKP'),
+            'customer_name'   => $customerName,
             'customer_email'  => $user?->email ?? 'client@jekpstore.com',
-            'customer_phone'  => $request->input('telephone', '0700000000'),
+            'customer_phone'  => $telephone,
             'items'           => array_values($cart),
             'subtotal'        => $subtotal,
             'shipping_cost'   => $shipping,
@@ -57,11 +72,19 @@ class CheckoutController extends Controller
             'status'          => Order::STATUS_PENDING,
             'payment_method'  => $request->input('payment_method', 'Wave / Mobile Money'),
             'payment_status'  => 'pending',
+            'notes'           => $note,
             'shipping_address'=> [
-                'adresse'  => $request->input('adresse', 'Abidjan'),
-                'quartier' => $quartier->nom ?? $request->input('quartier'),
-                'commune'  => $quartier->commune ?? null,
-                'ville'    => $request->input('ville', 'Abidjan'),
+                'name'        => $customerName,
+                'phone'       => $telephone,
+                'adresse'     => $adresse,
+                'address'     => $adresse,
+                'quartier'    => $quartierNom,
+                'commune'     => $communeNom,
+                'city'        => $villeNom,
+                'ville'       => $villeNom,
+                'pays'        => $paysNom,
+                'country'     => $paysNom,
+                'note'        => $note,
             ],
         ]);
 

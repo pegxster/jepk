@@ -101,13 +101,28 @@
             </div>
         </div>
 
-        @if($order->shipping_address)
+        @if($addr = $order->shipping_address)
         <div class="detail-card">
-            <h3><i class="fas fa-map-marker-alt"></i> Adresse de livraison</h3>
+            <h3><i class="fas fa-map-marker-alt"></i> Lieu de livraison</h3>
             <div class="info-grid">
-                <div class="info-item"><label>Nom</label><span>{{ $order->shipping_address['name'] ?? '—' }}</span></div>
-                <div class="info-item"><label>Téléphone</label><span>{{ $order->shipping_address['phone'] ?? '—' }}</span></div>
-                <div class="info-item" style="grid-column:1/-1"><label>Adresse</label><span>{{ $order->shipping_address['address'] ?? '—' }}, {{ $order->shipping_address['city'] ?? '' }} {{ $order->shipping_address['postal_code'] ?? '' }}</span></div>
+                <div class="info-item"><label>Destinataire</label><span>{{ $addr['name'] ?? $order->customer_name ?? '—' }}</span></div>
+                <div class="info-item"><label>Téléphone</label><span>{{ $addr['phone'] ?? $order->customer_phone ?? '—' }}</span></div>
+                <div class="info-item" style="grid-column:1/-1">
+                    <label>Adresse complète</label>
+                    <span>
+                        {{ $addr['adresse'] ?? $addr['address'] ?? 'Abidjan' }}
+                        @if(!empty($addr['quartier'])) · {{ $addr['quartier'] }} @endif
+                        @if(!empty($addr['commune']) && $addr['commune'] !== ($addr['quartier'] ?? '')) ({{ $addr['commune'] }}) @endif
+                        @if(!empty($addr['ville']) || !empty($addr['city'])) · {{ $addr['ville'] ?? $addr['city'] }} @endif
+                        @if(!empty($addr['pays']) || !empty($addr['country'])) ({{ $addr['pays'] ?? $addr['country'] }}) @endif
+                    </span>
+                </div>
+                @if(!empty($addr['note']) || !empty($order->notes))
+                <div class="info-item" style="grid-column:1/-1">
+                    <label>Instructions pour le livreur</label>
+                    <span style="font-style:italic;color:var(--texte2)"><i class="fas fa-sticky-note" style="color:var(--rose-v);margin-right:4px"></i> {{ $addr['note'] ?? $order->notes }}</span>
+                </div>
+                @endif
             </div>
         </div>
         @endif
