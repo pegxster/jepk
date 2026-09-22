@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $product->name . ' — JEKP Store')
+@section('title', $product->name . ' — JEPK Store')
 
 @push('styles')
 <style>
@@ -121,7 +121,7 @@
     <div class="breadcrumb">
         <a href="{{ route('home') }}">Accueil</a>
         <i class="fas fa-chevron-right" style="font-size:9px"></i>
-        <a href="{{ route('shop.index') }}">Boutique</a>
+        <a href="{{ route('shop.index') }}">Catalogue</a>
         @if($product->category_name)
         <i class="fas fa-chevron-right" style="font-size:9px"></i>
         <a href="{{ route('categories.index') }}">{{ $product->category_name }}</a>
@@ -177,15 +177,6 @@
             @endif
         </div>
 
-        {{-- Stock --}}
-        @if(($product->stock ?? 0) <= 0)
-            <div class="stock-badge stock-out"><span class="stock-dot dot-out"></span> Rupture de stock</div>
-        @elseif($product->stock <= 5)
-            <div class="stock-badge stock-low"><span class="stock-dot dot-low"></span> Plus que {{ $product->stock }} en stock</div>
-        @else
-            <div class="stock-badge stock-ok"><span class="stock-dot dot-ok"></span> En stock</div>
-        @endif
-
         {{-- Description --}}
         @if($product->description)
         <p class="p-desc">{{ $product->description }}</p>
@@ -215,44 +206,37 @@
         </div>
         @endif
 
-        {{-- Ajout au panier --}}
-        @if(($product->stock ?? 0) > 0)
-        <form action="{{ route('cart.add') }}" method="POST">
-            @csrf
-            <input type="hidden" name="product_id" value="{{ $product->_id }}">
-            <div class="add-row">
-                <div class="qty-ctrl">
-                    <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
-                    <input type="number" name="quantity" id="qtyInput" class="qty-input" value="1" min="1" max="{{ $product->stock ?? 99 }}">
-                    <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
-                </div>
-                <button type="submit" class="btn btn-rose btn-cart">
-                    <i class="fas fa-shopping-bag"></i> Ajouter au panier
+        {{-- CTA Commander --}}
+        @php
+            $waMsg = urlencode("Bonjour JEPK 👋\nJe suis intéressée par : *{$product->name}*\n{$product->description}\nPouvez-vous me donner plus d'informations ?");
+            $waUrl = "https://wa.me/2250153928572?text={$waMsg}";
+            $productId = $product->_id ?? $product->id ?? null;
+        @endphp
+        <div class="add-row" style="margin-top:28px;flex-direction:column;gap:12px">
+            {{-- Bouton principal : ajouter au panier --}}
+            @if($productId)
+            <form action="{{ route('cart.add') }}" method="POST" style="width:100%">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $productId }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn btn-rose btn-cart" style="width:100%;justify-content:center;padding:16px 24px;border-radius:50px;font-size:14px">
+                    <i class="fas fa-shopping-bag" style="font-size:16px"></i> Commander sur le site
                 </button>
-                <button type="button" class="btn-wish" title="Ajouter à ma wishlist">
-                    <i class="far fa-heart"></i>
-                </button>
-            </div>
-        </form>
-        @else
-        <button class="btn btn-outline-rose btn-cart" disabled style="opacity:.5;cursor:not-allowed;margin-top:28px">
-            <i class="fas fa-ban"></i> Produit indisponible
-        </button>
-        @endif
-
-        @if(session('success'))
-        <div style="background:#f0faf5;border:1px solid #a8d5be;color:#2d6a4f;padding:12px 16px;border-radius:10px;margin-top:14px;font-size:13px">
-            <i class="fas fa-check-circle"></i> {{ session('success') }}
+            </form>
+            @endif
+            {{-- Bouton secondaire : discuter sur WhatsApp --}}
+            <a href="{{ $waUrl }}" target="_blank" rel="noopener" class="btn btn-cart" style="width:100%;justify-content:center;background:transparent;border:1.5px solid #25d366;color:#128c3e;border-radius:50px;padding:14px 24px;gap:8px">
+                <i class="fab fa-whatsapp" style="font-size:16px;color:#25d366"></i> Discuter / Questions
+            </a>
         </div>
-        @endif
 
         {{-- Méta infos --}}
         <div class="prod-meta">
-            <div class="meta-row"><i class="fas fa-truck"></i><span><strong>Livraison</strong> offerte dès 70 000 F CFA d'achat</span></div>
-            <div class="meta-row"><i class="fas fa-undo"></i><span><strong>Retours</strong> sous 14 jours</span></div>
-            <div class="meta-row"><i class="fas fa-shield-alt"></i><span><strong>Paiement</strong> 100% sécurisé</span></div>
+            <div class="meta-row"><i class="fas fa-hand-sparkles"></i><span><strong>Fait main</strong> — chaque pièce est unique et confectionnée avec soin</span></div>
+            <div class="meta-row"><i class="fas fa-ruler-combined"></i><span><strong>Sur mesure</strong> — tailles et couleurs adaptables selon vos préférences</span></div>
+            <div class="meta-row"><i class="fas fa-clock"></i><span><strong>Délai</strong> — réalisé à la commande, délai communiqué lors de l'échange</span></div>
             @if(!empty($product->tags))
-            <div class="meta-row"><i class="fas fa-tag"></i><span><strong>Tags :</strong> {{ implode(', ', $product->tags) }}</span></div>
+            <div class="meta-row"><i class="fas fa-tag"></i><span><strong>Catégorie :</strong> {{ implode(', ', $product->tags) }}</span></div>
             @endif
         </div>
 
@@ -273,9 +257,9 @@
             </div>
             <div class="accord-item">
                 <button class="accord-btn" onclick="toggleAccord(this)">
-                    Livraison & Retours <i class="fas fa-chevron-down"></i>
+                    Commande & Délai <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="accord-body">Livraison offerte dès 60 000 CFA d'achat. Expédition sous 2–3 jours ouvrés. Retours acceptés sous 14 jours après réception — article en état d'origine. Contactez-nous via WhatsApp pour tout échange.</div>
+                <div class="accord-body">Chaque pièce est réalisée à la commande, spécialement pour vous. Contactez-nous via WhatsApp pour confirmer votre commande, choisir vos tailles et coloris, et obtenir un délai de réalisation estimé. Paiement à convenir lors de l'échange.</div>
             </div>
         </div>
         @endif

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="x-auth" content="{{ auth()->check() ? '1' : '0' }}">
-    <title>@yield('title', 'JEKP Store — Créations Artisanales')</title>
+    <title>@yield('title', 'JEPK Store — Créations Artisanales au Crochet')</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/images/jepklogo.png') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/jepklogo.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* ================================================================
-   JEKP STORE — Design Féminin Ultra-Doux 2024
+   JEPK STORE — Design Féminin Ultra-Doux
    Palette : Rose poudré · Lavande · Pêche · Blanc cassé · Vieux rose
    ================================================================ */
         :root {
@@ -61,7 +61,10 @@
         }
 
         html {
-            scroll-behavior: smooth
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         body {
@@ -71,6 +74,8 @@
             font-weight: 300;
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         ::selection {
@@ -1137,13 +1142,13 @@
     </a>
 
     {{-- Barre annonce --}}
-    <div class="ann-bar">✦ Fait main, avec amour, en Côte d'Ivoire &nbsp;·&nbsp; Livraison offerte dès 70 000 F CFA &nbsp;·&nbsp; Sur-mesure disponible ✦</div>
+    <div class="ann-bar">✦ Fait main au crochet, avec amour, en Côte d'Ivoire &nbsp;·&nbsp; Commande sur WhatsApp &nbsp;·&nbsp; Tailles &amp; couleurs adaptables ✦</div>
 
     {{-- Header --}}
     <header id="header">
         <div class="h-inner">
             <nav class="nav-g">
-                <a href="{{ route('shop.index') }}" class="nav-a">Boutique</a>
+                <a href="{{ route('shop.index') }}" class="nav-a">Catalogue</a>
                 <a href="{{ route('categories.index') }}" class="nav-a">Collections</a>
                 <a href="{{ route('pages.atelier') }}" class="nav-a">L'Atelier</a>
             </nav>
@@ -1183,7 +1188,7 @@
     <div class="m-menu" id="m-menu">
         <button class="m-close" id="m-close"><i class="fas fa-times"></i></button>
         <a href="{{ route('home') }}"><i class="fas fa-home" style="margin-right:10px"></i> Accueil</a>
-        <a href="{{ route('shop.index') }}"><i class="fas fa-shopping-bag" style="margin-right:10px"></i> Boutique</a>
+        <a href="{{ route('shop.index') }}"><i class="fas fa-th-large" style="margin-right:10px"></i> Catalogue</a>
         <a href="{{ route('categories.index') }}"><i class="fas fa-th-large" style="margin-right:10px"></i> Collections</a>
         <a href="{{ route('pages.atelier') }}"><i class="fas fa-palette" style="margin-right:10px"></i> L'Atelier</a>
         <a href="{{ route('pages.blog') }}"><i class="fas fa-feather-alt" style="margin-right:10px"></i> Blog</a>
@@ -1253,7 +1258,7 @@
             </div>
         </div>
         <div class="f-bas">
-            <span>© {{ date('Y') }} JEKP Store — Tous droits réservés</span>
+            <span>© {{ date('Y') }} JEPK Store — Tous droits réservés</span>
             <span class="acc">♡ Fait avec amour</span>
         </div>
     </footer>

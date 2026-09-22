@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Boutique — JEKP Store')
+@section('title', 'Catalogue — JEPK Store')
 @push('styles')
 <style>
 /* ── Hero ── */
@@ -71,38 +71,39 @@
 .shop-sort:focus{border-color:var(--rose-v)}
 
 /* ── Grille produits ── */
-.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .p-carte{position:relative;background:var(--blanc);border-radius:var(--rayon);overflow:hidden;
-    box-shadow:var(--ombre-sm);transition:var(--trans)}
-.p-carte:hover{transform:translateY(-6px);box-shadow:var(--ombre)}
+    border:1px solid rgba(201,104,128,.1);
+    box-shadow:0 2px 12px rgba(90,48,64,.07);transition:var(--trans)}
+.p-carte:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(90,48,64,.14);border-color:rgba(201,104,128,.2)}
 .p-img{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--beige)}
-.p-img img{width:100%;height:100%;object-fit:cover;transition:transform .65s ease;display:block}
-.p-carte:hover .p-img img{transform:scale(1.07)}
+.p-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block}
+.p-carte:hover .p-img img{transform:scale(1.04)}
 .p-badge{position:absolute;top:11px;left:11px;font-size:9px;letter-spacing:2px;text-transform:uppercase;
-    padding:5px 13px;border-radius:50px;font-weight:500;z-index:2}
+    padding:5px 13px;border-radius:50px;font-weight:600;z-index:2}
 .b-n{background:var(--rose-v);color:var(--blanc)}.b-p{background:var(--lavande2);color:var(--blanc)}
 .p-act{position:absolute;top:11px;right:11px;display:flex;flex-direction:column;gap:7px;
-    opacity:0;transform:translateX(12px);transition:var(--trans);z-index:2}
+    opacity:0;transform:translateX(10px);transition:var(--trans);z-index:2}
 .p-carte:hover .p-act{opacity:1;transform:translateX(0)}
-.p-btn{width:38px;height:38px;background:var(--blanc);border:none;border-radius:50%;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--texte);
-    box-shadow:0 2px 12px rgba(90,48,64,.12);transition:var(--trans)}
-.p-btn:hover,.p-btn.active{background:var(--rose-v);color:var(--blanc);box-shadow:0 4px 16px rgba(201,112,128,.4)}
+.p-btn{width:36px;height:36px;background:var(--blanc);border:none;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--texte);
+    box-shadow:0 2px 10px rgba(90,48,64,.14);transition:var(--trans)}
+.p-btn:hover,.p-btn.active{background:var(--rose-v);color:var(--blanc)}
 .p-cart{position:absolute;bottom:0;left:0;right:0;
-    background:linear-gradient(0deg,rgba(90,48,64,.88),transparent);
-    padding:32px 14px 14px;transform:translateY(100%);transition:transform .38s ease;
+    background:linear-gradient(0deg,rgba(61,18,32,.9) 0%,rgba(90,48,64,.5) 60%,transparent);
+    padding:40px 12px 12px;transform:translateY(100%);transition:transform .35s ease;
     border-radius:0 0 var(--rayon) var(--rayon);z-index:2}
 .p-carte:hover .p-cart{transform:translateY(0)}
-.p-cart .btn{width:100%;justify-content:center;font-size:10px}
-.p-info{padding:16px}
-.p-cat{font-size:10px;color:var(--rose-v);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;display:block}
-.p-nom{font-family:var(--f-titre);font-size:18px;font-weight:400;color:var(--texte);
-    text-decoration:none;display:block;margin-bottom:6px;transition:color .3s;line-height:1.3}
+.p-cart .btn,.p-cart button,.p-cart form{width:100%;justify-content:center;font-size:10px}
+.p-cart button{border-radius:50px;padding:11px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.p-info{padding:14px 16px 16px}
+.p-cat{font-size:9px;color:var(--rose-v);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px;display:block;font-weight:500}
+.p-nom{font-family:var(--f-titre);font-size:17px;font-weight:400;color:var(--texte);
+    text-decoration:none;display:block;margin-bottom:8px;transition:color .3s;line-height:1.25}
 .p-nom:hover{color:var(--rose-v)}
-.p-stars{color:var(--rose-p);font-size:11px;letter-spacing:1px;margin-bottom:7px;display:block}
-.p-prix-l{display:flex;align-items:center;gap:9px}
-.p-prix{font-size:16px;font-weight:600;color:var(--brun-d)}
-.p-prix-b{font-size:12px;color:var(--texte2);text-decoration:line-through}
+.p-prix-l{display:flex;align-items:center;gap:8px}
+.p-prix{font-size:15px;font-weight:600;color:var(--brun-d)}
+.p-prix-b{font-size:11px;color:var(--texte2);text-decoration:line-through}
 
 /* ── Modal Vue Rapide (Quick View) ── */
 .qv-modal-overlay{
@@ -185,17 +186,17 @@
 @section('content')
 {{-- HERO --}}
 <div class="shop-hero">
-    <span class="s-label">JEKP Store</span>
-    <h1 class="s-titre">Notre <em>Boutique</em></h1>
+    <span class="s-label">JEPK Store</span>
+    <h1 class="s-titre">Notre <em>Catalogue</em></h1>
     <div class="hero-tags">
-        <span class="hero-tag"><i class="fas fa-leaf" style="margin-right:5px;color:var(--rose-v)"></i> 100% Artisanal</span>
-        <span class="hero-tag"><i class="fas fa-truck" style="margin-right:5px;color:var(--rose-v)"></i> Livraison offerte dès 70 000 F CFA</span>
-        <span class="hero-tag"><i class="fas fa-undo" style="margin-right:5px;color:var(--rose-v)"></i> Retours 14 jours</span>
+        <span class="hero-tag"><i class="fas fa-hand-sparkles" style="margin-right:5px;color:var(--rose-v)"></i> 100% Fait main au crochet</span>
+        <span class="hero-tag"><i class="fas fa-ruler-combined" style="margin-right:5px;color:var(--rose-v)"></i> Tailles &amp; couleurs adaptables</span>
+        <span class="hero-tag"><i class="fab fa-whatsapp" style="margin-right:5px;color:var(--rose-v)"></i> Commande via WhatsApp</span>
     </div>
     <div class="breadcrumb">
         <a href="{{ route('home') }}">Accueil</a>
         <i class="fas fa-chevron-right" style="font-size:9px"></i>
-        <span>Boutique</span>
+        <span>Catalogue</span>
     </div>
 </div>
 
@@ -222,29 +223,28 @@
                         <a href="javascript:void(0)"
                            class="{{ request('categorie', 'tous') === 'tous' ? 'on' : '' }}"
                            onclick="setCategoryFilter('tous')">
-                            Tout voir <span>{{ count($displayProducts) }}</span>
+                            Tout voir
                         </a>
                     </li>
                     @php
-                    $listCats = [
-                        ['nom' => 'Fils Rares',     'slug' => 'fils-rares'],
-                        ['nom' => 'Kits Signature', 'slug' => 'kits-signature'],
-                        ['nom' => 'Accessoires',     'slug' => 'accessoires'],
-                        ['nom' => 'Maison',          'slug' => 'maison'],
-                        ['nom' => 'Adulte',          'slug' => 'adulte'],
-                        ['nom' => 'Enfant',          'slug' => 'enfant'],
+                    /* Liste fixe des 17 catégories du catalogue JEPK */
+                    $catFixe = [
+                        'Robes','Tops','Boléros','Tenues Plage','Ensemble Hommes','Tenues Couple',
+                        'Chapeaux',"Sacs à Main",'Enfants','Sacs Trafoil','Sacs Customisés',
+                        "Sacs d'Ordinateur",'Bouquets de Fleurs','Miroirs Crochetés',
+                        'Chouchous','Porte-Clés','Barrettes',
                     ];
+                    /* On fusionne avec les noms de la DB si disponibles, sinon on garde la liste fixe */
+                    $catAffichees = $categories->count() > 0
+                        ? $categories->pluck('name')->toArray()
+                        : $catFixe;
                     @endphp
-                    @foreach(isset($categories) && count($categories) ? $categories : $listCats as $c)
-                    @php
-                        $cNom  = is_array($c) ? $c['nom']  : $c->name;
-                        $cSlug = is_array($c) ? $c['slug'] : ($c->slug ?? Str::slug($cNom));
-                        $isSel = request('categorie') === $cSlug || request('categorie') === $cNom;
-                    @endphp
+                    @foreach($catAffichees as $cNom)
+                    @php $isSel = request('categorie') === $cNom; @endphp
                     <li>
                         <a href="javascript:void(0)"
                            class="{{ $isSel ? 'on' : '' }}"
-                           onclick="setCategoryFilter('{{ $cSlug }}')">
+                           onclick="setCategoryFilter('{{ addslashes($cNom) }}')">
                             {{ $cNom }}
                         </a>
                     </li>
@@ -256,38 +256,64 @@
             <div class="sidebar-section">
                 <span class="sidebar-label">Prix maximum</span>
                 <input type="range" name="prix_max" class="prix-range" id="priceRange"
-                       min="10000" max="150000" step="5000"
-                       value="{{ request('prix_max', 150000) }}"
+                       min="500" max="60000" step="500"
+                       value="{{ request('prix_max', 60000) }}"
                        oninput="updatePriceLabel(this.value)"
                        onchange="document.getElementById('shopFilterForm').submit()">
                 <div class="prix-vals">
                     <span>0 F CFA</span>
-                    <span id="priceLabel">{{ number_format(request('prix_max', 150000), 0, ',', ' ') }} F CFA</span>
+                    <span id="priceLabel">{{ number_format(request('prix_max', 60000), 0, ',', ' ') }} F CFA</span>
                 </div>
             </div>
 
-            {{-- Couleurs --}}
+            {{-- Gamme de prix rapide --}}
             <div class="sidebar-section">
-                <span class="sidebar-label">Couleurs</span>
-                <div class="coul-liste">
-                    <div class="coul-item" style="background:#e8d5c8" title="Nude" onclick="toggleColorFilter(this)"></div>
-                    <div class="coul-item on" style="background:#c97080" title="Rose" onclick="toggleColorFilter(this)"></div>
-                    <div class="coul-item" style="background:#b8a4d4" title="Lavande" onclick="toggleColorFilter(this)"></div>
-                    <div class="coul-item" style="background:#8b5e3c" title="Camel" onclick="toggleColorFilter(this)"></div>
-                    <div class="coul-item" style="background:#f5f5f5;border:1px solid #ddd" title="Blanc" onclick="toggleColorFilter(this)"></div>
-                    <div class="coul-item" style="background:#3d2030" title="Brun" onclick="toggleColorFilter(this)"></div>
-                </div>
-            </div>
-
-            {{-- Matières --}}
-            <div class="sidebar-section">
-                <span class="sidebar-label">Matières</span>
+                <span class="sidebar-label">Gamme de prix</span>
                 <ul class="cat-liste">
-                    <li><a href="javascript:void(0)" onclick="setCategoryFilter('merinos')">Laine Mérinos</a></li>
-                    <li><a href="javascript:void(0)" onclick="setCategoryFilter('alpaga')">Alpaga</a></li>
-                    <li><a href="javascript:void(0)" onclick="setCategoryFilter('mohair')">Mohair & Soie</a></li>
-                    <li><a href="javascript:void(0)" onclick="setCategoryFilter('coton')">Coton Bio</a></li>
+                    <li><a href="javascript:void(0)" onclick="setMaxPrice(5000)"
+                           class="{{ request('prix_max') == 5000 ? 'on' : '' }}">
+                        Moins de 5 000 F
+                    </a></li>
+                    <li><a href="javascript:void(0)" onclick="setMaxPrice(15000)"
+                           class="{{ request('prix_max') == 15000 ? 'on' : '' }}">
+                        Jusqu'à 15 000 F
+                    </a></li>
+                    <li><a href="javascript:void(0)" onclick="setMaxPrice(30000)"
+                           class="{{ request('prix_max') == 30000 ? 'on' : '' }}">
+                        Jusqu'à 30 000 F
+                    </a></li>
+                    <li><a href="javascript:void(0)" onclick="setMaxPrice(60000)"
+                           class="{{ !request('prix_max') || request('prix_max') == 60000 ? 'on' : '' }}">
+                        Tout afficher
+                    </a></li>
                 </ul>
+            </div>
+
+            {{-- Info personnalisation --}}
+            <div class="sidebar-section" style="border-bottom:none;padding-bottom:0">
+                <span class="sidebar-label">Couleurs & Tailles</span>
+                <div style="background:linear-gradient(135deg,var(--peche),var(--creme2));border-radius:12px;padding:14px 16px">
+                    <div style="font-size:12px;color:var(--texte);line-height:1.7;margin-bottom:10px">
+                        <i class="fas fa-palette" style="color:var(--rose-v);margin-right:6px"></i>
+                        <strong>Toutes couleurs</strong> disponibles sur commande<br>
+                        <i class="fas fa-ruler" style="color:var(--rose-v);margin-right:6px"></i>
+                        <strong>Toutes tailles</strong> — S, M, L, XL sur mesure
+                    </div>
+                    <a href="https://wa.me/2250153928572?text={{ urlencode('Bonjour JEPK 👋 Je voudrais personnaliser une commande, pouvez-vous m\'aider ?') }}"
+                       target="_blank" rel="noopener"
+                       style="display:flex;align-items:center;gap:7px;background:#25D366;color:#fff;font-size:11px;font-weight:700;padding:9px 14px;border-radius:9px;text-decoration:none;justify-content:center;letter-spacing:.5px">
+                        <i class="fab fa-whatsapp" style="font-size:14px"></i> Personnaliser via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            {{-- Matière --}}
+            <div class="sidebar-section">
+                <span class="sidebar-label">Matière</span>
+                <div style="display:flex;align-items:center;gap:9px;padding:10px 12px;background:var(--peche);border-radius:10px">
+                    <i class="fas fa-hand-sparkles" style="color:var(--rose-v);font-size:13px;flex-shrink:0"></i>
+                    <span style="font-size:12.5px;color:var(--texte2);line-height:1.5">Laine au crochet — 100% fait main en Côte d'Ivoire</span>
+                </div>
             </div>
         </form>
     </aside>
@@ -316,14 +342,14 @@
             @php
                 $pObj   = is_array($p) ? (object)$p : $p;
                 $pId    = $pObj->_id ?? $pObj->id ?? 'p'.rand(10,99);
-                $pNom   = $pObj->name ?? $pObj->nom ?? 'Création JEKP';
+                $pNom   = $pObj->name ?? $pObj->nom ?? 'Création JEPK';
                 $pSlug  = $pObj->slug ?? Str::slug($pNom);
                 $pCat   = $pObj->category_name ?? $pObj->cat ?? ($pObj->category->name ?? 'Artisanal');
                 $pPrice = $pObj->sale_price ?? $pObj->price ?? $pObj->prix ?? 15000;
                 $pOldP  = isset($pObj->sale_price) && $pObj->sale_price ? $pObj->price : ($pObj->anc ?? null);
                 $pBadge = $pObj->badge ?? null;
                 $pImg   = product_image_url($pObj->images[0] ?? $pObj->image ?? $pObj->img ?? null);
-                $pDesc  = $pObj->description ?? 'Une création artisanale unique faite à la main avec amour dans nos ateliers JEKP.';
+                $pDesc  = $pObj->description ?? 'Une création artisanale unique faite à la main avec amour en Côte d\'Ivoire.';
             @endphp
 
             <div class="p-carte">
@@ -349,29 +375,39 @@
                         </button>
                     </div>
 
-                    {{-- Bouton d'ajout au panier sur hover --}}
+                    {{-- Bouton Ajouter au panier --}}
+                    @php $isDbProduct = !is_array($p) && isset($pObj->_id); @endphp
                     <div class="p-cart">
+                        @if($isDbProduct)
                         <form action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $pId }}">
                             <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class="btn btn-blanc" style="width:100%">
-                                <i class="fas fa-shopping-bag"></i> Ajouter au panier
+                            <button type="submit" class="btn btn-blanc" style="width:100%;justify-content:center">
+                                <i class="fas fa-shopping-bag"></i> Commander
                             </button>
                         </form>
+                        @else
+                        @php $waTextCard = urlencode("Bonjour JEPK 👋\nJe suis intéressée par : *{$pNom}*\n{$pDesc}\nPouvez-vous me donner plus d'informations ?"); @endphp
+                        <a href="https://wa.me/2250153928572?text={{ $waTextCard }}" target="_blank" rel="noopener" class="btn btn-blanc" style="width:100%;justify-content:center">
+                            <i class="fab fa-whatsapp"></i> Commander
+                        </a>
+                        @endif
                     </div>
                 </div>
 
                 <div class="p-info">
                     <span class="p-cat">{{ $pCat }}</span>
                     <a href="{{ route('shop.show', $pSlug) }}" class="p-nom">{{ $pNom }}</a>
-                    <span class="p-stars">★★★★★</span>
-                    <div class="p-prix-l">
+                    <div class="p-prix-l" style="margin-top:6px">
                         <span class="p-prix">{{ number_format($pPrice, 0, ',', ' ') }} F CFA</span>
                         @if($pOldP)
                             <span class="p-prix-b">{{ is_numeric($pOldP) ? number_format((float)$pOldP, 0, ',', ' ') : $pOldP }} F CFA</span>
                         @endif
                     </div>
+                    <span style="font-size:10px;color:var(--texte2);letter-spacing:.5px;margin-top:4px;display:block">
+                        <i class="fas fa-hand-sparkles" style="color:var(--rose-v);margin-right:4px;font-size:9px"></i>Fait main · Sur commande
+                    </span>
                 </div>
             </div>
             @empty
@@ -411,21 +447,15 @@
                 <span class="qv-prix-b" id="qvOldPrix"></span>
             </div>
             <p class="qv-desc" id="qvDesc">Description du produit...</p>
-            <div class="qv-stock">
-                <span class="qv-stock-dot"></span> En stock · Expédié sous 24h
+            <div class="qv-stock" style="color:var(--texte2);background:var(--peche);border-radius:50px;padding:6px 14px;display:inline-flex;align-items:center;gap:6px;font-size:11px;margin:10px 0">
+                <i class="fas fa-hand-sparkles" style="color:var(--rose-v)"></i> Fait main à la commande
             </div>
 
-            <form action="{{ route('cart.add') }}" method="POST">
-                @csrf
-                <input type="hidden" name="product_id" id="qvProductId" value="">
-                <div style="display:flex;gap:12px;align-items:center;margin-top:10px">
-                    <input type="number" name="quantity" value="1" min="1" max="99"
-                           style="width:70px;padding:12px;border:1.5px solid var(--peche);border-radius:9px;text-align:center;font-family:var(--f-corps);font-size:14px">
-                    <button type="submit" class="btn btn-rose" style="flex:1;justify-content:center">
-                        <i class="fas fa-shopping-bag"></i> Ajouter au panier
-                    </button>
-                </div>
-            </form>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+                <a id="qvWaBtn" href="https://wa.me/2250153928572" target="_blank" rel="noopener" class="btn btn-rose" style="justify-content:center">
+                    <i class="fab fa-whatsapp" style="font-size:16px"></i> Commander via WhatsApp
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -452,6 +482,14 @@ function applySort(val) {
     document.getElementById('shopFilterForm').submit();
 }
 
+// ── Gamme de prix rapide ──
+function setMaxPrice(val) {
+    const range = document.getElementById('priceRange');
+    if (range) range.value = val;
+    updatePriceLabel(val);
+    document.getElementById('shopFilterForm').submit();
+}
+
 // ── Mise à jour de l'étiquette prix ──
 function updatePriceLabel(val) {
     document.getElementById('priceLabel').innerText = parseInt(val).toLocaleString('fr-FR') + ' F CFA';
@@ -472,7 +510,10 @@ function openQuickView(nom, cat, prix, oldPrix, img, desc, id) {
     document.getElementById('qvOldPrix').innerText = oldPrix || '';
     document.getElementById('qvImg').src = img;
     document.getElementById('qvDesc').innerText = desc;
-    document.getElementById('qvProductId').value = id;
+
+    // Mettre à jour le lien WhatsApp avec le nom du produit
+    const waMsg = encodeURIComponent('Bonjour JEPK 👋\nJe suis intéressée par : *' + nom + '*\n' + desc + '\nPouvez-vous me donner plus d\'informations ?');
+    document.getElementById('qvWaBtn').href = 'https://wa.me/2250153928572?text=' + waMsg;
 
     const modal = document.getElementById('qvModal');
     modal.style.display = 'flex';

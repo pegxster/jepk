@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','JEKP Store — Créations Artisanales')
+@section('title','JEPK Store — Créations Artisanales au Crochet')
 @push('styles')
 <style>
 /* ============================================================
@@ -153,7 +153,7 @@
 .cat-btn-s i{font-size:10px;transition:transform .3s}
 .cat-c:hover .cat-btn-s i{transform:translateX(4px)}
 
-/* ══════════ COUPS DE CŒUR — statique ══════════ */
+/* ══════════ COUPS DE CŒUR ══════════ */
 .prods{padding:90px 50px;max-width:1360px;margin:0 auto}
 .prods-ent{display:flex;justify-content:center;align-items:flex-end;margin-bottom:48px;text-align:center}
 .prods-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
@@ -161,11 +161,14 @@
 .p-img{position:relative;overflow:hidden;aspect-ratio:3/4;border-radius:var(--rayon);margin-bottom:14px;background:var(--beige)}
 .p-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s;display:block}
 .p-carte:hover .p-img img{transform:scale(1.04)}
+.p-img .p-cart{transform:translateY(100%)}
+.p-carte:hover .p-img .p-cart{transform:translateY(0) !important}
 .p-badge{position:absolute;top:11px;left:11px;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:50px;font-weight:500}
 .b-n{background:var(--rose-v);color:var(--blanc)}
 .b-p{background:var(--lavande2);color:var(--blanc)}
 .p-cat{font-size:10px;color:var(--rose-v);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;display:block}
-.p-nom{font-family:var(--f-titre);font-size:18px;font-weight:300;color:var(--texte);display:block;margin-bottom:6px}
+.p-nom{font-family:var(--f-titre);font-size:18px;font-weight:300;color:var(--texte);display:block;margin-bottom:6px;text-decoration:none;transition:color .3s}
+.p-nom:hover{color:var(--rose-v)}
 .p-prix-l{display:flex;align-items:center;gap:9px}
 .p-prix{font-size:16px;font-weight:400;color:var(--brun-d)}
 .p-prix-b{font-size:12px;color:var(--texte2);text-decoration:line-through}
@@ -298,6 +301,56 @@
 .nwsl-form input:focus{border-color:var(--rose-v)}
 .nwsl-form .btn{border-radius:0 50px 50px 0;white-space:nowrap}
 
+/* ══════════ LOOKBOOK STRIP (défilement auto) ══════════ */
+.lookbook-strip{padding:0;background:var(--brun-d);overflow:hidden}
+.lookbook-head{padding:36px 50px 20px;display:flex;align-items:center;justify-content:space-between}
+.lookbook-head .s-label{margin-bottom:0;color:var(--peche2)}
+.lookbook-head p{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;letter-spacing:1px}
+.lookbook-scroll-wrap{overflow:hidden}
+.lookbook-row{display:flex;gap:4px;width:max-content;animation:lookScroll 55s linear infinite}
+.lookbook-row:hover{animation-play-state:paused}
+@keyframes lookScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.lb-photo{
+    width:200px;height:260px;flex-shrink:0;overflow:hidden;
+    position:relative;
+}
+.lb-photo img{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .7s ease,filter .5s ease;filter:brightness(.85)}
+.lb-photo:hover img{transform:scale(1.07);filter:brightness(.65)}
+.lb-photo-label{
+    position:absolute;bottom:0;left:0;right:0;
+    background:linear-gradient(0deg,rgba(61,18,32,.9) 0%,transparent);
+    padding:32px 14px 14px;
+    font-family:var(--f-script);font-size:16px;
+    color:var(--peche2);text-align:center;
+    opacity:0;transition:opacity .4s;
+}
+.lb-photo:hover .lb-photo-label{opacity:1}
+
+/* ══════════ GALERIE JEPK ══════════ */
+.galerie{padding:80px 50px;background:var(--gris);overflow:hidden}
+.galerie-in{max-width:1360px;margin:0 auto}
+.galerie-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
+.galerie-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    grid-template-rows:200px 200px;
+    gap:10px;
+}
+.gal-item{overflow:hidden;border-radius:12px;position:relative}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease,filter .6s ease;filter:brightness(.92)}
+.gal-item:hover img{transform:scale(1.06);filter:brightness(.75)}
+.gal-item:nth-child(1){grid-column:1/3;grid-row:1/3}
+.gal-item:nth-child(4){grid-column:4/6}
+.gal-item:nth-child(6){grid-column:6/7;grid-row:1/3}
+.gal-item-overlay{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    opacity:0;transition:opacity .4s;
+    background:rgba(61,18,32,.18);
+}
+.gal-item:hover .gal-item-overlay{opacity:1}
+.gal-item-overlay i{font-size:22px;color:rgba(255,255,255,.85)}
+
 /* ══════════ RESPONSIVE ══════════ */
 @media(max-width:1100px){
     .prods-grid{grid-template-columns:repeat(3,1fr)}
@@ -312,8 +365,13 @@
     .mesure-in{grid-template-columns:1fr;gap:40px}
     .stats-in{grid-template-columns:repeat(2,1fr)}
     .temos-grid{grid-template-columns:1fr}
-    .qui,.cats,.prods,.mesure,.temos,.blog-mini,.nwsl,.inspi{padding-left:24px;padding-right:24px}
+    .qui,.cats,.prods,.mesure,.temos,.blog-mini,.nwsl,.inspi,.galerie{padding-left:24px;padding-right:24px}
     .qui,.temos{padding-top:60px;padding-bottom:60px}
+    .lookbook-head{padding-left:20px;padding-right:20px}
+    .galerie-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,140px)}
+    .gal-item:nth-child(1){grid-column:1/3;grid-row:1/3}
+    .gal-item:nth-child(4){grid-column:auto}
+    .gal-item:nth-child(6){grid-column:auto;grid-row:auto}
     .stats{padding-left:24px;padding-right:24px}
     .prods-ent{flex-direction:column;align-items:flex-start;gap:16px}
     .carousel{min-height:500px;height:100dvh}
@@ -344,6 +402,13 @@
     .cat-c{height:260px}
     .avantages{grid-template-columns:1fr}
     .av-item{border-right:none;border-bottom:1px solid var(--peche)}
+    .galerie-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,130px)}
+    .gal-item:nth-child(1){grid-column:1/3;grid-row:1/3}
+    .gal-item:nth-child(4){grid-column:auto}
+    .gal-item:nth-child(6){grid-column:auto;grid-row:auto}
+    .galerie-head{flex-direction:column;align-items:flex-start;gap:12px}
+    .lb-photo{width:140px;height:190px}
+    .lookbook-head{padding-top:24px;padding-bottom:14px}
     .nwsl-form{flex-direction:column;border-radius:12px}
     .nwsl-form input{border-right:1.5px solid var(--peche);border-bottom:none;border-radius:12px 12px 0 0}
     .nwsl-form .btn{border-radius:0 0 12px 12px}
@@ -381,21 +446,21 @@ $staticSlides = [
     [
         'image'    => asset('assets/images/slider lt.png'),
         'badge'    => 'Nouvelle Collection',
-        'script'   => "L'art du fil précieux",
+        'script'   => "L'art du crochet",
         'title'    => "Création\nArtisanale",
-        'phrase'   => 'Des laines d\'exception, sélectionnées avec passion pour des créations qui vous ressemblent.',
-        'btn1_text'=> 'Découvrir la boutique',
+        'phrase'   => 'Robes, sacs, chapeaux et accessoires faits main au crochet, avec amour, en Côte d\'Ivoire.',
+        'btn1_text'=> 'Découvrir le catalogue',
         'btn1_url' => route('shop.index'),
         'btn2_text'=> "Voir l'atelier",
         'btn2_url' => route('pages.atelier'),
     ],
     [
         'image'    => asset('assets/images/slider 2.jpg'),
-        'badge'    => 'Kits Signature',
-        'script'   => 'Créer avec amour',
-        'title'    => "Kits\nExclusifs",
-        'phrase'   => 'Tout ce dont vous avez besoin pour réaliser des pièces uniques, du premier point au dernier.',
-        'btn1_text'=> 'Voir les kits',
+        'badge'    => 'Collection Accessoires',
+        'script'   => 'Sacs, chapeaux & bijoux',
+        'title'    => "Accessoires\nau Crochet",
+        'phrase'   => 'Sacs à main, chapeaux, porte-clés et chouchous — des pièces uniques pour sublimer votre quotidien.',
+        'btn1_text'=> 'Voir les accessoires',
         'btn1_url' => route('shop.index'),
         'btn2_text'=> null,
         'btn2_url' => null,
@@ -464,15 +529,35 @@ $carouselSlides = isset($slides) && count($slides)
 <div class="marquee">
     <div class="m-piste">
         @foreach(range(1,2) as $_)
-        <span class="m-item">Laines Mérinos <span class="m-pt"></span></span>
-        <span class="m-item">Créations Artisanales <span class="m-pt"></span></span>
-        <span class="m-item">Kits Signature <span class="m-pt"></span></span>
-        <span class="m-item">Sur Mesure <span class="m-pt"></span></span>
-        <span class="m-item">Livraison Express <span class="m-pt"></span></span>
-        <span class="m-item">Fils d'Exception <span class="m-pt"></span></span>
-        <span class="m-item">Fait avec Amour <span class="m-pt"></span></span>
-        <span class="m-item">100% Artisanal <span class="m-pt"></span></span>
+        <span class="m-item">Robes au crochet <span class="m-pt"></span></span>
+        <span class="m-item">Créations artisanales <span class="m-pt"></span></span>
+        <span class="m-item">Sacs &amp; Accessoires <span class="m-pt"></span></span>
+        <span class="m-item">Sur mesure disponible <span class="m-pt"></span></span>
+        <span class="m-item">Tenues Couple <span class="m-pt"></span></span>
+        <span class="m-item">Commande directe sur le site <span class="m-pt"></span></span>
+        <span class="m-item">Fait avec amour <span class="m-pt"></span></span>
+        <span class="m-item">100% Fait main · Côte d'Ivoire <span class="m-pt"></span></span>
         @endforeach
+    </div>
+</div>
+
+{{-- ══════ AVANTAGES ══════ --}}
+<div class="avantages">
+    <div class="av-item">
+        <div class="av-icone"><i class="fas fa-hand-sparkles"></i></div>
+        <div><div class="av-titre">100% Fait main</div><div class="av-sous">Chaque pièce tricotée avec soin</div></div>
+    </div>
+    <div class="av-item">
+        <div class="av-icone"><i class="fas fa-ruler-combined"></i></div>
+        <div><div class="av-titre">Tailles adaptables</div><div class="av-sous">S, M, L, XL — sur demande</div></div>
+    </div>
+    <div class="av-item">
+        <div class="av-icone"><i class="fas fa-shopping-bag"></i></div>
+        <div><div class="av-titre">Commande sur le site</div><div class="av-sous">Suivi de commande sur votre dashboard</div></div>
+    </div>
+    <div class="av-item">
+        <div class="av-icone"><i class="fab fa-whatsapp"></i></div>
+        <div><div class="av-titre">Support WhatsApp</div><div class="av-sous">Questions &amp; suivi en temps réel</div></div>
     </div>
 </div>
 
@@ -488,8 +573,8 @@ $carouselSlides = isset($slides) && count($slides)
         <div class="qui-txt">
             <span class="s-label rev">Notre histoire</span>
             <h2 class="s-titre rev d1">Qui sommes-<em>nous</em> ?</h2>
-            <p class="qui-p rev d2">JEKP Store est né d'une passion profonde pour l'art du crochet et la création textile. Nous sommes une maison artisanale qui sélectionne avec soin des fils d'exception et crée des pièces pensées pour tous les niveaux.</p>
-            <p class="qui-p rev d2">Notre mission : vous offrir le meilleur de la création artisanale, avec des matières nobles et des designs qui traversent les tendances.</p>
+            <p class="qui-p rev d2">JEPK Store est né d'une passion profonde pour l'art du crochet. Nous créons des robes, sacs, chapeaux, accessoires et bien plus — chaque pièce est tricotée à la main avec amour, en Côte d'Ivoire.</p>
+            <p class="qui-p rev d2">Notre mission : vous offrir des créations uniques, personnalisables en taille et en couleur, directement sur commande via WhatsApp.</p>
             <div class="qui-vals rev d3">
                 <div class="val-item"><div class="val-i"><i class="fas fa-heart"></i></div><div><div class="val-nom">Fait avec passion</div><div class="val-desc">Chaque création porte notre amour du métier</div></div></div>
                 <div class="val-item"><div class="val-i"><i class="fas fa-leaf"></i></div><div><div class="val-nom">Matières naturelles</div><div class="val-desc">Fils naturels et éco-responsables</div></div></div>
@@ -507,44 +592,54 @@ $carouselSlides = isset($slides) && count($slides)
         <div class="ent-c rev">
             <span class="s-label">Explorez</span>
             <h2 class="s-titre">Nos <em>Collections</em></h2>
-            <p class="s-sous">Créations artisanales pour la maison, la mode adulte, l'univers enfant et tous vos accessoires du quotidien.</p>
+            <p class="s-sous">Robes, tops, sacs, chapeaux et bien plus — faits main au crochet, tous personnalisables en taille et couleur.</p>
         </div>
         <div class="cats-grid">
             @php
             $dc = [
                 [
-                    'nom'  => 'Maison',
-                    'sous' => 'Coussins, plaids, nappes, tapis et décorations faites à la main pour votre intérieur.',
-                    'slug' => 'maison',
-                    'img'  => 'assets/images/jepk42.jpg',
+                    'nom'  => 'Robes',
+                    'sous' => 'Robes au crochet — légères, élégantes, du S au L.',
+                    'slug' => 'robes',
+                    'img'  => 'assets/images/catalogue/image2.jpg',
                 ],
                 [
-                    'nom'  => 'Adulte',
-                    'sous' => 'Pulls, gilets, écharpes et bonnets — des pièces uniques au crochet pour vous.',
-                    'slug' => 'adulte',
-                    'img'  => 'assets/images/jepk5.jpg',
+                    'nom'  => 'Sacs à Main',
+                    'sous' => 'Sacs, pochettes et accessoires faits main.',
+                    'slug' => 'sacs-a-main',
+                    'img'  => 'assets/images/catalogue/image47.jpg',
                 ],
                 [
-                    'nom'  => 'Enfant',
-                    'sous' => 'Layettes, doudous, peluches et vêtements doux pour les bébés et les enfants.',
-                    'slug' => 'enfant',
-                    'img'  => 'assets/images/jepk10.jpg',
+                    'nom'  => 'Chapeaux',
+                    'sous' => 'Chapeaux et coiffes au crochet pour toutes les saisons.',
+                    'slug' => 'chapeaux',
+                    'img'  => 'assets/images/catalogue/image40.jpg',
                 ],
                 [
-                    'nom'  => 'Accessoires',
-                    'sous' => 'Sacs, pochettes, bijoux et idées cadeaux — l\'art du crochet au quotidien.',
-                    'slug' => 'accessoires',
-                    'img'  => 'assets/images/jepk25.jpg',
+                    'nom'  => 'Tenues Couple',
+                    'sous' => 'Des ensembles assortis pour marquer les occasions.',
+                    'slug' => 'tenues-couple',
+                    'img'  => 'assets/images/catalogue/image37.jpg',
                 ],
             ];
             @endphp
 
-            @foreach(isset($categories) && count($categories) ? $categories : $dc as $i => $c)
+            @foreach(isset($categories) && count($categories) ? $categories->take(4) : $dc as $i => $c)
             @php
                 $nom  = is_array($c) ? $c['nom']  : $c->name;
-                $sous = is_array($c) ? $c['sous']  : ($c->description ?? '');
+                $sous = is_array($c) ? $c['sous']  : ($c->description ?? 'Collection faite main au crochet.');
                 $slug = is_array($c) ? $c['slug']  : $c->slug;
-                $img  = is_array($c) ? asset($c['img']) : product_image_url($c->image);
+                // Si la catégorie vient de la DB et n'a pas d'image, chercher la première image produit
+                if (is_array($c)) {
+                    $img = asset($c['img']);
+                } elseif (!empty($c->image)) {
+                    $img = product_image_url($c->image);
+                } else {
+                    $firstProd = \App\Models\Product::where('category_name', $nom)->where('is_active', true)->first();
+                    $img = ($firstProd && !empty($firstProd->images))
+                        ? product_image_url($firstProd->images[0])
+                        : asset('assets/images/catalogue/image2.jpg');
+                }
             @endphp
             <a href="{{ route('categories.show', $slug) }}" class="cat-c rev d{{ $i+1 }}">
                 <img src="{{ $img }}" alt="{{ $nom }}" loading="lazy">
@@ -571,6 +666,96 @@ $carouselSlides = isset($slides) && count($slides)
 
 
 
+{{-- ══════ LOOKBOOK STRIP (auto-scroll photos jepk) ══════ --}}
+@php
+$lookbookPhotos = [
+    ['img'=>'jepk1.jpg', 'label'=>'Fait main'],
+    ['img'=>'jepk5.jpg', 'label'=>'Avec amour'],
+    ['img'=>'jepk7.jpg', 'label'=>'Unique'],
+    ['img'=>'jepk9.jpg', 'label'=>'Artisanal'],
+    ['img'=>'jepk11.jpg','label'=>'Sur mesure'],
+    ['img'=>'jepk13.jpg','label'=>'Élégant'],
+    ['img'=>'jepk15.jpg','label'=>'Côte d\'Ivoire'],
+    ['img'=>'jepk18.jpg','label'=>'Passion'],
+    ['img'=>'jepk20.jpg','label'=>'Créatif'],
+    ['img'=>'jepk22.jpg','label'=>'Exclusif'],
+    ['img'=>'jepk24.jpg','label'=>'Tendance'],
+    ['img'=>'jepk26.jpg','label'=>'Délicat'],
+];
+@endphp
+<div class="lookbook-strip">
+    <div class="lookbook-head">
+        <div>
+            <span class="s-label" style="color:var(--peche2);font-size:24px">Notre Lookbook</span>
+            <p style="font-size:11px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:2px;text-transform:uppercase">Créations en images · Fait main · Côte d'Ivoire</p>
+        </div>
+        <a href="{{ route('shop.index') }}" class="btn btn-outline" style="font-size:10px;padding:9px 20px">
+            <i class="fas fa-th-large"></i> Voir le catalogue
+        </a>
+    </div>
+    <div class="lookbook-scroll-wrap">
+        <div class="lookbook-row">
+            {{-- Doubled for seamless infinite loop --}}
+            @foreach([$lookbookPhotos, $lookbookPhotos] as $group)
+            @foreach($group as $ph)
+            <div class="lb-photo">
+                <img src="{{ asset('assets/images/'.$ph['img']) }}" alt="{{ $ph['label'] }}" loading="lazy">
+                <span class="lb-photo-label">{{ $ph['label'] }}</span>
+            </div>
+            @endforeach
+            @endforeach
+        </div>
+    </div>
+    <div style="height:20px"></div>
+</div>
+
+{{-- ══════ COUPS DE CŒUR ══════ --}}
+@if(isset($featured) && count($featured))
+<section class="prods">
+    <div class="prods-ent">
+        <div>
+            <span class="s-label">Nos favoris</span>
+            <h2 class="s-titre">Coups de <em>cœur</em></h2>
+        </div>
+    </div>
+    <div class="prods-grid">
+        @foreach($featured->take(4) as $fp)
+        @php
+            $fpNom   = $fp->name ?? 'Création JEPK';
+            $fpSlug  = $fp->slug ?? \Illuminate\Support\Str::slug($fpNom);
+            $fpCat   = $fp->category_name ?? 'Artisanal';
+            $fpPrice = $fp->price ?? 15000;
+            $fpImg   = product_image_url($fp->images[0] ?? null);
+            $fpDesc  = $fp->description ?? '';
+            $fpWaMsg = urlencode("Bonjour JEPK 👋\nJe suis intéressée par : *{$fpNom}*\n{$fpDesc}\nPouvez-vous me donner plus d'informations ?");
+        @endphp
+        <div class="p-carte">
+            <div class="p-img" style="border-radius:var(--rayon)">
+                <a href="{{ route('shop.show', $fpSlug) }}">
+                    <img src="{{ $fpImg }}" alt="{{ $fpNom }}" loading="lazy">
+                </a>
+                <div class="p-cart" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(90,48,64,.88),transparent);padding:32px 14px 14px;transform:translateY(100%);transition:transform .38s;border-radius:0 0 var(--rayon) var(--rayon)">
+                    <a href="https://wa.me/2250153928572?text={{ $fpWaMsg }}" target="_blank" rel="noopener" class="btn btn-blanc" style="width:100%;justify-content:center;font-size:10px">
+                        <i class="fab fa-whatsapp"></i> Commander
+                    </a>
+                </div>
+            </div>
+            <span class="p-cat">{{ $fpCat }}</span>
+            <a href="{{ route('shop.show', $fpSlug) }}" class="p-nom">{{ $fpNom }}</a>
+            <div class="p-prix-l">
+                <span class="p-prix">{{ number_format($fpPrice, 0, ',', ' ') }} F CFA</span>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    <div style="text-align:center;margin-top:40px">
+        <a href="{{ route('shop.index') }}" class="btn btn-outline-rose">
+            <i class="fas fa-th-large"></i> Voir tout le catalogue
+        </a>
+    </div>
+</section>
+@endif
+
 {{-- ══════ INSPIRATION GRILLE ══════ --}}
 <section class="inspi">
     <div class="ent-c rev" style="text-align:center;margin-bottom:42px">
@@ -578,11 +763,11 @@ $carouselSlides = isset($slides) && count($slides)
         <h2 class="s-titre">Notre <em>Univers</em></h2>
     </div>
     <div class="inspi-grid">
-        <div class="inspi-card rev"><img src="{{ asset('assets/images/jepk32.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Collection Automne</span></div>
-        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk40.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Kits & Tutoriels</span></div>
-        <div class="inspi-card rev d2"><img src="{{ asset('assets/images/jepk28.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Accessoires</span></div>
-        <div class="inspi-card rev"><img src="{{ asset('assets/images/jepk37.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Collection Automne</span></div>
-        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/jepk27.jpg') }}" alt="" loading="lazy"><span class="inspi-tag">Kits & Tutoriels</span></div>
+        <div class="inspi-card rev"><img src="{{ asset('assets/images/catalogue/image2.jpg') }}" alt="Robe au crochet" loading="lazy"><span class="inspi-tag">Robes &amp; Tenues</span></div>
+        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/catalogue/image40.jpg') }}" alt="Chapeau crochet" loading="lazy"><span class="inspi-tag">Chapeaux</span></div>
+        <div class="inspi-card rev d2"><img src="{{ asset('assets/images/catalogue/image47.jpg') }}" alt="Sac à main crochet" loading="lazy"><span class="inspi-tag">Sacs à Main</span></div>
+        <div class="inspi-card rev"><img src="{{ asset('assets/images/catalogue/image37.jpg') }}" alt="Tenue couple" loading="lazy"><span class="inspi-tag">Tenues Couple</span></div>
+        <div class="inspi-card rev d1"><img src="{{ asset('assets/images/catalogue/image70.jpg') }}" alt="Bouquet de fleurs crochet" loading="lazy"><span class="inspi-tag">Bouquets &amp; Déco</span></div>
     </div>
 </section>
 
@@ -590,9 +775,9 @@ $carouselSlides = isset($slides) && count($slides)
 <section class="mesure" id="sur-mesure">
     <div class="mesure-in">
         <div class="mesure-txt rev">
-            <span class="s-label">Exclusif JEKP</span>
+            <span class="s-label">Exclusif JEPK</span>
             <h2 class="s-titre">Création<br><em>Sur Mesure</em></h2>
-            <p class="s-sous">Vous avez une idée en tête ? Décrivez-nous votre projet et nous l'transformons en une création unique, pensée rien que pour vous.</p>
+            <p class="s-sous">Vous avez une idée en tête ? Décrivez-nous votre projet et nous le transformons en une création unique au crochet, faite rien que pour vous.</p>
             <ul class="mesure-liste">
                 <li><i class="fas fa-check-circle"></i> Consultation personnalisée incluse</li>
                 <li><i class="fas fa-check-circle"></i> Choix libre des matières et coloris</li>
@@ -632,12 +817,18 @@ $carouselSlides = isset($slides) && count($slides)
                         <label>Type de création</label>
                         <select name="type_creation">
                             <option value="">Choisir…</option>
-                            <option>Pull / Gilet</option>
-                            <option>Écharpe / Châle</option>
-                            <option>Bonnet / Chapeau</option>
-                            <option>Chaussettes</option>
-                            <option>Accessoires bébé</option>
-                            <option>Autre</option>
+                            <option>Robe au crochet</option>
+                            <option>Top / Boléro</option>
+                            <option>Tenue de plage</option>
+                            <option>Ensemble couple</option>
+                            <option>Chapeau / Coiffe</option>
+                            <option>Sac à main</option>
+                            <option>Sac d'ordinateur</option>
+                            <option>Bouquet de fleurs</option>
+                            <option>Miroir crocheté</option>
+                            <option>Accessoire (chouchou, barrette…)</option>
+                            <option>Tenue enfant</option>
+                            <option>Autre projet</option>
                         </select>
                     </div>
                     <div class="f-g">
@@ -708,6 +899,28 @@ $carouselSlides = isset($slides) && count($slides)
     </div>
 </section>
 
+{{-- ══════ STATS ══════ --}}
+<section class="stats">
+    <div class="stats-in">
+        <div class="stat-it">
+            <span class="stat-n">80+</span>
+            <span class="stat-l">Créations au catalogue</span>
+        </div>
+        <div class="stat-it">
+            <span class="stat-n">17</span>
+            <span class="stat-l">Catégories</span>
+        </div>
+        <div class="stat-it">
+            <span class="stat-n">600<span style="font-size:.45em">F</span></span>
+            <span class="stat-l">Prix de départ (CFA)</span>
+        </div>
+        <div class="stat-it">
+            <span class="stat-n">100<span style="font-size:.5em">%</span></span>
+            <span class="stat-l">Fait main en Côte d'Ivoire</span>
+        </div>
+    </div>
+</section>
+
 {{-- ══════ TÉMOIGNAGES ══════ --}}
 <section class="temos">
     <div class="temos-in">
@@ -716,7 +929,7 @@ $carouselSlides = isset($slides) && count($slides)
             <h2 class="s-titre">Ce qu'elles <em>disent de nous</em></h2>
         </div>
         <div class="temos-grid">
-            @foreach([['★★★★★','La qualité des fils est absolument exceptionnelle. Les créations au crochet sont d\'une douceur incomparable et les coloris sont magnifiques. Je suis cliente à vie !','Aïcha K.','Cocody · Crocheteuse','47'],['★★★★★','J\'ai commandé une création sur mesure pour ma mère. Le résultat a dépassé toutes mes espérances ! L\'équipe est à l\'écoute et très professionnelle.','Nadège B.','Marcory · Créatrice','32'],['★★★★★','Service client au top, livraison ultra rapide et les produits sont encore plus beaux en vrai. JEKP c\'est une boutique à part entière. Je recommande !','Sarah M.','Yopougon · Artiste','56']] as $i=>$t)
+            @foreach([['★★★★★','La robe que j\'ai commandée est magnifique ! Le crochet est parfaitement réalisé, les couleurs sont vives et elle me va comme un gant. JEPK c\'est du travail sérieux !','Aïcha K.','Cocody · Fidèle cliente','47'],['★★★★★','J\'ai commandé un sac sur mesure pour ma mère. Le résultat a dépassé toutes mes espérances ! L\'équipe est à l\'écoute et très réactive sur WhatsApp.','Nadège B.','Marcory · Cliente','32'],['★★★★★','Les chapeaux sont sublimes et bien faits. On sent que c\'est fait avec amour. JEPK c\'est ma boutique préférée pour les accessoires au crochet en Côte d\'Ivoire !','Sarah M.','Yopougon · Passionnée de mode','56']] as $i=>$t)
             <div class="t-carte rev d{{ $i+1 }}">
                 <div class="t-etoiles">{{ $t[0] }}</div>
                 <p class="t-txt">{{ $t[1] }}</p>
@@ -730,6 +943,55 @@ $carouselSlides = isset($slides) && count($slides)
     </div>
 </section>
 
+{{-- ══════ GALERIE JEPK ══════ --}}
+<section class="galerie">
+    <div class="galerie-in">
+        <div class="galerie-head">
+            <div>
+                <span class="s-label">Notre atelier</span>
+                <h2 class="s-titre">Coulisses & <em>Créations</em></h2>
+            </div>
+            <a href="{{ route('shop.index') }}" class="btn btn-outline-rose">
+                <i class="fas fa-images"></i> Voir le catalogue complet
+            </a>
+        </div>
+        <div class="galerie-grid">
+            <div class="gal-item">
+                <img src="{{ asset('assets/images/jepk3.jpg') }}" alt="Création JEPK" loading="lazy">
+                <div class="gal-item-overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="gal-item">
+                <img src="{{ asset('assets/images/jepk8.jpg') }}" alt="Création JEPK" loading="lazy">
+                <div class="gal-item-overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="gal-item">
+                <img src="{{ asset('assets/images/jepk12.jpg') }}" alt="Création JEPK" loading="lazy">
+                <div class="gal-item-overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="gal-item">
+                <img src="{{ asset('assets/images/jepk15.jpg') }}" alt="Création JEPK" loading="lazy">
+                <div class="gal-item-overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="gal-item">
+                <img src="{{ asset('assets/images/jepk21.jpg') }}" alt="Création JEPK" loading="lazy">
+                <div class="gal-item-overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="gal-item">
+                <img src="{{ asset('assets/images/jepk27.jpg') }}" alt="Création JEPK" loading="lazy">
+                <div class="gal-item-overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="gal-item">
+                <img src="{{ asset('assets/images/jepk33.jpg') }}" alt="Création JEPK" loading="lazy">
+                <div class="gal-item-overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+            <div class="gal-item">
+                <img src="{{ asset('assets/images/jepk39.jpg') }}" alt="Création JEPK" loading="lazy">
+                <div class="gal-item-overlay"><i class="fas fa-expand-alt"></i></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {{-- ══════ BLOG ══════ --}}
 <section class="blog-mini">
     <div class="ent-c rev" style="text-align:left;margin-bottom:0">
@@ -737,9 +999,9 @@ $carouselSlides = isset($slides) && count($slides)
         <h2 class="s-titre">Inspirations & <em>Conseils</em></h2>
     </div>
     <div class="blog-grid" style="margin-top:44px">
-        @foreach([['Tutoriels','Comment réussir sa première création au crochet : guide complet pour débutantes','Découvrez toutes les étapes, les astuces et les erreurs à éviter pour réaliser votre première création au crochet.','assets/images/jepk39.jpg'],
-            ['Tendances','Les couleurs de la saison : tons doux et naturels à la une','Pantone a parlé : cette saison mise sur les tons pêche, lavande et crème. Voici comment les intégrer à vos créations.','assets/images/jepk29.jpg'],
-            ['Matières','Mérinos, alpaga, mohair : comment choisir son fil ?','Un guide complet pour comprendre les différentes fibres naturelles et choisir celle qui convient à votre projet.','assets/images/jepk44.jpg']] as $i=>$b)
+        @foreach([['Conseils','Comment prendre ses mesures pour une commande sur mesure ?','Taille, tour de poitrine, longueur souhaitée… voici comment nous communiquer les bonnes mesures pour une création parfaite.','assets/images/catalogue/image2.jpg'],
+            ['Entretien','Comment prendre soin de vos créations au crochet ?','Lavage, séchage, rangement — nos conseils pour que vos pièces gardent leur beauté le plus longtemps possible.','assets/images/catalogue/image47.jpg'],
+            ['Tendances','Les couleurs tendances de la saison au crochet','Tons naturels, terracotta, lavande… découvrez les coloris préférés de nos clientes cette saison.','assets/images/catalogue/image40.jpg']] as $i=>$b)
         <a href="{{ route('pages.blog') }}" class="bl-carte rev d{{ $i }}">
             <div class="bl-img"><img src="{{ asset($b[3]) }}" alt="{{ $b[1] }}" loading="lazy"></div>
             <div class="bl-body">

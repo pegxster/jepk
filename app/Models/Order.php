@@ -12,12 +12,13 @@ class Order extends Model
     protected $connection = 'mongodb';
     protected $table = 'orders';
 
-    const STATUS_PENDING    = 'pending';
-    const STATUS_CONFIRMED  = 'confirmed';
-    const STATUS_PROCESSING = 'processing';
-    const STATUS_SHIPPED    = 'shipped';
-    const STATUS_DELIVERED  = 'delivered';
-    const STATUS_CANCELLED  = 'cancelled';
+    const STATUS_PENDING          = 'pending';
+    const STATUS_CONTACTED        = 'contacted';
+    const STATUS_DEPOSIT_RECEIVED = 'deposit_received';
+    const STATUS_PROCESSING       = 'processing';
+    const STATUS_READY            = 'ready';
+    const STATUS_DELIVERED        = 'delivered';
+    const STATUS_CANCELLED        = 'cancelled';
 
     protected $fillable = [
         'order_number',
@@ -121,12 +122,13 @@ class Order extends Model
     public static function statusLabel(string $status): string
     {
         return match($status) {
-            self::STATUS_PENDING    => 'En attente',
-            self::STATUS_CONFIRMED  => 'Confirmée',
-            self::STATUS_PROCESSING => 'En traitement',
-            self::STATUS_SHIPPED    => 'Expédiée',
-            self::STATUS_DELIVERED  => 'Livrée',
-            self::STATUS_CANCELLED  => 'Annulée',
+            self::STATUS_PENDING          => 'Nouvelle commande',
+            self::STATUS_CONTACTED        => 'Client contacté',
+            self::STATUS_DEPOSIT_RECEIVED => 'Acompte reçu',
+            self::STATUS_PROCESSING       => 'En fabrication',
+            self::STATUS_READY            => 'Pièce prête',
+            self::STATUS_DELIVERED        => 'Livrée',
+            self::STATUS_CANCELLED        => 'Annulée',
             default => $status,
         };
     }
@@ -134,13 +136,32 @@ class Order extends Model
     public static function statusColor(string $status): string
     {
         return match($status) {
-            self::STATUS_PENDING    => '#E8896A',
-            self::STATUS_CONFIRMED  => '#9B8EC4',
-            self::STATUS_PROCESSING => '#4A90D9',
-            self::STATUS_SHIPPED    => '#27AE60',
-            self::STATUS_DELIVERED  => '#2ECC71',
-            self::STATUS_CANCELLED  => '#E74C3C',
+            self::STATUS_PENDING          => '#E8896A',
+            self::STATUS_CONTACTED        => '#9B8EC4',
+            self::STATUS_DEPOSIT_RECEIVED => '#4A90D9',
+            self::STATUS_PROCESSING       => '#F39C12',
+            self::STATUS_READY            => '#16A085',
+            self::STATUS_DELIVERED        => '#27AE60',
+            self::STATUS_CANCELLED        => '#E74C3C',
             default => '#999',
         };
+    }
+
+    /* Prochain statut logique dans le workflow JEPK */
+    public static function nextStatus(string $status): ?string
+    {
+        return match($status) {
+            self::STATUS_PENDING          => self::STATUS_CONTACTED,
+            self::STATUS_CONTACTED        => self::STATUS_DEPOSIT_RECEIVED,
+            self::STATUS_DEPOSIT_RECEIVED => self::STATUS_PROCESSING,
+            self::STATUS_PROCESSING       => self::STATUS_READY,
+            self::STATUS_READY            => self::STATUS_DELIVERED,
+            default => null,
+        };
+    }
+
+    public function depositAmount(): float
+    {
+        return round(($this->total ?? 0) * 0.5);
     }
 }

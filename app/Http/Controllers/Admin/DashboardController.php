@@ -14,28 +14,55 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $stats = [
-            'products'   => Product::count(),
-            'orders'     => Order::count(),
-            'users'      => User::count(),
-            'revenue'    => Order::whereIn('status', ['delivered', 'shipped'])->sum('total'),
-            'pending'    => Order::where('status', Order::STATUS_PENDING)->count(),
-            'low_stock'  => Product::where('stock', '<=', 5)->where('stock', '>', 0)->count(),
+        $pipelineStatuses = [
+            Order::STATUS_PENDING,
+            Order::STATUS_CONTACTED,
+            Order::STATUS_DEPOSIT_RECEIVED,
+            Order::STATUS_PROCESSING,
+            Order::STATUS_READY,
+            Order::STATUS_DELIVERED,
         ];
 
-        $recent_orders = Order::orderBy('created_at', 'desc')->limit(8)->get();
-        $low_stock     = Product::where('stock', '<=', 5)->where('stock', '>', 0)->orderBy('stock')->limit(5)->get();
-        $recent_posts  = BlogPost::orderBy('created_at', 'desc')->limit(3)->get();
-        $recent_users  = User::where('is_admin', '!=', true)->orderBy('created_at', 'desc')->limit(8)->get();
+        $stats = [
+            'products'        => Product::count(),
+            'orders'          => Order::count(),
+            'users'           => User::count(),
+            'revenue'         => Order::where('status', Order::STATUS_DELIVERED)->sum('total'),
+            'pending'         => Order::where('status', Order::STATUS_PENDING)->count(),
+            'to_contact'      => Order::where('status', Order::STATUS_PENDING)->count(),
+            'awaiting_deposit'=> Order::where('status', Order::STATUS_CONTACTED)->count(),
+            'in_production'   => Order::where('status', Order::STATUS_PROCESSING)->count(),
+            'ready'           => Order::where('status', Order::STATUS_READY)->count(),
+        ];
+
+        // Pipeline : commandes par statut actif avec les ordres
+        $pipeline = [];
+        foreach ($pipelineStatuses as $status) {
+            $pipeline[$status] = Order::where('status', $status)
+                ->orderBy('created_at', 'desc')
+                ->limit(10)
+                ->get();
+        }
+
+        $recent_orders = Order::orderBy('created_at', 'desc')->limit(10)->get();
+        $recent_users  = User::where('is_admin', '!=', true)->orderBy('created_at', 'desc')->limit(6)->get();
         $categories    = Category::orderBy('sort_order')->get();
+        $recent_prods  = Product::orderBy('created_at', 'desc')->limit(5)->get();
+
+        // Nombre de produits par catégorie en une seule requête agrégée
+        $prodCountByCategory = collect(
+            Product::raw(fn ($col) => $col->aggregate([
+                ['$group' => ['_id' => '$category_name', 'count' => ['$sum' => 1]]],
+            ]))->toArray()
+        )->keyBy('_id')->map(fn ($r) => $r['count']);
 
         // ── Graphique : revenus des 6 derniers mois ──
         $revenueChart = collect();
         for ($i = 5; $i >= 0; $i--) {
             $month = Carbon::now()->subMonths($i);
             $revenueChart->push([
-                'label' => $month->format('M'),
-                'value' => (float) Order::whereIn('status', ['delivered', 'shipped'])
+                'label' => $month->translatedFormat('M'),
+                'value' => (float) Order::where('status', Order::STATUS_DELIVERED)
                     ->whereYear('created_at', $month->year)
                     ->whereMonth('created_at', $month->month)
                     ->sum('total'),
@@ -43,19 +70,11 @@ class DashboardController extends Controller
         }
 
         // ── Graphique : commandes par statut ──
-        $statusLabels = [
-            'pending'    => 'En attente',
-            'confirmed'  => 'Confirmées',
-            'processing' => 'En traitement',
-            'shipped'    => 'Expédiées',
-            'delivered'  => 'Livrées',
-            'cancelled'  => 'Annulées',
-        ];
         $ordersByStatus = collect();
-        foreach ($statusLabels as $key => $label) {
-            $count = Order::where('status', $key)->count();
+        foreach ($pipelineStatuses as $status) {
+            $count = Order::where('status', $status)->count();
             if ($count > 0) {
-                $ordersByStatus->push(['label' => $label, 'value' => $count]);
+                $ordersByStatus->push(['label' => Order::statusLabel($status), 'value' => $count]);
             }
         }
 
@@ -70,9 +89,9 @@ class DashboardController extends Controller
         }
 
         return view('admin.dashboard', compact(
-            'stats', 'recent_orders', 'low_stock', 'recent_posts',
-            'recent_users', 'categories', 'revenueChart',
-            'ordersByStatus', 'dailyOrders'
+            'stats', 'pipeline', 'recent_orders',
+            'recent_users', 'categories', 'recent_prods', 'prodCountByCategory',
+            'revenueChart', 'ordersByStatus', 'dailyOrders'
         ));
     }
 }

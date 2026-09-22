@@ -25,9 +25,9 @@ class OrderController extends Controller
 
         $orders   = $query->paginate(15)->withQueryString();
         $statuses = [
-            Order::STATUS_PENDING, Order::STATUS_CONFIRMED,
-            Order::STATUS_PROCESSING, Order::STATUS_SHIPPED,
-            Order::STATUS_DELIVERED, Order::STATUS_CANCELLED,
+            Order::STATUS_PENDING, Order::STATUS_CONTACTED,
+            Order::STATUS_DEPOSIT_RECEIVED, Order::STATUS_PROCESSING,
+            Order::STATUS_READY, Order::STATUS_DELIVERED, Order::STATUS_CANCELLED,
         ];
 
         return view('admin.orders.index', compact('orders', 'statuses'));
@@ -40,9 +40,23 @@ class OrderController extends Controller
 
     public function updateStatus(Request $request, Order $order)
     {
-        $request->validate(['status' => 'required|string']);
-        $order->update(['status' => $request->status]);
+        $request->validate([
+            'status' => 'required|string|in:pending,contacted,deposit_received,processing,ready,delivered,cancelled',
+        ]);
 
-        return redirect()->back()->with('success', 'Statut mis à jour !');
+        $updateData = ['status' => $request->status];
+
+        // Horodatages automatiques
+        if ($request->status === Order::STATUS_DEPOSIT_RECEIVED && !$order->deposit_received_at) {
+            $updateData['deposit_received_at'] = now();
+            $updateData['deposit_amount'] = round(($order->total ?? 0) * 0.5);
+        }
+        if ($request->status === Order::STATUS_DELIVERED && !$order->delivered_at) {
+            $updateData['delivered_at'] = now();
+        }
+
+        $order->update($updateData);
+
+        return redirect()->back()->with('success', 'Statut mis à jour : ' . Order::statusLabel($request->status));
     }
 }

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 70">
+  <!-- Fond noir Orange Money -->
+  <rect width="200" height="70" rx="10" fill="#000000"/>
+  <!-- Flèche blanche — vers haut-droite -->
+  <g transform="translate(48,35)">
+    <!-- Corps de la flèche blanche -->
+    <line x1="-22" y1="18" x2="14" y2="-16" stroke="white" stroke-width="9" stroke-linecap="round"/>
+    <!-- Tête de flèche blanche -->
+    <polygon points="14,-16 0,-16 14,-2" fill="white"/>
+    <!-- Barre horizontale blanche -->
+    <rect x="-4" y="-16" width="18" height="9" rx="2" fill="white"/>
+  </g>
+  <!-- Flèche orange — vers bas-gauche -->
+  <g transform="translate(68,35)">
+    <!-- Corps de la flèche orange -->
+    <line x1="22" y1="-18" x2="-14" y2="16" stroke="#FF6200" stroke-width="9" stroke-linecap="round"/>
+    <!-- Tête de flèche orange -->
+    <polygon points="-14,16 0,16 -14,2" fill="#FF6200"/>
+    <!-- Barre horizontale orange -->
+    <rect x="-14" y="7" width="18" height="9" rx="2" fill="#FF6200"/>
+  </g>
+  <!-- Texte "Orange Money" -->
+  <text x="148" y="34" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#FF6200" text-anchor="middle">Orange</text>
+  <text x="148" y="52" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="white" text-anchor="middle">Money</text>
+</svg>

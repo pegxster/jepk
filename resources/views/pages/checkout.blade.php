@@ -76,14 +76,16 @@
 @endpush
 @section('content')
 <div class="page-hero">
-    <span class="s-label">Commander</span>
+    <span class="s-label">Réserver votre création</span>
     <h1 class="s-titre">Votre <em>commande</em></h1>
     <div class="steps">
         <div class="step done"><span class="step-num"><i class="fas fa-check" style="font-size:11px"></i></span><span class="step-label">Panier</span></div>
+        <div class="step-line done"></div>
+        <div class="step on"><span class="step-num">2</span><span class="step-label">Vos infos</span></div>
         <div class="step-line"></div>
-        <div class="step on"><span class="step-num">2</span><span class="step-label">Livraison</span></div>
+        <div class="step"><span class="step-num">3</span><span class="step-label">Confirmation</span></div>
         <div class="step-line"></div>
-        <div class="step"><span class="step-num">3</span><span class="step-label">Paiement</span></div>
+        <div class="step"><span class="step-num">4</span><span class="step-label">Acompte &amp; Fabrication</span></div>
     </div>
 </div>
 
@@ -129,73 +131,82 @@
                 <div class="livraison-opts">
                     <label class="livr-opt on">
                         <input type="radio" name="livraison" value="standard" checked>
-                        <div><div class="livr-nom">Livraison Standard</div><div class="livr-desc">24h à 48h ouvrés</div></div>
-                        <span class="livr-prix">Gratuite</span>
+                        <div><div class="livr-nom">Livraison à domicile</div><div class="livr-desc">Abidjan — 24h à 48h ouvrés après fabrication</div></div>
+                        <span class="livr-prix">2 000 F CFA</span>
                     </label>
                     <label class="livr-opt">
-                        <input type="radio" name="livraison" value="coursier">
-                        <div><div class="livr-nom">Livraison Express par coursier</div><div class="livr-desc">Même jour (Abidjan & environs)</div></div>
-                        <span class="livr-prix">3 000 F CFA</span>
+                        <input type="radio" name="livraison" value="retrait">
+                        <div><div class="livr-nom">Retrait en boutique</div><div class="livr-desc">Venez récupérer votre commande directement</div></div>
+                        <span class="livr-prix">Gratuit</span>
                     </label>
                 </div>
             </div>
 
-            {{-- Paiement --}}
+            {{-- Processus JEPK — Acompte & Fabrication --}}
             <div class="checkout-bloc">
-                <h3 class="bloc-titre"><i class="fas fa-lock"></i> Moyen de paiement</h3>
-                <input type="hidden" name="payment_method" id="checkout_payment_method" value="wave">
+                <h3 class="bloc-titre"><i class="fas fa-scissors"></i> Comment fonctionne votre commande ?</h3>
 
-                <div style="display:flex;flex-direction:column;gap:12px">
-                    {{-- Option 1 : Wave --}}
-                    <div class="pay-opt-card on" id="opt-wave" onclick="selectCheckoutPayment('wave')" style="display:flex;align-items:center;gap:14px;padding:16px;border:2px solid var(--rose-v);border-radius:12px;background:var(--creme2);cursor:pointer;transition:all .3s">
-                        <div style="width:42px;height:42px;background:#1dc8f0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                            <svg viewBox="0 0 100 100" width="34" height="34" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="50" fill="#1dc8f0"/>
-                                <ellipse cx="50" cy="60" rx="22" ry="26" fill="#0b1b28"/>
-                                <ellipse cx="50" cy="64" rx="14" ry="18" fill="#ffffff"/>
-                                <circle cx="43" cy="46" r="4.5" fill="#ffffff"/>
-                                <circle cx="57" cy="46" r="4.5" fill="#ffffff"/>
-                                <circle cx="44" cy="46" r="2.2" fill="#0b1b28"/>
-                                <circle cx="58" cy="46" r="2.2" fill="#0b1b28"/>
-                                <polygon points="45,53 50,60 55,53" fill="#f39c12"/>
-                            </svg>
+                {{-- Timeline processus --}}
+                <div style="display:flex;flex-direction:column;gap:0;margin-bottom:22px">
+                    @php
+                    $steps = [
+                        ['icon'=>'fa-check-circle','color'=>'#27AE60','title'=>'Vous passez commande','desc'=>'Remplissez le formulaire ci-dessus et confirmez votre réservation.','done'=>true],
+                        ['icon'=>'fa-comments','color'=>'#9B8EC4','title'=>'On vous contacte sous 24h','desc'=>'Notre équipe vous appelle ou vous écrit sur WhatsApp pour confirmer les détails (couleur, taille, personnalisation).','done'=>false],
+                        ['icon'=>'fa-hand-holding-dollar','color'=>'#4A90D9','title'=>'Versement de l\'acompte (50%)','desc'=>'Pour lancer la fabrication, un acompte de 50% du total est requis. Paiement via Wave, Orange Money ou virement.','done'=>false],
+                        ['icon'=>'fa-scissors','color'=>'#F39C12','title'=>'Fabrication de votre pièce','desc'=>'Votre création est faite entièrement à la main avec soin. Délai : 5 à 10 jours selon la complexité.','done'=>false],
+                        ['icon'=>'fa-truck','color'=>'#16A085','title'=>'Livraison + solde (50% restant)','desc'=>'À la livraison, vous réglez le solde restant. Votre pièce unique est entre vos mains !','done'=>false],
+                    ];
+                    @endphp
+                    @foreach($steps as $i => $st)
+                    <div style="display:flex;gap:14px;align-items:flex-start;padding-bottom:{{ $i < count($steps)-1 ? '16px' : '0' }};position:relative">
+                        <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+                            <div style="width:36px;height:36px;border-radius:50%;background:{{ $st['done'] ? $st['color'] : 'rgba('.implode(',',sscanf($st['color'],'#%02x%02x%02x')).',.1)' }};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                                <i class="fas {{ $st['icon'] }}" style="color:{{ $st['done'] ? '#fff' : $st['color'] }};font-size:14px"></i>
+                            </div>
+                            @if($i < count($steps)-1)
+                            <div style="width:2px;height:100%;min-height:20px;background:var(--peche);flex:1;margin-top:6px"></div>
+                            @endif
                         </div>
-                        <div style="flex:1">
-                            <div style="font-size:14px;font-weight:600;color:var(--texte)">Paiement Wave (+225)</div>
-                            <div style="font-size:11px;color:var(--texte2);margin-top:2px">Mobile Money rapide & sans frais</div>
+                        <div style="padding-top:6px;flex:1">
+                            <div style="font-size:14px;font-weight:600;color:{{ $st['done'] ? $st['color'] : 'var(--texte)' }};margin-bottom:3px">{{ $st['title'] }}</div>
+                            <div style="font-size:12px;color:var(--texte2);line-height:1.6">{{ $st['desc'] }}</div>
                         </div>
-                        <i class="fas fa-check-circle" id="check-wave" style="color:var(--rose-v);font-size:18px"></i>
                     </div>
+                    @endforeach
+                </div>
 
-                    {{-- Option 2 : À la livraison --}}
-                    <div class="pay-opt-card" id="opt-livraison" onclick="selectCheckoutPayment('livraison')" style="display:flex;align-items:center;gap:14px;padding:16px;border:1.5px solid var(--peche);border-radius:12px;background:var(--blanc);cursor:pointer;transition:all .3s">
-                        <div style="width:42px;height:42px;background:var(--brun-d);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                            <i class="fas fa-money-bill-wave" style="color:#fff;font-size:18px"></i>
+                {{-- Modes de paiement de l'acompte --}}
+                <div style="background:linear-gradient(135deg,var(--creme2),var(--peche));border-radius:12px;padding:16px 20px;margin-bottom:18px">
+                    <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--texte2);font-weight:600;margin-bottom:12px">Moyens de paiement acceptés pour l'acompte</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:10px">
+                        <div style="background:#fff;padding:8px 14px;border-radius:10px;border:1.5px solid #E8F6FC;display:flex;align-items:center">
+                            <img src="{{ asset('assets/images/wave-logo.svg') }}" alt="Wave" style="height:36px;width:auto;display:block">
                         </div>
-                        <div style="flex:1">
-                            <div style="font-size:14px;font-weight:600;color:var(--texte)">Paiement à la livraison</div>
-                            <div style="font-size:11px;color:var(--texte2);margin-top:2px">Payez en espèces directement au livreur</div>
+                        <div style="background:#fff;padding:8px 14px;border-radius:10px;border:1.5px solid #FFE8D6;display:flex;align-items:center">
+                            <img src="{{ asset('assets/images/orange-money-logo.svg') }}" alt="Orange Money" style="height:36px;width:auto;display:block">
                         </div>
-                        <i class="far fa-circle" id="check-livraison" style="color:var(--texte2);font-size:18px"></i>
+                        <div style="display:flex;align-items:center;gap:8px;background:#fff;padding:10px 14px;border-radius:10px;border:1.5px solid #E8F5E9;font-size:12px;font-weight:600;color:var(--texte)">
+                            <i class="fas fa-money-bills" style="color:#27AE60;font-size:18px"></i> Espèces (en main propre)
+                        </div>
                     </div>
                 </div>
 
-                {{-- Indication Wave --}}
-                <div id="wave-input-box" style="margin-top:16px;background:var(--creme2);padding:14px 18px;border-radius:10px;border:1px solid var(--peche2)">
-                    <label style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--texte2);display:block;margin-bottom:6px;font-weight:500">
-                        <i class="fas fa-phone" style="color:var(--rose-v);margin-right:4px"></i> Numéro pour le paiement Wave (+225)
-                    </label>
-                    <input type="tel" name="num_wave" value="{{ auth()->user()->telephone ?? '' }}" placeholder="+225 07 00 00 00 00" style="width:100%;padding:10px 14px;border:1.5px solid var(--peche);border-radius:8px;font-family:var(--f-corps);font-size:13.5px;outline:none;background:var(--blanc)">
-                    <small style="display:block;font-size:11px;color:var(--texte2);margin-top:6px">
-                        Un lien de paiement ou une demande Wave vous sera envoyée sur ce numéro.
-                    </small>
+                {{-- Préférence de contact --}}
+                <div>
+                    <label style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--texte2);font-weight:600;display:block;margin-bottom:10px">Comment souhaitez-vous être contacté(e) ?</label>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap">
+                        <label style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1.5px solid var(--peche);border-radius:10px;cursor:pointer;font-size:13px;transition:all .2s" id="lbl-wa">
+                            <input type="radio" name="contact_pref" value="whatsapp" checked onchange="toggleContactPref()" style="accent-color:var(--rose-v)">
+                            <i class="fab fa-whatsapp" style="color:#25D366;font-size:17px"></i> WhatsApp
+                        </label>
+                        <label style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1.5px solid var(--peche);border-radius:10px;cursor:pointer;font-size:13px;transition:all .2s" id="lbl-tel">
+                            <input type="radio" name="contact_pref" value="telephone" onchange="toggleContactPref()" style="accent-color:var(--rose-v)">
+                            <i class="fas fa-phone" style="color:var(--rose-v);font-size:15px"></i> Appel téléphonique
+                        </label>
+                    </div>
                 </div>
 
-                {{-- Indication Livraison --}}
-                <div id="livraison-info-box" style="display:none;margin-top:16px;background:#f0faf5;padding:14px 18px;border-radius:10px;border:1px solid #a8d5be;color:#2d6a4f;font-size:12.5px;line-height:1.6">
-                    <i class="fas fa-info-circle" style="margin-right:6px"></i>
-                    Vous réglerez le montant exact en espèces auprès de notre livreur à la réception de votre colis.
-                </div>
+                <input type="hidden" name="payment_method" value="acompte_50">
             </div>
         </form>
     </div>
@@ -224,13 +235,31 @@
             <div class="recap-item"><img src="{{ asset('assets/images/jepk1.jpg') }}" alt=""><div><div class="ri-nom">Kit Pull Couture N°1 x1</div><div class="ri-prix">45 000 F CFA</div></div></div>
             @php $total=45000; @endphp
         @endif
+        @php $acompte = round($total * 0.5); $solde = $total - $acompte; @endphp
         <div class="recap-ligne"><span>Sous-total</span><span>{{ number_format($total,0,',',' ') }} F CFA</span></div>
-        <div class="recap-ligne"><span>Livraison</span><span>Gratuite</span></div>
-        <div class="recap-total"><span>Total</span><span>{{ number_format($total,0,',',' ') }} F CFA</span></div>
-        <button type="submit" form="checkout-form" class="btn btn-rose" style="width:100%;justify-content:center;margin-top:20px;border-radius:50px">
-            <i class="fas fa-lock"></i> Confirmer la commande
+        <div class="recap-ligne"><span>Livraison</span><span id="recap-livr">2 000 F CFA</span></div>
+        <div class="recap-total"><span>Total estimé</span><span>{{ number_format($total,0,',',' ') }} F CFA</span></div>
+
+        {{-- Acompte ── --}}
+        <div style="background:linear-gradient(135deg,rgba(201,104,128,.08),rgba(155,142,196,.08));border:1.5px dashed var(--rose-p);border-radius:12px;padding:16px;margin-top:16px">
+            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--texte2);margin-bottom:10px;font-weight:600">Acompte requis pour démarrer</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <span style="font-size:13px;color:var(--texte2)">Acompte (50%)</span>
+                <span style="font-size:18px;font-weight:700;color:var(--rose-v)">{{ number_format($acompte,0,',',' ') }} F</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:12px;color:var(--texte2)">Solde à la livraison (50%)</span>
+                <span style="font-size:13px;color:var(--texte2)">{{ number_format($solde,0,',',' ') }} F</span>
+            </div>
+        </div>
+
+        <button type="submit" form="checkout-form" class="btn btn-rose" style="width:100%;justify-content:center;margin-top:18px;border-radius:50px;font-size:13px;padding:14px">
+            <i class="fas fa-heart" style="font-size:14px"></i> Réserver ma création
         </button>
-        <div style="text-align:center;margin-top:14px;font-size:11px;color:var(--texte2)"><i class="fas fa-shield-alt" style="color:var(--rose-p)"></i> Paiement 100% sécurisé</div>
+        <div style="text-align:center;margin-top:12px;font-size:11px;color:var(--texte2);line-height:1.6">
+            <i class="fas fa-info-circle" style="color:var(--rose-p)"></i>
+            Aucun paiement maintenant — notre équipe vous contacte sous 24h pour confirmer et vous donner les instructions d'acompte.
+        </div>
     </div>
 </div>
 

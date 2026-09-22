@@ -36,47 +36,106 @@
 @section('content')
 <div class="success-wrap">
     <div class="success-card">
-        <div class="success-icon"><i class="fas fa-check"></i></div>
+        {{-- Icône & titre --}}
+        <div class="success-icon" style="background:linear-gradient(135deg,var(--peche),var(--lavande))">
+            <i class="fas fa-heart" style="color:var(--rose-v)"></i>
+        </div>
         <span class="s-label">Merci pour votre confiance</span>
-        <h1>Commande <em>Confirmée !</em></h1>
-        <p>Votre commande a été enregistrée avec succès. Notre équipe d'artisanes s'active déjà pour la préparer avec tout l'amour et le soin nécessaires.</p>
+        <h1>Commande <em>Reçue !</em></h1>
 
         @if(isset($order) && $order)
-            <div class="order-badge">N° COMMANDE : {{ $order->order_number }}</div>
-
-            <table class="recap-table">
-                <thead>
-                    <tr>
-                        <th>Article</th>
-                        <th style="text-align:center">Qté</th>
-                        <th style="text-align:right">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($order->items ?? [] as $it)
-                    <tr>
-                        <td>{{ $it['name'] ?? $it['nom'] ?? 'Article JEKP' }}</td>
-                        <td style="text-align:center">{{ $it['quantity'] ?? $it['qte'] ?? 1 }}</td>
-                        <td style="text-align:right;font-weight:500">{{ number_format(($it['price'] ?? 0) * ($it['quantity'] ?? 1), 0, ',', ' ') }} F CFA</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <div style="background:var(--creme2);padding:18px 24px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin-top:16px">
-                <span style="font-size:13px;color:var(--texte2)">Montant Total réglé :</span>
-                <span style="font-size:18px;font-weight:600;color:var(--brun-d)">{{ number_format($order->total ?? 0, 0, ',', ' ') }} F CFA</span>
-            </div>
+            @php $acompte = round(($order->total ?? 0) * 0.5); @endphp
+            <div class="order-badge">N° {{ $order->order_number }}</div>
         @else
-            <div class="order-badge">N° COMMANDE : JKP-{{ strtoupper(Str::random(6)) }}</div>
+            @php $acompte = 0; @endphp
+            <div class="order-badge">N° JEPK-{{ strtoupper(Str::random(6)) }}</div>
         @endif
 
-        <div class="success-actions">
+        {{-- Processus —  étapes visuelles --}}
+        <div style="background:linear-gradient(135deg,var(--creme2),var(--peche));border-radius:16px;padding:24px 28px;margin:24px 0;text-align:left">
+            <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--texte2);margin-bottom:18px">Votre commande étape par étape</div>
+            @php
+            $nextSteps = [
+                ['icon'=>'fa-check-circle','color'=>'#27AE60','done'=>true,
+                 'title'=>'Commande enregistrée','desc'=>'Votre réservation a bien été reçue.'],
+                ['icon'=>'fa-comments','color'=>'#9B8EC4','done'=>false,
+                 'title'=>'On vous contacte sous 24h','desc'=>'Notre équipe vous contacte par WhatsApp ou téléphone pour confirmer les détails.'],
+                ['icon'=>'fa-hand-holding-dollar','color'=>'#4A90D9','done'=>false,
+                 'title'=>isset($order) ? 'Acompte : '.number_format($acompte,0,',',' ').' F CFA (50%)' : 'Versement de l\'acompte (50%)',
+                 'desc'=>'Dès réception de l\'acompte, la fabrication commence immédiatement.'],
+                ['icon'=>'fa-scissors','color'=>'#F39C12','done'=>false,
+                 'title'=>'Fabrication de votre pièce','desc'=>'Création artisanale faite main avec soin. Délai : 5 à 10 jours.'],
+                ['icon'=>'fa-truck','color'=>'#16A085','done'=>false,
+                 'title'=>'Livraison + solde restant','desc'=>'Votre pièce vous est livrée. Vous réglez le solde (50%) à la réception.'],
+            ];
+            @endphp
+            @foreach($nextSteps as $i => $st)
+            <div style="display:flex;gap:12px;align-items:flex-start;{{ $i < count($nextSteps)-1 ? 'padding-bottom:14px' : '' }}">
+                <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+                    <div style="width:32px;height:32px;border-radius:50%;background:{{ $st['done'] ? $st['color'] : 'rgba(255,255,255,.8)' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid {{ $st['color'] }}">
+                        <i class="fas {{ $st['icon'] }}" style="color:{{ $st['done'] ? '#fff' : $st['color'] }};font-size:12px"></i>
+                    </div>
+                    @if($i < count($nextSteps)-1)
+                    <div style="width:2px;flex:1;min-height:14px;background:rgba(0,0,0,.1);margin-top:4px"></div>
+                    @endif
+                </div>
+                <div style="padding-top:5px;flex:1">
+                    <div style="font-size:13px;font-weight:{{ $st['done'] ? '700' : '600' }};color:{{ $st['done'] ? $st['color'] : 'var(--texte)' }}">{{ $st['title'] }}</div>
+                    <div style="font-size:11px;color:var(--texte2);margin-top:2px;line-height:1.5">{{ $st['desc'] }}</div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        @if(isset($order) && $order && count($order->items ?? []))
+        <table class="recap-table">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th style="text-align:center">Qté</th>
+                    <th style="text-align:right">Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($order->items ?? [] as $it)
+                <tr>
+                    <td>{{ $it['name'] ?? $it['nom'] ?? 'Création JEPK' }}</td>
+                    <td style="text-align:center">{{ $it['quantity'] ?? $it['qte'] ?? 1 }}</td>
+                    <td style="text-align:right;font-weight:500">{{ number_format(($it['price'] ?? 0) * ($it['quantity'] ?? 1), 0, ',', ' ') }} F</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        {{-- Résumé financier --}}
+        <div style="border:1.5px dashed var(--rose-p);border-radius:12px;padding:16px 20px;margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center">
+            <div style="border-right:1px solid var(--peche);padding-right:10px">
+                <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--texte2);margin-bottom:4px">Acompte (50%)</div>
+                <div style="font-size:22px;font-weight:700;color:var(--rose-v)">{{ number_format($acompte, 0, ',', ' ') }} F</div>
+                <div style="font-size:10px;color:var(--texte2);margin-top:2px">À verser pour démarrer</div>
+            </div>
+            <div style="padding-left:10px">
+                <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--texte2);margin-bottom:4px">Solde (50%)</div>
+                <div style="font-size:22px;font-weight:700;color:var(--brun-d)">{{ number_format(($order->total ?? 0) - $acompte, 0, ',', ' ') }} F</div>
+                <div style="font-size:10px;color:var(--texte2);margin-top:2px">À la livraison</div>
+            </div>
+        </div>
+        @endif
+
+        {{-- Bouton WhatsApp direct --}}
+        @php
+        $waMsgSuccess = urlencode("Bonjour JEPK 👋\nJe viens de passer une commande sur votre site et j'attends votre confirmation.\nN° commande : " . (isset($order) ? $order->order_number : 'JEPK-?'));
+        @endphp
+        <div class="success-actions" style="margin-top:28px">
+            <a href="https://wa.me/2250153928572?text={{ $waMsgSuccess }}" target="_blank" rel="noopener"
+               class="btn" style="background:#25D366;color:#fff;border:none">
+                <i class="fab fa-whatsapp" style="font-size:16px"></i> Contacter JEPK sur WhatsApp
+            </a>
             <a href="{{ route('account.orders') }}" class="btn btn-rose">
-                <i class="fas fa-box-open"></i> Suivre mes commandes
+                <i class="fas fa-box-open"></i> Mes commandes
             </a>
             <a href="{{ route('shop.index') }}" class="btn btn-outline-rose">
-                <i class="fas fa-shopping-bag"></i> Continuer mes achats
+                <i class="fas fa-shopping-bag"></i> Continuer
             </a>
         </div>
     </div>
