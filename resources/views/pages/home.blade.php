@@ -727,7 +727,6 @@ $lookbookPhotos = [
             $fpPrice = $fp->price ?? 15000;
             $fpImg   = product_image_url($fp->images[0] ?? null);
             $fpDesc  = $fp->description ?? '';
-            $fpWaMsg = urlencode("Bonjour JEPK 👋\nJe suis intéressée par : *{$fpNom}*\n{$fpDesc}\nPouvez-vous me donner plus d'informations ?");
         @endphp
         <div class="p-carte">
             <div class="p-img" style="border-radius:var(--rayon)">
@@ -735,8 +734,8 @@ $lookbookPhotos = [
                     <img src="{{ $fpImg }}" alt="{{ $fpNom }}" loading="lazy">
                 </a>
                 <div class="p-cart" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(90,48,64,.88),transparent);padding:32px 14px 14px;transform:translateY(100%);transition:transform .38s;border-radius:0 0 var(--rayon) var(--rayon)">
-                    <a href="https://wa.me/2250153928572?text={{ $fpWaMsg }}" target="_blank" rel="noopener" class="btn btn-blanc" style="width:100%;justify-content:center;font-size:10px">
-                        <i class="fab fa-whatsapp"></i> Commander
+                    <a href="{{ route('shop.show', $fpSlug) }}" class="btn btn-blanc" style="width:100%;justify-content:center;font-size:10px">
+                        <i class="fas fa-shopping-bag"></i> Commander
                     </a>
                 </div>
             </div>

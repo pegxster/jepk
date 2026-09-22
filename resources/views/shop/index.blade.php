@@ -191,7 +191,7 @@
     <div class="hero-tags">
         <span class="hero-tag"><i class="fas fa-hand-sparkles" style="margin-right:5px;color:var(--rose-v)"></i> 100% Fait main au crochet</span>
         <span class="hero-tag"><i class="fas fa-ruler-combined" style="margin-right:5px;color:var(--rose-v)"></i> Tailles &amp; couleurs adaptables</span>
-        <span class="hero-tag"><i class="fab fa-whatsapp" style="margin-right:5px;color:var(--rose-v)"></i> Commande via WhatsApp</span>
+        <span class="hero-tag"><i class="fas fa-shield-alt" style="margin-right:5px;color:var(--rose-v)"></i> Commande en ligne sécurisée</span>
     </div>
     <div class="breadcrumb">
         <a href="{{ route('home') }}">Accueil</a>
@@ -370,7 +370,7 @@
                             <i class="far fa-heart"></i>
                         </button>
                         <button type="button" class="p-btn" title="Vue rapide"
-                                onclick='openQuickView("{{ addslashes($pNom) }}", "{{ $pCat }}", "{{ number_format($pPrice, 0, ",", " ") }} F CFA", "{{ $pOldP ? number_format((float)$pOldP, 0, ",", " ") . " F CFA" : "" }}", "{{ $pImg }}", "{{ addslashes($pDesc) }}", "{{ $pId }}")'>
+                                onclick='openQuickView("{{ addslashes($pNom) }}", "{{ $pCat }}", "{{ number_format($pPrice, 0, ",", " ") }} F CFA", "{{ $pOldP ? number_format((float)$pOldP, 0, ",", " ") . " F CFA" : "" }}", "{{ $pImg }}", "{{ addslashes($pDesc) }}", "{{ $pId }}", "{{ route("shop.show", $pSlug) }}")'>
                             <i class="far fa-eye"></i>
                         </button>
                     </div>
@@ -388,9 +388,8 @@
                             </button>
                         </form>
                         @else
-                        @php $waTextCard = urlencode("Bonjour JEPK 👋\nJe suis intéressée par : *{$pNom}*\n{$pDesc}\nPouvez-vous me donner plus d'informations ?"); @endphp
-                        <a href="https://wa.me/2250153928572?text={{ $waTextCard }}" target="_blank" rel="noopener" class="btn btn-blanc" style="width:100%;justify-content:center">
-                            <i class="fab fa-whatsapp"></i> Commander
+                        <a href="{{ route('shop.show', $pSlug) }}" class="btn btn-blanc" style="width:100%;justify-content:center">
+                            <i class="fas fa-eye"></i> Voir le produit
                         </a>
                         @endif
                     </div>
@@ -452,8 +451,8 @@
             </div>
 
             <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
-                <a id="qvWaBtn" href="https://wa.me/2250153928572" target="_blank" rel="noopener" class="btn btn-rose" style="justify-content:center">
-                    <i class="fab fa-whatsapp" style="font-size:16px"></i> Commander via WhatsApp
+                <a id="qvViewBtn" href="#" class="btn btn-rose" style="justify-content:center">
+                    <i class="fas fa-shopping-bag" style="font-size:16px"></i> Commander
                 </a>
             </div>
         </div>
@@ -503,7 +502,7 @@ function toggleColorFilter(el) {
 }
 
 // ── Modal Vue Rapide (Quick View) ──
-function openQuickView(nom, cat, prix, oldPrix, img, desc, id) {
+function openQuickView(nom, cat, prix, oldPrix, img, desc, id, url) {
     document.getElementById('qvTitre').innerText = nom;
     document.getElementById('qvCat').innerText = cat;
     document.getElementById('qvPrix').innerText = prix;
@@ -511,9 +510,7 @@ function openQuickView(nom, cat, prix, oldPrix, img, desc, id) {
     document.getElementById('qvImg').src = img;
     document.getElementById('qvDesc').innerText = desc;
 
-    // Mettre à jour le lien WhatsApp avec le nom du produit
-    const waMsg = encodeURIComponent('Bonjour JEPK 👋\nJe suis intéressée par : *' + nom + '*\n' + desc + '\nPouvez-vous me donner plus d\'informations ?');
-    document.getElementById('qvWaBtn').href = 'https://wa.me/2250153928572?text=' + waMsg;
+    document.getElementById('qvViewBtn').href = url || '#';
 
     const modal = document.getElementById('qvModal');
     modal.style.display = 'flex';
