@@ -180,10 +180,10 @@
                     <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--texte2);font-weight:600;margin-bottom:12px">Moyens de paiement acceptés pour l'acompte</div>
                     <div style="display:flex;flex-wrap:wrap;gap:10px">
                         <div style="background:#fff;padding:8px 14px;border-radius:10px;border:1.5px solid #E8F6FC;display:flex;align-items:center">
-                            <img src="{{ asset('assets/images/wave-logo.svg') }}" alt="Wave" style="height:36px;width:auto;display:block">
+                            <img src="{{ asset('assets/images/wave-logo.webp') }}" alt="Wave" style="height:40px;width:auto;display:block">
                         </div>
                         <div style="background:#fff;padding:8px 14px;border-radius:10px;border:1.5px solid #FFE8D6;display:flex;align-items:center">
-                            <img src="{{ asset('assets/images/orange-money-logo.svg') }}" alt="Orange Money" style="height:36px;width:auto;display:block">
+                            <img src="{{ asset('assets/images/orange-money-logo.png') }}" alt="Orange Money" style="height:40px;width:auto;display:block">
                         </div>
                         <div style="display:flex;align-items:center;gap:8px;background:#fff;padding:10px 14px;border-radius:10px;border:1.5px solid #E8F5E9;font-size:12px;font-weight:600;color:var(--texte)">
                             <i class="fas fa-money-bills" style="color:#27AE60;font-size:18px"></i> Espèces (en main propre)
